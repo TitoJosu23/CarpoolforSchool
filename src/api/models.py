@@ -19,7 +19,7 @@ class School(db.Model):
     school_address = db.Column(db.String(80), unique=False, nullable=False)
     school_logo_url = db.Column(db.String(80), unique=False, nullable=False)
     active_complaints = db.Column(db.Integer, db.ForeignKey('complaint.id'))
-    complaint = db.relationship(Complaint)
+    complaints = db.relationship(Complaint)
 
     def serialize(self):
         return {
@@ -73,6 +73,7 @@ class Guardian(db.Model):
     payment_info = db.Column(db.String(80), unique=False, nullable=False)
     user = db.relationship(User)
     child = db.relationship(Child)
+    complaints = db.relationship(Complaint)
 
     def serialize(self):
         return {
@@ -83,4 +84,53 @@ class Guardian(db.Model):
             "last_name": self.last_name,
             "seats_available": self.seats_available,
             "payment_info": self.payment_info,
+        }
+class Complaint(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    flagged_guardian = db.Column(db.integer, db.ForeignKey("guardian.id"))
+    flag_creator = db.Column(db.integer, db.ForeignKey("guardian.id"))
+    flag_comment = db.Column(db.string(200))
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "flagged_guardian": self.flagged_guard,
+            "flag_creator": self.flag_creator,
+            "flag_comment": self.flag_comment,
+                # do not serialize the password, its a security breach
+            }
+
+class Child(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    school_id = db.Column(db.Integer, db.ForeignKey('school.id'))
+    first_Name = db.Column(db.String(80), unique=False, nullable=False)
+    last_name = db.Column(db.Boolean(), unique=False, nullable=False)
+    class_grade = db.Column(db.String(120), unique=True, nullable=False)
+    gender = db.Column(db.String(80), unique=False, nullable=False)
+    address = db.Column(db.String(120), unique=True, nullable=False)
+    phone = db.Column(db.String(120), unique=True, nullable=False)
+    guardians = db.relationship(Guardian)
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "school_ID": self.school_id,
+            "first_name":self.first_Name,
+            "last_name":self.last_name,
+            "class_grade":self.class_grade,
+            "gender":self.gender,
+            "address":self.address,
+            "phone":self.phone,
+        }
+
+
+class Black_list(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    blacklisted_guardian_id = db.Column(db.Integer, db.ForeignKey('guardian.user_id'))
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "blacklisted_guardian_id": self.blacklisted_guardian_id,
         }
