@@ -19,6 +19,7 @@ class School(db.Model):
     school_address = db.Column(db.String(80), unique=False, nullable=False)
     school_logo_url = db.Column(db.String(80), unique=False, nullable=False)
     active_complaints = db.Column(db.Integer, db.ForeignKey('complaint.id'))
+    complaint = db.relationship(Complaint)
 
     def serialize(self):
         return {
@@ -26,7 +27,7 @@ class School(db.Model):
             "school_name": self.school_name,
             "school_address": self.school_address,
             "school_logo_url": self.school_logo_url,
-            "active_flags": self.active_flags,
+            "active_complaint":self.complaint.serialize() if self.complaint is not None else None,
         }
 
 class School_Access(db.Model):
@@ -43,12 +44,14 @@ class School_Access(db.Model):
     wedenesday = db.Column(db.Boolean(80), unique=False, nullable=False)
     thursday = db.Column(db.Boolean(80), unique=False, nullable=False)
     friday = db.Column(db.Boolean(80), unique=False, nullable=False)
+    user = db.relationship(User)
+    school = db.relationship(School)
 
     def serialize(self):
         return {
             "id": self.id,
-            "user_id": self.user_id,
-            "school_id": self.school_id,
+            "user_id": self.user,
+            "school_id": self.school,
             "role": self.role,
             "is_driver": self.is_driver,
             "is_available": self.is_available,
@@ -68,12 +71,14 @@ class Guardian(db.Model):
     last_name = db.Column(db.String(80), unique=False, nullable=False)
     seats_available = db.Column(db.Integer, nullable=False)
     payment_info = db.Column(db.String(80), unique=False, nullable=False)
+    user = db.relationship(User)
+    child = db.relationship(Child)
 
     def serialize(self):
         return {
             "id": self.id,
-            "user_id": self.user_id,
-            "child_id": self.child_id,
+            "user_id": self.user,
+            "child_id": self.child,
             "first_name": self.first_name,
             "last_name": self.last_name,
             "seats_available": self.seats_available,
