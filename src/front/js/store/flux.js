@@ -16,8 +16,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           const payload = await response.json();
           localStorage.setItem("session", JSON.stringify(payload));
           setStore({ session: payload });
-          return payload; //this is gonna make the promise resolve
-          // return jsonify({ "token": access_token, "user_id": user.id })
+          return payload;
         }
       },
     },
