@@ -4,6 +4,7 @@ import ScrollToTop from "./component/scrollToTop";
 
 import { Home } from "./pages/home";
 import { GuardianLogin } from "./pages/GuardianLogin.js";
+import { GuardianSignup } from "./pages/GuardianSignup.jsx";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
@@ -34,6 +35,9 @@ const Layout = () => {
             </Route>
             <Route exact path="/pages/Guardianlogin">
               <GuardianLogin />
+            </Route>
+            <Route exact path="/pages/Guardiansignup">
+              <GuardianSignup />
             </Route>
             <Route>
               <h1>Not found!</h1>

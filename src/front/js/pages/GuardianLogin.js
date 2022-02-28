@@ -7,7 +7,7 @@ export const GuardianLogin = () => {
   const { store, actions } = useContext(Context);
 
   return (
-    <section className="vh-100" style={{ backgroundColor: "#9A616D" }}>
+    <section className="vh-100" style={{ backgroundColor: "#ACE3E8" }}>
       <div className="container py-5 h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col col-xl-10">
