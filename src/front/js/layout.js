@@ -2,8 +2,11 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
+
 import { GuardianSignIn } from "./pages/GuardianSignIn.js";
 import { GuardianSignup } from "./pages/GuardianSignup.jsx";
+import { SchoolLogin } from "./pages/SchoolLogin";
+import { SchoolSignin } from "./pages/SchoolSignin";
 import { GuardianHome } from "./pages/GuardianHome";
 import { LandingPage } from "./pages/LandingPage";
 
@@ -24,8 +27,12 @@ const Layout = () => {
         <ScrollToTop>
           <Navbar />
           <Switch>
-            <Route exact path="/">
-              <LandingPage />
+            <Route exact path="/SchoolSignin">
+              <SchoolSignin />
+            </Route>
+            <Route exact path="/SchoolLogin/">
+              <SchoolLogin />
+            </Route>
             </Route>
             <Route exact path="/guardian/signIn">
               <GuardianSignIn />
