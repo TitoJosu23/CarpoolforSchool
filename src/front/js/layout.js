@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
 import { Home } from "./pages/home";
-import { GuardianLogin } from "./pages/GuardianLogin.js";
+import { GuardianSignIn } from "./pages/GuardianSignIn.js";
 import { GuardianSignup } from "./pages/GuardianSignup.jsx";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
@@ -33,8 +33,8 @@ const Layout = () => {
             <Route exact path="/single/:theid">
               <Single />
             </Route>
-            <Route exact path="/pages/Guardianlogin">
-              <GuardianLogin />
+            <Route exact path="/pages/GuardianSignIn">
+              <GuardianSignIn />
             </Route>
             <Route exact path="/pages/Guardiansignup">
               <GuardianSignup />
