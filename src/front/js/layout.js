@@ -3,11 +3,11 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
 
-import { Home } from "./pages/home";
 import { GuardianSignIn } from "./pages/GuardianSignIn.js";
 import { GuardianSignup } from "./pages/GuardianSignup.jsx";
-import { Demo } from "./pages/demo";
-import { Single } from "./pages/single";
+import { SchoolLogin } from "./pages/SchoolLogin";
+import { SchoolSignin } from "./pages/SchoolSignin";
+
 
 import { GuardianLogin } from "./pages/GuardianLogin";
 import { GuardianHome } from "./pages/GuardianHome";
@@ -30,15 +30,11 @@ const Layout = () => {
         <ScrollToTop>
           <Navbar />
           <Switch>
-            <Route exact path="/">
-
-              <Home />
+            <Route exact path="/SchoolSignin">
+              <SchoolSignin />
             </Route>
-            <Route exact path="/demo">
-              <Demo />
-            </Route>
-            <Route exact path="/single/:theid">
-              <Single />
+            <Route exact path="/SchoolLogin/:theid">
+              <SchoolLogin />
             </Route>
             <Route exact path="/pages/GuardianSignIn">
               <GuardianSignIn />
@@ -54,7 +50,6 @@ const Layout = () => {
             </Route>
             <Route exact path="/guardian/home">
               <GuardianHome />
-
             </Route>
             <Route>
               <h1>Not found!</h1>
