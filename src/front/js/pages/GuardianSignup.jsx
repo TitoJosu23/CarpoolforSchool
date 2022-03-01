@@ -51,52 +51,6 @@ export const GuardianSignup = () => {
                           className="form-control form-control-lg"
                         />
                       </div>
-                      <label className="form-label" for="form2Example27">
-                        Gender
-                      </label>
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="exampleRadios"
-                          id="exampleRadios1"
-                          value="option1"
-                          checked
-                        />
-                        <label
-                          className="form-check-label"
-                          for="exampleRadios1"
-                        >
-                          Male
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input
-                          class="form-check-input"
-                          type="radio"
-                          name="exampleRadios"
-                          id="exampleRadios2"
-                          value="option2"
-                        />
-                        <label class="form-check-label" for="exampleRadios2">
-                          Female
-                        </label>
-                      </div>
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="exampleRadios"
-                          id="exampleRadios3"
-                          value="option3"
-                        />
-                        <label
-                          className="form-check-label"
-                          for="exampleRadios2"
-                        >
-                          Other
-                        </label>
-                      </div>
                       <div className="form-outline mb-4" />
                       <label className="form-label" for="form2Example17">
                         Email address

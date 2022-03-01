@@ -5,5 +5,5 @@ import "../../styles/home.css";
 export const LandingPage = () => {
   const { store, actions } = useContext(Context);
 
-  return <div>LANDING</div>;
+  return <div>LANDING PAGE</div>;
 };

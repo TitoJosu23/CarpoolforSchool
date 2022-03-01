@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
-
 import { GuardianSignIn } from "./pages/GuardianSignIn.js";
 import { GuardianSignup } from "./pages/GuardianSignup.jsx";
 import { SchoolLogin } from "./pages/SchoolLogin";
@@ -27,21 +26,20 @@ const Layout = () => {
         <ScrollToTop>
           <Navbar />
           <Switch>
-            <Route exact path="/SchoolSignin">
+            <Route exact path="/">
+              <LandingPage />
+            </Route>
+            <Route exact path="/school/create">
               <SchoolSignin />
             </Route>
-            <Route exact path="/SchoolLogin/">
+            <Route exact path="/school/login/">
               <SchoolLogin />
             </Route>
-            </Route>
-            <Route exact path="/guardian/signIn">
+            <Route exact path="/guardian/login">
               <GuardianSignIn />
             </Route>
-            <Route exact path="/guardian/signup">
+            <Route exact path="/guardian/create">
               <GuardianSignup />
-            </Route>
-            <Route exact path="/home">
-              <LandingPage />
             </Route>
             <Route exact path="/guardian/home">
               <GuardianHome />
