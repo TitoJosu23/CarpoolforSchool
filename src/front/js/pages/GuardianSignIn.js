@@ -1,9 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
+import { Link } from "react-router-dom";
 
 export const GuardianSignIn = () => {
+  const history = useHistory();
   const { store, actions } = useContext(Context);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   return (
     <section className="vh-100" style={{ backgroundColor: "#ACE3E8" }}>
@@ -22,7 +27,16 @@ export const GuardianSignIn = () => {
                 </div>
                 <div className="col-md-6 col-lg-7 d-flex align-items-center">
                   <div className="card-body p-4 p-lg-5 text-black">
-                    <form>
+                    <form
+                      onSubmit={(e) => {
+                        actions
+                          .createNewSession(email, password)
+                          .then((session) => {
+                            history.push("/");
+                          });
+                        e.preventDefault();
+                      }}
+                    >
                       <div className="d-flex align-items-center mb-3 pb-1"></div>
                       <h5
                         className="fw-normal mb-3 pb-3"
@@ -32,6 +46,7 @@ export const GuardianSignIn = () => {
                       </h5>
                       <div className="form-outline mb-4">
                         <input
+                          onChange={(e) => setEmail(e.target.value)}
                           type="email"
                           id="form2Example17"
                           className="form-control form-control-lg"
@@ -42,6 +57,7 @@ export const GuardianSignIn = () => {
                       </div>
                       <div className="form-outline mb-4">
                         <input
+                          onChange={(e) => setPassword(e.target.value)}
                           type="password"
                           id="form2Example27"
                           className="form-control form-control-lg"
@@ -51,10 +67,7 @@ export const GuardianSignIn = () => {
                         </label>
                       </div>
                       <div className="pt-1 mb-4">
-                        <button
-                          className="btn btn-dark btn-lg btn-block"
-                          type="button"
-                        >
+                        <button className="btn btn-dark btn-lg btn-block">
                           Login
                         </button>
                       </div>

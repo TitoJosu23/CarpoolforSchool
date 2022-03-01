@@ -7,9 +7,6 @@ import { GuardianSignIn } from "./pages/GuardianSignIn.js";
 import { GuardianSignup } from "./pages/GuardianSignup.jsx";
 import { SchoolLogin } from "./pages/SchoolLogin";
 import { SchoolSignin } from "./pages/SchoolSignin";
-
-
-import { GuardianLogin } from "./pages/GuardianLogin";
 import { GuardianHome } from "./pages/GuardianHome";
 import { LandingPage } from "./pages/LandingPage";
 
@@ -33,20 +30,18 @@ const Layout = () => {
             <Route exact path="/SchoolSignin">
               <SchoolSignin />
             </Route>
-            <Route exact path="/SchoolLogin/:theid">
+            <Route exact path="/SchoolLogin/">
               <SchoolLogin />
             </Route>
-            <Route exact path="/pages/GuardianSignIn">
+            </Route>
+            <Route exact path="/guardian/signIn">
               <GuardianSignIn />
             </Route>
-            <Route exact path="/pages/Guardiansignup">
+            <Route exact path="/guardian/signup">
               <GuardianSignup />
             </Route>
-            <Route exact path="/pages/landingpage">
+            <Route exact path="/home">
               <LandingPage />
-            </Route>
-            <Route exact path="/guardian/login">
-              <GuardianLogin />
             </Route>
             <Route exact path="/guardian/home">
               <GuardianHome />

@@ -7,5 +7,5 @@ export const GuardianHome = (props) => {
   const { store, actions } = useContext(Context);
   const params = useParams();
 
-  return <div></div>;
+  return <div>GUARDIAN HOME</div>;
 };
