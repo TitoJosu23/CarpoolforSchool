@@ -24,3 +24,12 @@ def create_token():
     # create a new token with the user id inside
     access_token = create_access_token(identity=user.id)
     return jsonify({ "token": access_token, "user_id": user.id })
+
+@api.route("/user", methods=["POST"])
+def create_user():
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
+    user = User(email=email, password=password)
+    db.session.add(user)
+    db.session.commit()
+    return jsonify(user.serialize())
