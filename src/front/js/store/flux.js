@@ -1,6 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {},
+
     actions: {
       createNewSession: async (email, password) => {
         const options = {
@@ -20,6 +21,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
     },
+
   };
 };
 
