@@ -1,10 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 
 export const GuardianSignup = () => {
   const { store, actions } = useContext(Context);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
   return (
     <section className="vh-100" style={{ backgroundColor: "#ACE3E8" }}>
@@ -36,8 +41,9 @@ export const GuardianSignup = () => {
                       </label>
                       <div className="form-outline mb-4">
                         <input
+                          onChange={(e) => setFirstName(e.target.value)}
                           type="first name"
-                          id="form2Example17"
+                          id="form2Example17One"
                           className="form-control form-control-lg"
                         />
                       </div>
@@ -46,8 +52,9 @@ export const GuardianSignup = () => {
                       </label>
                       <div className="form-outline mb-4">
                         <input
+                          onChange={(e) => setLastName(e.target.value)}
                           type="last name"
-                          id="form2Example17"
+                          id="form2Example17Two"
                           className="form-control form-control-lg"
                         />
                       </div>
@@ -57,6 +64,7 @@ export const GuardianSignup = () => {
                       </label>
                       <div className="form-outline mb-4">
                         <input
+                          onChange={(e) => setEmail(e.target.value)}
                           type="email"
                           id="form2Example17"
                           className="form-control form-control-lg"
@@ -67,8 +75,9 @@ export const GuardianSignup = () => {
                       </label>
                       <div className="form-outline mb-4">
                         <input
+                          onChange={(e) => setPassword(e.target.value)}
                           type="password"
-                          id="form2Example27"
+                          id="form2Example27One"
                           className="form-control form-control-lg"
                         />
                       </div>
@@ -77,8 +86,11 @@ export const GuardianSignup = () => {
                       </label>
                       <div className="form-outline mb-4">
                         <input
+                          onChange={(e) =>
+                            setPasswordConfirmation(e.target.value)
+                          }
                           type="password"
-                          id="form2Example27"
+                          id="form2Example27Two"
                           className="form-control form-control-lg"
                         />
                       </div>
@@ -90,8 +102,14 @@ export const GuardianSignup = () => {
                           Privacy policy
                         </a>
                       </div>
-                      <div className="form-group">
-                        <label className="checkbox-inline">
+                      <div
+                        style={{ alignItems: "left" }}
+                        className="form-group"
+                      >
+                        <label
+                          style={{ textAlign: "left" }}
+                          className="checkbox-inline "
+                        >
                           <input type="checkbox" required="required" /> I accept
                           the <a href="#">Terms of Use</a> &amp;{" "}
                           <a href="#">Privacy Policy</a>
@@ -102,6 +120,15 @@ export const GuardianSignup = () => {
                         <button
                           className="btn btn-dark btn-lg btn-block"
                           type="button"
+                          onClick={() =>
+                            actions.signUp(
+                              firstName,
+                              lastName,
+                              email,
+                              password,
+                              passwordConfirmation
+                            )
+                          }
                         >
                           Create Account
                         </button>
