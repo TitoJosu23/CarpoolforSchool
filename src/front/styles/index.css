@@ -1,10 +1,50 @@
+body {
+  text-align: center;
+  color: white;
+}
+.navbar {
+  margin-bottom: 100px;
+}
+.toblue {
+  color: blue;
+}
+button {
+  background-color: rgb(238, 155, 0);
+  border: 1px solid black;
+  border-radius: 3px;
+  color: white;
+  margin-top: 20px;
+  margin-left: 10px;
+  padding: 10px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  justify-content: flex-start;
+}
+.first-photo {
+  margin: auto;
+  border-radius: 5px;
+}
+.photo {
+  margin-top: 50px;
+  width: 800px;
+  border: 1px solid black;
+}
+h1 {
+  font-size: 50px;
+  margin-bottom: 30px;
+}
+h5 {
+  color: darkgray;
+}
+p {
+  margin: 0;
+}
 .title {
   padding-top: 50px;
   padding-bottom: 100px;
   padding-left: 35%;
-}
-.container {
-  display: flex;
 }
 .test {
   display: block;
@@ -15,9 +55,9 @@
 }
 .signup {
   position: absolute;
-  right: 0;
+  right: 4%;
 }
 .login {
   position: absolute;
-  right: 3.5%;
+  right: 8%;
 }
