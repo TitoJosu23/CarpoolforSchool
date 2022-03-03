@@ -32,4 +32,55 @@ def create_user():
     user = User(email=email, password=password)
     db.session.add(user)
     db.session.commit()
-    return jsonify(user.serialize())
+    access_token = create_access_token(identity=user.id)
+    return jsonify({**user.serialize(),"token":access_token})
+
+@api.route("/guardian", methods=["POST"])
+@jwt_required()
+def create_guardian():
+    current_user_id=get_jwt_identity()
+    user = User.query.get(current_user_id)
+    first_name = request.json.get("firstName", None)
+    last_name = request.json.get("lastName", None)
+    seats_available = request.json.get("seats_available",None)
+    payment_info = request.json.get("payment_info",None)
+    address = request.json.get("address", None)
+    guardian = Guardian(first_name=first_name, last_name=last_name, seats_available= seats_available,payment_info=payment_info, address=address)
+    db.session.add(guardian)
+    db.session.commit()
+    return jsonify(guardian.serialize())
+
+@api.route("/school", methods=["POST"])
+def create_school():
+    school_name= request.json.get("school_name", None)
+    school_address= request.json.get("school_address", None)
+    school_logo_url= request.json.get("school_logo_url", None)
+    db.session.add(guardian)
+    db.session.commit()
+    return jsonify(guardian.serialize())
+
+@api.route("/guardian", methods=["GET"])
+@jwt_required()
+def get_guardian():
+    current_user_id=get_jwt_identity()
+    user = User.query.get(current_user_id)
+    first_name = request.json.get("firstName", None)
+
+@api.route("/school_access/<int:school_access_id>/accept", methods=["GET"])
+def accept_school_invite(school_access_id):
+    current_user_id=get_jwt_identity()
+    school_access = SchoolAccess.query.get(school_access_id)
+    school_access.accepted=True
+    db.session.add(school_access)
+    db.session.commit()
+    return f"<h1>Invite Accepted,You can now login to {school_access.school.school_name}</h1>"
+
+@api.route("/guardian", methods=["POST"])
+def create_school_access():
+    current_user_id=get_jwt_identity()
+    user = User.query.get(current_user_id)
+    guardian = Guardian(first_name=first_name, last_name=last_name, seats_available= seats_available,payment_info=payment_info, address=address)
+    db.session.add(guardian)
+    db.session.commit()
+    return jsonify(guardian.serialize())
+    

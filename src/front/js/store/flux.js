@@ -3,20 +3,34 @@ const getState = ({ getStore, getActions, setStore }) => {
     store: {},
 
     actions: {
-      signUp: (firstName, lastName, email, password, passwordConfirmation) => {
+      setSessionStore: (token, user_id) => {
+        const payload = { token, user_id };
+        localStorage.setItem("session", JSON.stringify(payload));
+        setStore({ session: payload });
+      },
+      createUser: async (email, password) => {
+        const actions = getActions();
         const options = {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            firstName: firstName,
-            lastName: lastName,
             email: email,
             password: password,
-            passwordConfirmation: passwordConfirmation,
           }),
         };
+        const response = await fetch(
+          process.env.BACKEND_URL + `/api/user`,
+          options
+        );
+        if (response.status === 200) {
+          const payload = await response.json();
+          actions.setSessionStore(payload.token, payload.id);
+          return payload;
+        }
+        return await response.json();
       },
       createNewSession: async (email, password) => {
+        const actions = getActions();
         const options = {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -28,10 +42,10 @@ const getState = ({ getStore, getActions, setStore }) => {
         );
         if (response.status === 200) {
           const payload = await response.json();
-          localStorage.setItem("session", JSON.stringify(payload));
-          setStore({ session: payload });
+          actions.setSessionStore(payload.token, payload.user_id);
           return payload;
         }
+        return await response.json();
       },
     },
   };

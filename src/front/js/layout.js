@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
 import { GuardianSignIn } from "./pages/GuardianSignIn.js";
-import { GuardianSignup } from "./pages/GuardianSignup.jsx";
+import { UserSignup } from "./pages/UserSignup.jsx";
 import { SchoolLogin } from "./pages/SchoolLogin";
 import { SchoolSignin } from "./pages/SchoolSignin";
 import { GuardianHome } from "./pages/GuardianHome";
@@ -38,8 +38,8 @@ const Layout = () => {
             <Route exact path="/guardian/login">
               <GuardianSignIn />
             </Route>
-            <Route exact path="/guardian/create">
-              <GuardianSignup />
+            <Route exact path="/user/create">
+              <UserSignup />
             </Route>
             <Route exact path="/guardian/home">
               <GuardianHome />

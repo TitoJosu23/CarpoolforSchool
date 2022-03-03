@@ -1,15 +1,16 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
+import { useHistory } from "react-router-dom";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 
-export const GuardianSignup = () => {
+export const UserSignup = () => {
+  const history = useHistory();
   const { store, actions } = useContext(Context);
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [error, setError] = useState(null);
 
   return (
     <section className="vh-100" style={{ backgroundColor: "#ACE3E8" }}>
@@ -28,7 +29,19 @@ export const GuardianSignup = () => {
                 </div>
                 <div className="col-md-6 col-lg-7 d-flex align-items-center">
                   <div className="card-body p-4 p-lg-5 text-black">
-                    <form>
+                    {error && <div className="alert alert-danger">{error}</div>}
+                    <form
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        if (password != passwordConfirmation) {
+                          setError("Passwords Do Not Match!");
+                          return false;
+                        }
+                        actions.createUser(email, password).then(() => {
+                          history.push("/");
+                        });
+                      }}
+                    >
                       <div className="d-flex align-items-center mb-3 pb-1"></div>
                       <h4
                         className="fw-normal mb-3 pb-3"
@@ -36,28 +49,6 @@ export const GuardianSignup = () => {
                       >
                         Create Account
                       </h4>
-                      <label className="form-label" for="form2Example17">
-                        First Name
-                      </label>
-                      <div className="form-outline mb-4">
-                        <input
-                          onChange={(e) => setFirstName(e.target.value)}
-                          type="first name"
-                          id="form2Example17One"
-                          className="form-control form-control-lg"
-                        />
-                      </div>
-                      <label className="form-label" for="form2Example17">
-                        Last Name
-                      </label>
-                      <div className="form-outline mb-4">
-                        <input
-                          onChange={(e) => setLastName(e.target.value)}
-                          type="last name"
-                          id="form2Example17Two"
-                          className="form-control form-control-lg"
-                        />
-                      </div>
                       <div className="form-outline mb-4" />
                       <label className="form-label" for="form2Example17">
                         Email address
@@ -117,19 +108,7 @@ export const GuardianSignup = () => {
                       </div>
                       <div className="form-outline mb-4" />
                       <div className="pt-1 mb-4">
-                        <button
-                          className="btn btn-dark btn-lg btn-block"
-                          type="button"
-                          onClick={() =>
-                            actions.signUp(
-                              firstName,
-                              lastName,
-                              email,
-                              password,
-                              passwordConfirmation
-                            )
-                          }
-                        >
+                        <button className="btn btn-dark btn-lg btn-block">
                           Create Account
                         </button>
                       </div>

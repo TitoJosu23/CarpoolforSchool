@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 9964dde19982
+Revision ID: 00dc53b010e9
 Revises: 
-Create Date: 2022-02-26 01:17:36.283397
+Create Date: 2022-03-03 00:50:58.918238
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '9964dde19982'
+revision = '00dc53b010e9'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -23,8 +23,8 @@ def upgrade():
     sa.Column('first_Name', sa.String(length=255), nullable=False),
     sa.Column('last_name', sa.String(length=255), nullable=False),
     sa.Column('class_grade', sa.String(length=255), nullable=False),
-    sa.Column('gender', sa.String(length=255), nullable=False),
-    sa.Column('phone', sa.String(length=255), nullable=False),
+    sa.Column('gender', sa.String(length=255), nullable=True),
+    sa.Column('phone', sa.String(length=255), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('class_grade'),
     sa.UniqueConstraint('phone')
@@ -41,12 +41,14 @@ def upgrade():
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('first_name', sa.String(length=255), nullable=False),
     sa.Column('last_name', sa.String(length=255), nullable=False),
-    sa.Column('seats_available', sa.Integer(), nullable=False),
-    sa.Column('payment_info', sa.String(length=255), nullable=False),
+    sa.Column('seats_available', sa.Integer(), nullable=True),
+    sa.Column('payment_info', sa.String(length=255), nullable=True),
     sa.Column('address', sa.String(length=255), nullable=False),
+    sa.Column('phone', sa.String(length=255), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('address')
+    sa.UniqueConstraint('address'),
+    sa.UniqueConstraint('phone')
     )
     op.create_table('black_list',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -86,15 +88,16 @@ def upgrade():
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('school_id', sa.Integer(), nullable=True),
     sa.Column('role', sa.String(length=255), nullable=False),
-    sa.Column('is_driver', sa.Boolean(create_constraint=255), nullable=False),
-    sa.Column('is_available', sa.Boolean(create_constraint=255), nullable=False),
-    sa.Column('morning', sa.Boolean(create_constraint=255), nullable=False),
-    sa.Column('afternoon', sa.Boolean(create_constraint=255), nullable=False),
-    sa.Column('monday', sa.Boolean(create_constraint=255), nullable=False),
-    sa.Column('tuesday', sa.Boolean(create_constraint=255), nullable=False),
-    sa.Column('wedenesday', sa.Boolean(create_constraint=255), nullable=False),
-    sa.Column('thursday', sa.Boolean(create_constraint=255), nullable=False),
-    sa.Column('friday', sa.Boolean(create_constraint=255), nullable=False),
+    sa.Column('is_driver', sa.Boolean(), nullable=True),
+    sa.Column('is_available', sa.Boolean(), nullable=True),
+    sa.Column('morning', sa.Boolean(), nullable=True),
+    sa.Column('afternoon', sa.Boolean(), nullable=True),
+    sa.Column('monday', sa.Boolean(), nullable=True),
+    sa.Column('tuesday', sa.Boolean(), nullable=True),
+    sa.Column('wedenesday', sa.Boolean(), nullable=True),
+    sa.Column('thursday', sa.Boolean(), nullable=True),
+    sa.Column('friday', sa.Boolean(), nullable=True),
+    sa.Column('accepted', sa.Boolean(), nullable=True),
     sa.ForeignKeyConstraint(['school_id'], ['school.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id')
