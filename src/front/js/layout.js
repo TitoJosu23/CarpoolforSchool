@@ -2,12 +2,13 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
-import { GuardianSignIn } from "./pages/GuardianSignIn.js";
+import { GuardianLogin } from "./pages/GuardianLogin.js";
 import { UserSignup } from "./pages/UserSignup.jsx";
 import { SchoolLogin } from "./pages/SchoolLogin";
 import { SchoolSignUp } from "./pages/SchoolSignUp.js";
 import { GuardianHome } from "./pages/GuardianHome";
 import { LandingPage } from "./pages/LandingPage";
+import { SchoolHome } from "./pages/SchoolHome";
 
 import injectContext from "./store/appContext";
 
@@ -36,13 +37,16 @@ const Layout = () => {
               <SchoolLogin />
             </Route>
             <Route exact path="/guardian/login">
-              <GuardianSignIn />
+              <GuardianLogin />
             </Route>
             <Route exact path="/user/create">
               <UserSignup />
             </Route>
             <Route exact path="/guardian/home">
               <GuardianHome />
+            </Route>
+            <Route exact path="/school/home">
+              <SchoolHome />
             </Route>
             <Route>
               <h1>Not found!</h1>
