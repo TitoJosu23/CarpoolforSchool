@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import "../../styles/SchoolSignin.css";
 
-export const SchoolSignin = () => {
+export const SchoolSignUp = () => {
   return (
     <>
       <div className="container">

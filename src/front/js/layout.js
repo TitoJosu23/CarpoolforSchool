@@ -5,7 +5,7 @@ import ScrollToTop from "./component/scrollToTop";
 import { GuardianSignIn } from "./pages/GuardianSignIn.js";
 import { UserSignup } from "./pages/UserSignup.jsx";
 import { SchoolLogin } from "./pages/SchoolLogin";
-import { SchoolSignin } from "./pages/SchoolSignin";
+import { SchoolSignUp } from "./pages/SchoolSignUp.js";
 import { GuardianHome } from "./pages/GuardianHome";
 import { LandingPage } from "./pages/LandingPage";
 
@@ -30,7 +30,7 @@ const Layout = () => {
               <LandingPage />
             </Route>
             <Route exact path="/school/create">
-              <SchoolSignin />
+              <SchoolSignUp />
             </Route>
             <Route exact path="/school/login/">
               <SchoolLogin />
