@@ -26,37 +26,37 @@ export const GuardianHome = (props) => {
         className="content-container"
       >
         <div className="cardContainer">
-          <div style={{ marginTop: "10px" }} class="card text-center">
-            <div class="card-header">
-              <ul class="nav nav-tabs card-header-tabs">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="true" href="#">
+          <div style={{ marginTop: "10px" }} className="card text-center">
+            <div className="card-header">
+              <ul className="nav nav-tabs card-header-tabs">
+                <li className="nav-item">
+                  <a className="nav-link active" aria-current="true" href="#">
                     Accepted
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">
+                <li className="nav-item">
+                  <a className="nav-link" href="#">
                     Pending
                   </a>
                 </li>
               </ul>
             </div>
-            <div class="card-body">
-              <h5 class="card-title">Child with a Ride: </h5>
-              <p class="card-text">
+            <div className="card-body">
+              <h5 className="card-title">Child with a Ride: </h5>
+              <p className="card-text">
                 With supporting text below as a natural lead-in to additional
                 content.
               </p>
-              <a href="#" class="btn btn-primary">
+              <a href="#" className="btn btn-primary">
                 Cancel Carpool
               </a>
             </div>
           </div>
         </div>
         <div className="dropdownContainer" style={{ marginRight: "50px" }}>
-          <div class="btn-group">
+          <div className="btn-group">
             <button
-              class="btn btn-secondary btn-lg dropdown-toggle"
+              className="btn btn-secondary btn-lg dropdown-toggle"
               style={{ backgroundColor: "blue" }}
               type="button"
               id="dropdownMenuButton"
@@ -65,35 +65,35 @@ export const GuardianHome = (props) => {
             >
               Request a Ride
             </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <li>
-                <div class="form-check">
+                <div className="form-check">
                   <input
-                    class="form-check-input"
+                    className="form-check-input"
                     type="radio"
                     name="flexRadioDefault"
                     id="flexRadioDefault1"
                   />
-                  <label class="form-check-label" for="flexRadioDefault1">
+                  <label className="form-check-label" for="flexRadioDefault1">
                     Child One
                   </label>
                 </div>
               </li>
               <li>
-                <div class="form-check">
+                <div className="form-check">
                   <input
-                    class="form-check-input"
+                    className="form-check-input"
                     type="radio"
                     name="flexRadioDefault"
                     id="flexRadioDefault2"
                   />
-                  <label class="form-check-label" for="flexRadioDefault1">
+                  <label className="form-check-label" for="flexRadioDefault1">
                     Child Two
                   </label>
                   <button
                     type="button"
                     style={{ margin: "auto" }}
-                    class="btn btn-primary btn-sm"
+                    className="btn btn-primary btn-sm"
                   >
                     Request Carpool
                   </button>
@@ -103,7 +103,7 @@ export const GuardianHome = (props) => {
           </div>
         </div>
       </div>
-      <div className="carouselContainer">
+      <div style={{ backgroundColor: "#F2F2F2" }} className="carouselContainer">
         <div className="text">
           <h1>Schools</h1>
         </div>
