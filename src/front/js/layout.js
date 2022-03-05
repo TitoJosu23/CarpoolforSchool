@@ -7,8 +7,9 @@ import { UserSignup } from "./pages/UserSignup.jsx";
 import { SchoolLogin } from "./pages/SchoolLogin";
 import { SchoolSignUp } from "./pages/SchoolSignUp.js";
 import { GuardianHome } from "./pages/GuardianHome";
-import { LandingPage } from "./pages/LandingPage";
+import { NavPage } from "./pages/NavPage";
 import { SchoolHome } from "./pages/SchoolHome";
+import { LandingPage } from "./pages/LandingPage";
 
 import injectContext from "./store/appContext";
 
@@ -25,8 +26,10 @@ const Layout = () => {
     <div>
       <BrowserRouter basename={basename}>
         <ScrollToTop>
-          <Navbar />
           <Switch>
+            <Route exact path="/nav">
+              <NavPage />
+            </Route>
             <Route exact path="/">
               <LandingPage />
             </Route>

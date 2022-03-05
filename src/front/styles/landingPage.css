@@ -1,0 +1,29 @@
+.landingPage {
+  height: 95vh;
+}
+.landingPage .centerImage {
+  position: absolute;
+  top: 50%;
+  left: -23px;
+  color: white;
+}
+.landingPage p {
+  color: white;
+  font-size: 4vw;
+}
+.landingPage .schoolView {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-image: url("https://img.freepik.com/free-vector/stack-books-graphic-illustration_53876-8852.jpg?w=1380");
+}
+.landingPage .guardianView {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-image: url("https://img.freepik.com/free-vector/mom-dad-watch-their-adorable-son-read-book_73637-671.jpg?t=st=1646444757~exp=1646445357~hmac=b3787c4dc6a902b3c2d9772c0eddac9072a78c6a8d331960d0ea8284cfba2b7d&w=1380");
+}
+.landingPage .splitText {
+  box-shadow: 0px 10px 20px 10px #616161;
+  border-radius: 30px;
+}
