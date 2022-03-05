@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const SchoolHomeNavbar = () => {
   return (
     <div clasName="SchoolHomeNavbar">
-      <nav className=" navbar navbar-expand-lg navbar-light bg-light nav-school-home">
+      <nav className=" navbar navbar-expand-lg navbar-light bg-dark nav-school-home">
         <h4 className="navbar-title">School Name</h4>
         <div className="collapse navbar-collapse" id="navbarNavDropdown">
           <ul className="navbar-nav">

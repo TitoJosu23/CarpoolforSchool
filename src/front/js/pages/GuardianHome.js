@@ -12,7 +12,7 @@ export const GuardianHome = (props) => {
   const { store, actions } = useContext(Context);
   const params = useParams();
   return (
-    <>
+    <div className="GuardianHome">
       <GuardianNav />
       <div
         style={{
@@ -117,6 +117,6 @@ export const GuardianHome = (props) => {
           <h3>Pending</h3>
         </div>
       </div>
-    </>
+    </div>
   );
 };
