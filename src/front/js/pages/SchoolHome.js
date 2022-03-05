@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import SchoolHomeNavbar from "../component/SchoolHomeNavbar";
 import "../../styles/index.css";
+import "../../styles/SchoolHome.css";
 
 import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
@@ -11,26 +12,22 @@ export const SchoolHome = (props) => {
   const params = useParams();
 
   return (
-    <>
+    <div className="SchoolHome">
       <SchoolHomeNavbar />
-      <div>
-        <div class="jumbotron">
-          <h1 class="display-4">Hello, world!</h1>
-          <p class="lead">
-            This is a simple hero unit, a simple jumbotron-style component for
-            calling extra attention to featured content or information.
-          </p>
-          <p>
-            It uses utility classes for typography and spacing to space content
-            out within the larger container.
-          </p>
-          <p class="lead">
-            <a class="btn btn-primary btn-lg" href="#" role="button">
-              Learn more
-            </a>
-          </p>
+      <div className="box-modeling">
+        <div className="box box-1">
+          <h3>Search Guardians</h3>
+        </div>
+        <div className="box box-2">
+          <h3>Edit School</h3>
+        </div>
+        <div className="box box-3">
+          <h3>View Complaints</h3>
+        </div>
+        <div className="box box-4">
+          <h3>Request</h3>
         </div>
       </div>
-    </>
+    </div>
   );
 };
