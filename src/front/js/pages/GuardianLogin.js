@@ -12,7 +12,7 @@ export const GuardianLogin = () => {
 
   return (
     <div className="guardianLogin container-fluid mx-auto">
-      <div className="container-fluid card mt-5">
+      <div className="container-fluid card">
         <div className="container-fluid card-body">
           <form
             className="text-center"
@@ -42,22 +42,22 @@ export const GuardianLogin = () => {
               />
               <label className="form-label">Password</label>
             </div>
-            <div className="routeCont container-fluid d-flex justify-content-between">
-              <div className="mt-4">
-                <Link className="route" to="/user/create">
-                  New User?
-                </Link>
-              </div>
-              <div>
-                <p className="btn btn-secondary ms-5">Submit</p>
-              </div>
-              <div className="mt-4">
-                <Link className="route" to="/guardian/reset">
-                  Forgot Password?
-                </Link>
-              </div>
+            <div className="">
+              <button className="btn btn-dark">Submit</button>
             </div>
           </form>
+          <div className="d-flex justify-content-between">
+            <div className="mt-4">
+              <Link className="route" to="/user/create">
+                New User?
+              </Link>
+            </div>
+            <div className="mt-4">
+              <Link className="route" to="/guardian/reset">
+                Forgot Password?
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </div>
