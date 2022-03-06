@@ -1,0 +1,36 @@
+.guadianLogin {
+  width: 100vmin;
+  height: 100vmin;
+}
+.guardianLogin form {
+  height: 50%;
+  width: 100%;
+  padding: none;
+}
+.guardianLogin .card {
+  box-shadow: 0px 0px 40px 40px #ffffff1f;
+  border-style: none;
+  border-radius: 5%;
+  height: 50rem;
+  width: 50rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("https://img.freepik.com/free-vector/back-school-kids-cartoon_18591-51470.jpg?w=1380");
+}
+/* .guardianLogin .card-body {
+  background-color: rgba(255, 255, 255, 0.719);
+} */
+.guardianLogin form {
+  margin-top: 100px;
+  width: 75%;
+}
+.guardianLogin h3 {
+  font-size: clamp(40px, 10vw, 2rem);
+}
+.guardianLogin label {
+  font-size: clamp(26px, 5vw, 1.5rem);
+}
+.guardianLogin .route {
+  font-size: clamp(1.5rem, 5vw, 1.5rem);
+}
