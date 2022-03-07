@@ -26,6 +26,7 @@ export const GuardianLogin = () => {
             <h3 className="fw-normal mb-3 pb-3">Sign into your account</h3>
             <div className="mb-4">
               <input
+                placeholder="Enter your email"
                 onChange={(e) => setEmail(e.target.value)}
                 type="email"
                 className="form-control form-control-lg"
@@ -35,6 +36,7 @@ export const GuardianLogin = () => {
             </div>
             <div className="mb-4">
               <input
+                placeholder="Enter your password"
                 onChange={(e) => setPassword(e.target.value)}
                 type="password"
                 className="form-control form-control-lg"
