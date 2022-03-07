@@ -1,13 +1,13 @@
-.guadianLogin {
+.createUser {
   width: 80vmax;
 }
-.guardianLogin form {
+.createUser form {
   opacity: 85%;
   height: 50%;
   width: 80%;
   background-color: white;
 }
-.guardianLogin .card {
+.createUser .card {
   margin-top: 200px;
   width: 50%;
   box-shadow: 0px 0px 40px 40px #ffffff1f;
@@ -17,21 +17,21 @@
   background-repeat: no-repeat;
 }
 @media only screen and (max-width: 800px) {
-  .guardianLogin .card {
+  .createUser .card {
     width: 80%;
     margin-top: 50px;
   }
-  .guardianLogin form {
+  .createUser form {
     width: 100%;
   }
 }
-.guardianLogin input {
+.createUser input {
   background-color: rgba(172, 172, 172, 0.678);
 }
-.guardianLogin input:focus {
+.createUser input:focus {
   background-color: grey;
 }
-.guardianLogin .loginBtn button {
+.createUser .loginBtn button {
   margin-bottom: 20px;
   margin-right: 70px;
 }

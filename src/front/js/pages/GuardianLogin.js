@@ -42,22 +42,18 @@ export const GuardianLogin = () => {
               />
               <label className="form-label">Password</label>
             </div>
-            <div className="">
+            <div className="loginBtn">
               <button className="btn btn-dark">Submit</button>
             </div>
+            <div className="d-inline-block text-center">
+              <Link to={"/user/create"}>
+                <p className="text-center">New Account!</p>
+              </Link>
+              <Link to={"/user/forgot"}>
+                <p className="text-center">Forgot Password?</p>
+              </Link>
+            </div>
           </form>
-          <div className="d-flex justify-content-between">
-            <div className="mt-4">
-              <Link className="route" to="/user/create">
-                New User?
-              </Link>
-            </div>
-            <div className="mt-4">
-              <Link className="route" to="/guardian/reset">
-                Forgot Password?
-              </Link>
-            </div>
-          </div>
         </div>
       </div>
     </div>
