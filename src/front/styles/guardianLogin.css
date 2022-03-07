@@ -1,5 +1,5 @@
-.guadianLogin {
-  width: 80vmax;
+.guardianLogin {
+  width: 80%;
 }
 .guardianLogin form {
   opacity: 85%;
@@ -16,12 +16,15 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 900px) {
   .guardianLogin .card {
-    width: 80%;
+    width: 100%;
     margin-top: 50px;
   }
   .guardianLogin form {
+    width: 100%;
+  }
+  .guardianLogin {
     width: 100%;
   }
 }
