@@ -7,10 +7,11 @@ export const GuardianNav = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">
-          <IsRole roles={["guardian"]}> Welcome Guardian</IsRole>
-          <IsRole roles={["admin"]}> Welcome Admin</IsRole>
-        </a>
+        <p className="navbar-brand">
+          Welcome
+          <IsRole roles={["guardian"]}> Guardian</IsRole>
+          <IsRole roles={["admin"]}> Admin</IsRole>
+        </p>
         <button
           className="navbar-toggler"
           type="button"
@@ -25,22 +26,22 @@ export const GuardianNav = () => {
         <div className="collapse navbar-collapse" id="navbarNavDropdown">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="#">
+              <p className="nav-link active" aria-current="page" href="#">
                 Home
-              </a>
+              </p>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              <p className="nav-link" href="#">
                 Report a Flag
-              </a>
+              </p>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              <p className="nav-link" href="#">
                 Send a Tip
-              </a>
+              </p>
             </li>
             <li className="nav-item dropdown">
-              <a
+              <p
                 className="nav-link dropdown-toggle"
                 href="#"
                 id="navbarDropdownMenuLink"
@@ -49,7 +50,7 @@ export const GuardianNav = () => {
                 aria-expanded="false"
               >
                 Account Settings:
-              </a>
+              </p>
               <ul
                 className="dropdown-menu"
                 aria-labelledby="navbarDropdownMenuLink"

@@ -48,6 +48,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             payload.roles
           );
           return payload;
+        } else if (response.status != 200) {
+          return "User Not Found!";
         }
         return await response.json();
       },

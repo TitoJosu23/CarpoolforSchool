@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
-import { GuardianNav } from "../component/GuardianNav.jsx";
+import { GuardianNav } from "../component/GuardianNavBar.jsx";
 import { GuardianChildCard } from "../component/GuardianChildCard.jsx";
 import { RideRequestDropdown } from "../component/RideRequestDropdown.jsx";
 import "../../styles/Dashboard.css";
