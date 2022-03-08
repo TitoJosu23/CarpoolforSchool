@@ -8,8 +8,8 @@ export const GuardianNav = () => {
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
         <a className="navbar-brand" href="#">
-          Welcome
-          <IsRole roles={["guardian"]}></IsRole>
+          <IsRole roles={["guardian"]}> Welcome Guardian</IsRole>
+          <IsRole roles={["admin"]}> Welcome Admin</IsRole>
         </a>
         <button
           className="navbar-toggler"
