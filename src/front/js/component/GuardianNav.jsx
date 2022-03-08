@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
 import propTypes from "prop-types";
 import "../../styles/GuardianNavBar.css";
+import { IsRole } from "./IsRole.jsx";
 
 export const GuardianNav = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
         <a className="navbar-brand" href="#">
-          Welcome Guardian:
+          Welcome
+          <IsRole roles={["guardian"]}></IsRole>
         </a>
         <button
           className="navbar-toggler"

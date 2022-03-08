@@ -20,10 +20,12 @@ def create_token():
     if user is None:
         # the user was not found on the database
         return jsonify({"msg": "User not found!"}), 401
+    data = School_Access.query.filter_by(user_id=user.id)
+    roles = [{"school_id":sa.school_id, "role":sa.role} for sa in data]
     
     # create a new token with the user id inside
     access_token = create_access_token(identity=user.id)
-    return jsonify({ "token": access_token, "user_id": user.id })
+    return jsonify({ "token": access_token, "user_id": user.id, "roles":roles})
 
 @api.route("/user", methods=["POST"])
 def create_user():

@@ -3,8 +3,8 @@ const getState = ({ getStore, getActions, setStore }) => {
     store: {},
 
     actions: {
-      setSessionStore: (token, user_id) => {
-        const payload = { token, user_id };
+      setSessionStore: (token, user_id, roles) => {
+        const payload = { token, user_id, roles };
         localStorage.setItem("session", JSON.stringify(payload));
         setStore({ session: payload });
       },
@@ -42,7 +42,11 @@ const getState = ({ getStore, getActions, setStore }) => {
         );
         if (response.status === 200) {
           const payload = await response.json();
-          actions.setSessionStore(payload.token, payload.user_id);
+          actions.setSessionStore(
+            payload.token,
+            payload.user_id,
+            payload.roles
+          );
           return payload;
         }
         return await response.json();
