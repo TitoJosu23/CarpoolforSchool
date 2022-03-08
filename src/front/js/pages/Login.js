@@ -18,7 +18,7 @@ export const UserLogin = () => {
             className="text-center"
             onSubmit={(e) => {
               actions.createNewSession(email, password).then((session) => {
-                history.push("/");
+                history.push("/user/home");
               });
               e.preventDefault();
             }}

@@ -38,7 +38,7 @@ export const UserSignup = () => {
                           return false;
                         }
                         actions.createUser(email, password).then(() => {
-                          history.push("/");
+                          history.push("/user/home");
                         });
                       }}
                     >
