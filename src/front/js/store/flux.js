@@ -53,6 +53,17 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
         return await response.json();
       },
+      getChildren: async () => {
+        const options = {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        };
+        const response = await fetch(
+          process.env.BACKEND_URL + `/api/children`,
+          options
+        );
+        return response.json();
+      },
     },
   };
 };

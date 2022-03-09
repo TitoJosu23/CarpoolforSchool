@@ -12,11 +12,17 @@ import { IsRole } from "../component/IsRole.jsx";
 import { AdminNavBar } from "../component/AdminNavBar.js";
 
 export const Dashboard = (props) => {
+  const [children, setChildren] = useState([]);
   const history = useHistory();
   const { store, actions } = useContext(Context);
   const params = useParams();
   const logStatus = JSON.parse(localStorage.getItem("session"));
 
+  useEffect(() => {
+    actions.getChildren().then((payload) => setChildren(payload));
+  }, []);
+
+  console.log(children);
   if (logStatus === null) {
     history.push("/user/login");
   }
@@ -67,8 +73,7 @@ export const Dashboard = (props) => {
         <div className="dropdownContainer" style={{ marginRight: "50px" }}>
           <div className="btn-group">
             <button
-              className="btn btn-secondary btn-lg dropdown-toggle"
-              style={{ backgroundColor: "blue" }}
+              className="btn btn-primary btn-lg dropdown-toggle"
               type="button"
               id="dropdownMenuButton"
               data-bs-toggle="dropdown"
@@ -77,38 +82,28 @@ export const Dashboard = (props) => {
               Request a Ride
             </button>
             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <li>
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    name="flexRadioDefault"
-                    id="flexRadioDefault1"
-                  />
-                  <label className="form-check-label" for="flexRadioDefault1">
-                    Child One
-                  </label>
-                </div>
-              </li>
-              <li>
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    name="flexRadioDefault"
-                    id="flexRadioDefault2"
-                  />
-                  <label className="form-check-label" for="flexRadioDefault1">
-                    Child Two
-                  </label>
-                  <button
-                    type="button"
-                    style={{ margin: "auto" }}
-                    className="btn btn-primary btn-sm"
-                  >
-                    Request Carpool
-                  </button>
-                </div>
+              {children.map((child, index) => {
+                return (
+                  <li>
+                    <div className="form-check">
+                      <input className="form-check-input" type="checkbox" />
+                      <label
+                        className="form-check-label"
+                        for="flexRadioDefault1"
+                      >
+                        {child.first_name}
+                      </label>
+                    </div>
+                  </li>
+                );
+              })}
+              <li className="d-flex justify-content-center">
+                <button
+                  type="button"
+                  className="btn btn-primary btn-sm mx-auto"
+                >
+                  Request Carpool
+                </button>
               </li>
             </ul>
           </div>
