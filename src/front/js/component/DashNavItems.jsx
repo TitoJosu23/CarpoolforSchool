@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import propTypes from "prop-types";
 import "../../styles/dashnav.css";
+
 export const DashNavItems = (props) => {
   const [open, setOpen] = useState(false);
   return (
@@ -9,6 +10,7 @@ export const DashNavItems = (props) => {
         <a href="#" className="icon-button" onClick={() => setOpen(!open)}>
           {props.icon}
         </a>
+        {open && props.children}
       </li>
     </>
   );
