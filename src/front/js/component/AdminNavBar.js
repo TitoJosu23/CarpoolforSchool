@@ -1,9 +1,8 @@
 import React from "react";
 import "../../styles/index.css";
-import "../../styles/SchoolHome.css";
 import { Link } from "react-router-dom";
 
-const SchoolHomeNavbar = () => {
+export const AdminNavBar = () => {
   return (
     <div clasName="SchoolHomeNavbar">
       <nav className=" navbar navbar-expand-lg navbar-light bg-dark nav-school-home">
@@ -39,7 +38,3 @@ const SchoolHomeNavbar = () => {
     </div>
   );
 };
-
-export default SchoolHomeNavbar;
-
-// nav-link dropdown-toggle setting-position

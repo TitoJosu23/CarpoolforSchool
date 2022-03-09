@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
@@ -7,13 +8,23 @@ import { GuardianChildCard } from "../component/GuardianChildCard.jsx";
 import { RideRequestDropdown } from "../component/RideRequestDropdown.jsx";
 import "../../styles/Dashboard.css";
 import { SchoolsAcceptedCarousel } from "../component/SchoolsAcceptedCarousel.jsx";
+import { IsRole } from "../component/IsRole.jsx";
+import { AdminNavBar } from "../component/AdminNavBar.js";
 
 export const Dashboard = (props) => {
+  const history = useHistory();
   const { store, actions } = useContext(Context);
   const params = useParams();
+  const logStatus = JSON.parse(localStorage.getItem("session"));
+
+  if (logStatus === null) {
+    history.push("/user/login");
+  }
   return (
-    <div className="GuardianHome">
-      <GuardianNav />
+    <div className="dashBoardHome">
+      <IsRole roles={["guardian"]}>
+        <GuardianNav />
+      </IsRole>
       <div
         style={{
           backgroundColor: "white",
