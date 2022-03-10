@@ -91,13 +91,11 @@ def create_school_access():
 def get_children():
     current_user_id=1
     guardian = Guardian.query.filter_by(user_id=current_user_id).first()
+    if guardian is None:
+        raise APIException ("No Guardian Found")
     guardian = guardian.serialize()
-    # print("This is the guardian!!!!!!!!!!!!!!!!!!!!!!!!!!!!", guardian)
-    if guardian is not None:
-        children = guardian["children"]
-        # print("This is the guardian children!!!!!!!!!!!!!!!!!!!!!!!!!!!!",children)
-        if children is None:
-            return "No Children Found!"
-        child_list = [child.serialize() for child in children]
-        return jsonify(child_list)
-    return "No Guardian Found!"
+    children = guardian["children"]
+    if children is None:
+        raise APIException ("No Children Found")
+    child_list = [child.serialize() for child in children]
+    return jsonify(child_list)
