@@ -10,7 +10,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ session: payload });
       },
       _fetch: async (url, options = {}) => {
-        options.header = { "Content-Type": "application/json" };
+        options.headers = { "Content-Type": "application/json" };
         const response = await fetch(process.env.BACKEND_URL + url, options);
         if (response.status >= 200 && response.status < 400) {
           return await response.json();
