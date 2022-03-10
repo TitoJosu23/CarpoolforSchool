@@ -7,6 +7,7 @@ import { UserSignup } from "./pages/UserSignup.jsx";
 import { Dashboard } from "./pages/Dashboard.js";
 import { NavPage } from "./pages/NavPage";
 import { LandingPage } from "./pages/LandingPage";
+import { ForgotPassword } from "./pages/ForgotPassword";
 
 import injectContext from "./store/appContext";
 
@@ -35,6 +36,9 @@ const Layout = () => {
             </Route>
             <Route exact path="/user/home">
               <Dashboard />
+            </Route>
+            <Route exact path="/user/forgot">
+              <ForgotPassword />
             </Route>
             <Route>
               <h1>Not found!</h1>
