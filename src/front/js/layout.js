@@ -8,6 +8,8 @@ import { Dashboard } from "./pages/Dashboard.js";
 import { NavPage } from "./pages/NavPage";
 import { LandingPage } from "./pages/LandingPage";
 import { ForgotPassword } from "./pages/ForgotPassword";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import injectContext from "./store/appContext";
 
@@ -21,6 +23,7 @@ const Layout = () => {
     <div>
       <BrowserRouter basename={basename}>
         <ScrollToTop>
+          <ToastContainer />
           <Switch>
             <Route exact path="/nav">
               <NavPage />

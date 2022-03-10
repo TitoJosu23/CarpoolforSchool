@@ -16,7 +16,7 @@ export const RideRequestDropdown = (props) => {
           Request a Ride
         </button>
         <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          {props.children.map((child, index) => {
+          {props.children?.map((child, index) => {
             return (
               <li>
                 <div className="form-check">

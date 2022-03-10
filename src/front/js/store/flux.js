@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {},
@@ -13,9 +14,9 @@ const getState = ({ getStore, getActions, setStore }) => {
         const response = await fetch(process.env.BACKEND_URL + url, options);
         if (response.status >= 200 && response.status < 400) {
           return await response.json();
-        } else if (response.status > 400 && response.status < 500) {
+        } else if (response.status >= 400 && response.status < 500) {
           const error = await response.json();
-          alert(error.message);
+          toast(error.message);
         } else {
           alert("Unknown Error");
           console.log(await response.text());
@@ -30,8 +31,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             password: password,
           }),
         };
-        const response = await actions._fetch(`/api/user`, options);
-        const payload = await response.json();
+        const payload = await actions._fetch(`/api/user`, options);
         actions.setSessionStore(payload.token, payload.id);
         return payload;
       },
@@ -39,36 +39,15 @@ const getState = ({ getStore, getActions, setStore }) => {
         const actions = getActions();
         const options = {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email: email, password: password }),
         };
-        const response = await fetch(
-          process.env.BACKEND_URL + `/api/token`,
-          options
-        );
-        if (response.status === 200) {
-          const payload = await response.json();
-          actions.setSessionStore(
-            payload.token,
-            payload.user_id,
-            payload.roles
-          );
-          return payload;
-        } else if (response.status != 200) {
-          return "User Not Found!";
-        }
-        return await response.json();
+        const payload = await actions._fetch(`/api/token`, options);
+        actions.setSessionStore(payload.token, payload.user_id, payload.roles);
+        return payload;
       },
       getChildren: async () => {
-        const options = {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-        };
-        const response = await fetch(
-          process.env.BACKEND_URL + `/api/children`,
-          options
-        );
-        return response.json();
+        const actions = getActions();
+        return await actions._fetch(`/api/children`);
       },
     },
   };
