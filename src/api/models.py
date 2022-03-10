@@ -102,7 +102,7 @@ class Child(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_Name = db.Column(db.String(255), unique=False, nullable=False)
     last_name = db.Column(db.String(255), unique=False, nullable=False)
-    class_grade = db.Column(db.String(255), unique=True, nullable=False)
+    class_grade = db.Column(db.String(255), unique=False, nullable=False)
     gender = db.Column(db.String(255), unique=False)
     phone = db.Column(db.String(255), unique=True)
     guardians = db.relationship("Guardian",
@@ -111,12 +111,10 @@ class Child(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "school_id": self.school_id,
             "first_name":self.first_Name,
             "last_name":self.last_name,
             "class_grade":self.class_grade,
             "gender":self.gender,
-            "address":self.address,
             "phone":self.phone,
         }
 class Guardian(db.Model):
@@ -138,13 +136,13 @@ class Guardian(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "user_id": self.user,
-            "child_id": self.child,
+            "user_id": self.user_id,
+            "children": self.children,
             "first_name": self.first_name,
             "last_name": self.last_name,
             "seats_available": self.seats_available,
             "payment_info": self.payment_info,
-            "complaint_id": self.complaint_id,
+            # "complaint_id": self.complaints,
         }
 class Black_list(db.Model):
     id = db.Column(db.Integer, primary_key=True)

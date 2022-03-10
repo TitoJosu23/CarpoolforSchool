@@ -9,7 +9,12 @@ export const UserLogin = () => {
   const { store, actions } = useContext(Context);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loginMsg, setLoginMsg] = useState("Sign In To Your Account");
+  const logStatus = JSON.parse(localStorage.getItem("session"));
 
+  if (logStatus != null) {
+    history.push("/user/home");
+  }
   return (
     <div className="guardianLogin container-fluid mx-auto">
       <div className="container-fluid card">
@@ -18,15 +23,22 @@ export const UserLogin = () => {
             className="text-center"
             onSubmit={(e) => {
               actions.createNewSession(email, password).then((session) => {
-                history.push("/");
+                if (session == "User Not Found!") {
+                  setEmail("");
+                  setPassword("");
+                  setLoginMsg("Login Failed!");
+                } else {
+                  history.push("/user/home");
+                }
               });
               e.preventDefault();
             }}
           >
-            <h3 className="fw-normal mb-3 pb-3">Sign into your account</h3>
+            <h3 className="fw-normal mb-3 pb-3">{loginMsg}</h3>
             <div className="mb-4">
               <input
                 placeholder="Enter your email"
+                value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 type="email"
                 className="form-control form-control-lg"
@@ -37,6 +49,7 @@ export const UserLogin = () => {
             <div className="mb-4">
               <input
                 placeholder="Enter your password"
+                value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 type="password"
                 className="form-control form-control-lg"

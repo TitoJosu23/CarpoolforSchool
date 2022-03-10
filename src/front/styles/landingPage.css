@@ -39,6 +39,11 @@
   color: white;
   font-size: 4vw;
 }
+.landingPage .splitText {
+  padding-left: 3rem;
+  padding-right: 3rem;
+  padding-top: 0.9rem;
+}
 .landingPage .schoolView {
   animation-name: blur;
   animation-duration: 1s;
@@ -107,4 +112,38 @@
   text-decoration: none;
 }
 @media only screen and (max-width: 576px) {
+  .landingPage .schoolView {
+    animation-name: unblur;
+    animation-duration: 0.1s;
+    animation-fill-mode: forwards;
+  }
+  .landingPage .guardianView .splitText {
+    box-shadow: 0px 10px 20px 10px #616161;
+    border-radius: 30px;
+    opacity: 100%;
+  }
+  .landingPage .guardianView .splitText p {
+    color: rgb(212, 182, 12);
+    font-size: 8vw;
+  }
+  .landingPage .guardianView {
+    animation-name: unblur;
+    animation-duration: 0.1s;
+    animation-fill-mode: forwards;
+    border-bottom-style: solid;
+  }
+  .landingPage .splitText {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 1rem;
+  }
+  .landingPage .schoolView .splitText {
+    box-shadow: 0px 10px 20px 10px #616161;
+    border-radius: 30px;
+    opacity: 100%;
+  }
+  .landingPage .schoolView .splitText p {
+    color: #3db49a;
+    font-size: 8vw;
+  }
 }

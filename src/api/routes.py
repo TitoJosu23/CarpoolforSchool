@@ -20,10 +20,12 @@ def create_token():
     if user is None:
         # the user was not found on the database
         return jsonify({"msg": "User not found!"}), 401
+    data = School_Access.query.filter_by(user_id=user.id)
+    roles = [{"school_id":sa.school_id, "role":sa.role} for sa in data]
     
     # create a new token with the user id inside
     access_token = create_access_token(identity=user.id)
-    return jsonify({ "token": access_token, "user_id": user.id })
+    return jsonify({ "token": access_token, "user_id": user.id, "roles":roles})
 
 @api.route("/user", methods=["POST"])
 def create_user():
@@ -36,7 +38,7 @@ def create_user():
     return jsonify({**user.serialize(),"token":access_token})
 
 @api.route("/guardian", methods=["POST"])
-@jwt_required()
+# @jwt_required()
 def create_guardian():
     current_user_id=get_jwt_identity()
     user = User.query.get(current_user_id)
@@ -60,7 +62,7 @@ def create_school():
     return jsonify(guardian.serialize())
 
 @api.route("/guardian", methods=["GET"])
-@jwt_required()
+# @jwt_required()
 def get_guardian():
     current_user_id=get_jwt_identity()
     user = User.query.get(current_user_id)
@@ -83,4 +85,19 @@ def create_school_access():
     db.session.add(guardian)
     db.session.commit()
     return jsonify(guardian.serialize())
-    
+
+@api.route("/children", methods=["GET"])
+# @jwt_required()
+def get_children():
+    current_user_id=1
+    guardian = Guardian.query.filter_by(user_id=current_user_id).first()
+    guardian = guardian.serialize()
+    # print("This is the guardian!!!!!!!!!!!!!!!!!!!!!!!!!!!!", guardian)
+    if guardian is not None:
+        children = guardian["children"]
+        # print("This is the guardian children!!!!!!!!!!!!!!!!!!!!!!!!!!!!",children)
+        if children is None:
+            return "No Children Found!"
+        child_list = [child.serialize() for child in children]
+        return jsonify(child_list)
+    return "No Guardian Found!"
