@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { GuardianNav } from "../component/GuardianNavBar.jsx";
+import { ModalSearchGuardian } from "../component/ModalSearchGuardian";
 import { GuardianChildCard } from "../component/GuardianChildCard.jsx";
 import { RideRequestDropdown } from "../component/RideRequestDropdown.jsx";
 import "../../styles/Dashboard.css";
@@ -28,9 +29,7 @@ export const Dashboard = (props) => {
   }
   return (
     <div className="dashBoardHome">
-      <IsRole roles={["guardian"]}>
-        <GuardianNav />
-      </IsRole>
+      <IsRole roles={["guardian"]}></IsRole>
       <div
         style={{
           backgroundColor: "white",
@@ -67,6 +66,10 @@ export const Dashboard = (props) => {
               <a href="#" className="btn btn-primary">
                 Cancel Carpool
               </a>
+            </div>
+            <div>
+              <h1>test</h1>
+              <ModalSearchGuardian />
             </div>
           </div>
         </div>
