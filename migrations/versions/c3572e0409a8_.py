@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: b766a4a2a60e
+Revision ID: c3572e0409a8
 Revises: 
-Create Date: 2022-03-09 20:10:25.883175
+Create Date: 2022-03-11 19:07:10.911870
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'b766a4a2a60e'
+revision = 'c3572e0409a8'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -26,7 +26,6 @@ def upgrade():
     sa.Column('gender', sa.String(length=255), nullable=True),
     sa.Column('phone', sa.String(length=255), nullable=True),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('class_grade'),
     sa.UniqueConstraint('phone')
     )
     op.create_table('user',
@@ -66,11 +65,11 @@ def upgrade():
     )
     op.create_table('complaint',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('flagged_guardian', sa.Integer(), nullable=True),
-    sa.Column('flag_creator', sa.Integer(), nullable=True),
+    sa.Column('flagged_guardian_id', sa.Integer(), nullable=True),
+    sa.Column('flag_creator_id', sa.Integer(), nullable=True),
     sa.Column('flag_comment', sa.String(length=255), nullable=True),
-    sa.ForeignKeyConstraint(['flag_creator'], ['guardian.id'], ),
-    sa.ForeignKeyConstraint(['flagged_guardian'], ['guardian.id'], ),
+    sa.ForeignKeyConstraint(['flag_creator_id'], ['guardian.id'], ),
+    sa.ForeignKeyConstraint(['flagged_guardian_id'], ['guardian.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('school',
@@ -81,6 +80,7 @@ def upgrade():
     sa.Column('active_complaints', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['active_complaints'], ['complaint.id'], ),
     sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('school_address'),
     sa.UniqueConstraint('school_name')
     )
     op.create_table('school__access',
@@ -94,7 +94,7 @@ def upgrade():
     sa.Column('afternoon', sa.Boolean(), nullable=True),
     sa.Column('monday', sa.Boolean(), nullable=True),
     sa.Column('tuesday', sa.Boolean(), nullable=True),
-    sa.Column('wedenesday', sa.Boolean(), nullable=True),
+    sa.Column('wednesday', sa.Boolean(), nullable=True),
     sa.Column('thursday', sa.Boolean(), nullable=True),
     sa.Column('friday', sa.Boolean(), nullable=True),
     sa.Column('accepted', sa.Boolean(), nullable=True),

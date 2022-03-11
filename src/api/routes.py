@@ -99,3 +99,50 @@ def get_children():
         raise APIException ("No Children Found")
     child_list = [child.serialize() for child in children]
     return jsonify(child_list)
+
+@api.route("/guardian/school/<int:current_school_id>", methods=["GET"])
+# @jwt_required()
+def get_guardian_for_school(current_school_id):
+    current_user_id=1
+    school_access = School_Access.query.filter_by(user_id=current_user_id,school_id=current_school_id).first()
+    if school_access is None:
+        raise APIException ("School Not Found!")
+    school_access = School_Access.query.filter_by(school_id=current_school_id)
+    guardian_list=[]
+    for access in school_access:
+        guardian = Guardian.query.filter_by(user_id=access.user_id).first()
+        guardian_list.append(guardian.serialize())
+    return jsonify(guardian_list),200
+@api.route("/complaint/<int:flagged_guardian_id>", methods=["POST"])
+def create_complaint(flagged_guardian_id):
+    current_user_id=1
+    if current_user_id == flagged_guardian_id:
+        raise APIException("Cannot Complain Against Self!")
+    guardian= Guardian.query.get(flagged_guardian_id)
+    if guardian is None:
+        raise APIException("Guardian does not exist!")
+    comment = request.json.get("comment")
+    if comment is None:
+        raise APIException("Comment does not exist!")
+    check_complaint=Complaint.query.filter_by(flagged_guardian_id=flagged_guardian_id,flag_creator_id=current_user_id).first()
+    if check_complaint is not None:
+        raise APIException("Complaint against this guardian already exists!")
+    complaint = Complaint(flagged_guardian_id=flagged_guardian_id,flag_creator_id=current_user_id,flag_comment=comment)
+    db.session.add(complaint)
+    db.session.commit()
+    return ("Complaint Succesfully Filed!"),200
+
+@api.route("/complaint/<int:school_id>", methods=["GET"])
+def get_complaint(school_id):
+    current_user_id=1
+    school_access_list = School_Access.query.filter_by(school_id=school_id)
+    user_list = list(map(lambda school_access: User.query.get(school_access.user_id),school_access_list))
+    guardian_list = list(map(lambda user:Guardian.query.filter_by(user_id=user.id).first(),user_list))
+    complaint_against_list = list(map(lambda guardian:Complaint.query.filter_by(flagged_guardian_id=guardian.id).first(),guardian_list))
+    valid_complaints=[]
+    for items in complaint_against_list:
+        if items is not None:
+            items.serialize()
+            valid_complaints.append(items)
+    print (valid_complaints)
+    return ("check console for complaint_against_list")

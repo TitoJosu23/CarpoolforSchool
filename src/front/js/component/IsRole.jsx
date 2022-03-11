@@ -5,6 +5,7 @@ import "../../styles/GuardianNavBar.css";
 export const IsRole = (props) => {
   const session = JSON.parse(localStorage.getItem("session"));
   if (
+    !session ||
     !Array.isArray(session.roles) ||
     session.roles.filter((r) => props.roles.includes(r.role)).length === 0
   )
