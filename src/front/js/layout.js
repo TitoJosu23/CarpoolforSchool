@@ -10,6 +10,7 @@ import { LandingPage } from "./pages/LandingPage";
 import { ForgotPassword } from "./pages/ForgotPassword";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { GuardianSchedule } from "./pages/GuardianSchedule.jsx";
 
 import injectContext from "./store/appContext";
 
@@ -42,6 +43,9 @@ const Layout = () => {
             </Route>
             <Route exact path="/user/forgot">
               <ForgotPassword />
+            </Route>
+            <Route exact path="/user/schedule">
+              <GuardianSchedule />
             </Route>
             <Route>
               <h1>Not found!</h1>
