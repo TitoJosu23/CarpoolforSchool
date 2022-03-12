@@ -43,15 +43,6 @@ export const Dashboard = (props) => {
   return (
     <>
       <NavReuse />
-      {/* <DashNavBar>
-        <DashNavItems icon={<GrHomeRounded className="svg" />} />
-        <DashNavItems icon={<BsFlag className="flag" />} />
-        <DashNavItems icon={<RiMoneyDollarBoxLine className="tip" />} />
-
-        <DashNavItems icon={<BsPerson className="person" />}>
-          <DashDropDown></DashDropDown>
-        </DashNavItems>
-      </DashNavBar> */}
       <div className="dashBoardHome">
         <IsRole roles={["guardian"]}>
           <p>Welcome Guardian</p>
