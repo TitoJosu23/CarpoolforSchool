@@ -3,7 +3,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User, Complaint, School, School_Access, Child, Guardian, Black_list
-from api.utils import generate_sitemap, APIException
+from api.utils import generate_sitemap, APIException, school_member
 from flask_jwt_extended import create_access_token,jwt_required,get_jwt_identity
 
 api = Blueprint('api', __name__)
@@ -38,7 +38,7 @@ def create_user():
     return jsonify({**user.serialize(),"token":access_token})
 
 @api.route("/guardian", methods=["POST"])
-# @jwt_required()
+@jwt_required()
 def create_guardian():
     current_user_id=get_jwt_identity()
     user = User.query.get(current_user_id)
@@ -62,7 +62,7 @@ def create_school():
     return jsonify(guardian.serialize())
 
 @api.route("/guardian", methods=["GET"])
-# @jwt_required()
+@jwt_required()
 def get_guardian():
     current_user_id=get_jwt_identity()
     user = User.query.get(current_user_id)
@@ -87,9 +87,9 @@ def create_school_access():
     return jsonify(guardian.serialize())
 
 @api.route("/children", methods=["GET"])
-# @jwt_required()
+@jwt_required()
 def get_children():
-    current_user_id=1
+    current_user_id=get_jwt_identity()
     guardian = Guardian.query.filter_by(user_id=current_user_id).first()
     if guardian is None:
         raise APIException ("No Guardian Found")
@@ -101,9 +101,9 @@ def get_children():
     return jsonify(child_list)
 
 @api.route("/guardian/school/<int:current_school_id>", methods=["GET"])
-# @jwt_required()
+@jwt_required()
 def get_guardian_for_school(current_school_id):
-    current_user_id=1
+    current_user_id=get_jwt_identity()
     school_access = School_Access.query.filter_by(user_id=current_user_id,school_id=current_school_id).first()
     if school_access is None:
         raise APIException ("School Not Found!")
@@ -113,9 +113,10 @@ def get_guardian_for_school(current_school_id):
         guardian = Guardian.query.filter_by(user_id=access.user_id).first()
         guardian_list.append(guardian.serialize())
     return jsonify(guardian_list),200
-@api.route("/complaint/<int:flagged_guardian_id>", methods=["POST"])
+@api.route("/school/<int:school_id>/complaint/<int:flagged_guardian_id>", methods=["POST"])
+@jwt_required()
 def create_complaint(flagged_guardian_id):
-    current_user_id=1
+    current_user_id=get_jwt_identity()
     if current_user_id == flagged_guardian_id:
         raise APIException("Cannot Complain Against Self!")
     guardian= Guardian.query.get(flagged_guardian_id)
@@ -132,9 +133,12 @@ def create_complaint(flagged_guardian_id):
     db.session.commit()
     return ("Complaint Succesfully Filed!"),200
 
+
 @api.route("/complaint/<int:school_id>", methods=["GET"])
-def get_complaint(school_id):
-    current_user_id=1
+@jwt_required()
+@school_member(role="admin")
+def get_complaint(school_id,school_access):
+    current_user_id=school_access.user_id
     school_access_list = School_Access.query.filter_by(school_id=school_id)
     user_list = list(map(lambda school_access: User.query.get(school_access.user_id),school_access_list))
     guardian_list = list(map(lambda user:Guardian.query.filter_by(user_id=user.id).first(),user_list))
@@ -146,3 +150,4 @@ def get_complaint(school_id):
             valid_complaints.append(items)
     print (valid_complaints)
     return ("check console for complaint_against_list")
+    

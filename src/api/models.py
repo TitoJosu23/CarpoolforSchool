@@ -112,6 +112,7 @@ class Guardian(db.Model):
     phone = db.Column(db.String(255), unique=True, nullable=False)
     children = db.relationship("Child",
                     secondary=Child_to_guardian)
+    user = db.relationship("User")
 
     def serialize(self):
         return {
