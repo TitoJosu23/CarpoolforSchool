@@ -15,29 +15,12 @@ class User(db.Model):
             "email": self.email,
             # do not serialize the password, its a security breach
         }
-class Complaint(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    flagged_guardian = db.Column(db.Integer, db.ForeignKey("guardian.id"))
-    flag_creator = db.Column(db.Integer, db.ForeignKey("guardian.id"))
-    flag_comment = db.Column(db.String(255))
-
-    def serialize(self):
-        return {
-            "id": self.id,
-            "flagged_guardian": self.flagged_guardian,
-            "flag_creator": self.flag_creator,
-            "flag_comment": self.flag_comment,
-                # do not serialize the password, its a security breach
-            }
-
 class School(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     school_name = db.Column(db.String(255), unique=True, nullable=False)
-    school_address = db.Column(db.String(255), unique=False, nullable=False)
+    school_address = db.Column(db.String(255), unique=True, nullable=False)
     school_logo_url = db.Column(db.String(255), unique=False, nullable=False)
     active_complaints = db.Column(db.Integer, db.ForeignKey('complaint.id'))
-    # children = db.relationship("Child")
-    # complaints = db.relationship("Complaint")
     access_list = db.relationship("School_Access")
 
 
@@ -47,7 +30,7 @@ class School(db.Model):
             "school_name": self.school_name,
             "school_address": self.school_address,
             "school_logo_url": self.school_logo_url,
-            "active_complaint":self.complaint
+            "active_complaint":self.active_complaints
         }
 
 class School_Access(db.Model):
@@ -61,7 +44,7 @@ class School_Access(db.Model):
     afternoon = db.Column(db.Boolean, unique=False, default=False)
     monday = db.Column(db.Boolean, unique=False, default=False)
     tuesday= db.Column(db.Boolean, unique=False, default=False)
-    wedenesday = db.Column(db.Boolean, unique=False, default=False)
+    wednesday = db.Column(db.Boolean, unique=False, default=False)
     thursday = db.Column(db.Boolean, unique=False, default=False)
     friday = db.Column(db.Boolean, unique=False, default=False)
     accepted = db.Column(db.Boolean, unique=False, default=False)
@@ -81,8 +64,8 @@ class School_Access(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "user_id": self.user,
-            "school_id": self.school,
+            "user_id": self.user_id,
+            "school_id": self.school_id,
             "role": self.role,
             "is_driver": self.is_driver,
             "is_available": self.is_available,
@@ -93,6 +76,7 @@ class School_Access(db.Model):
             "wednesday":self.wednesday,
             "thursday":self.thursday,
             "friday":self.friday,
+            "accepted":self.accepted,
         }
 Child_to_guardian = db.Table('child_to_guardian',
     db.Column('guardian_id', db.ForeignKey('guardian.id')),
@@ -126,31 +110,51 @@ class Guardian(db.Model):
     payment_info = db.Column(db.String(255), unique=False)
     address = db.Column(db.String(255), unique=True, nullable=False)
     phone = db.Column(db.String(255), unique=True, nullable=False)
-    black_list = db.relationship("Black_list",foreign_keys="Black_list.blacklisting_guardian_id")
-    black_list_against = db.relationship("Black_list",foreign_keys="Black_list.blacklisted_guardian_id")
-    complaints = db.relationship("Complaint",foreign_keys="Complaint.flag_creator")
-    complaints_against = db.relationship("Complaint",foreign_keys="Complaint.flagged_guardian")
     children = db.relationship("Child",
                     secondary=Child_to_guardian)
+    user = db.relationship("User")
 
     def serialize(self):
         return {
             "id": self.id,
             "user_id": self.user_id,
-            "children": self.children,
             "first_name": self.first_name,
             "last_name": self.last_name,
             "seats_available": self.seats_available,
             "payment_info": self.payment_info,
-            # "complaint_id": self.complaints,
+            "address":self.address,
+            "phone":self.phone,
+            "children": list(map(lambda child: child.serialize(),self.children))
         }
+class Complaint(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    flagged_guardian_id = db.Column(db.Integer, db.ForeignKey("guardian.id"))
+    flag_creator_id = db.Column(db.Integer, db.ForeignKey("guardian.id"))
+    flag_comment = db.Column(db.String(255), nullable=False)
+    flag_creator = db.relationship(Guardian, foreign_keys="Complaint.flag_creator_id",
+        backref=db.backref('complaint'))
+    flagged_guardian = db.relationship(Guardian, foreign_keys="Complaint.flagged_guardian_id")
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "flagged_guardian_id": self.flagged_guardian_id,
+            "flag_creator_id": self.flag_creator_id,
+            "flag_comment": self.flag_comment,
+                # do not serialize the password, its a security breach
+            }
 class Black_list(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     blacklisted_guardian_id = db.Column(db.Integer, db.ForeignKey('guardian.id'))
     blacklisting_guardian_id = db.Column(db.Integer, db.ForeignKey('guardian.id'))
+    blacklisted_guardian = db.relationship(Guardian, foreign_keys="Black_list.blacklisted_guardian_id",
+        backref=db.backref('black_list'))
+    blacklisting_guardian = db.relationship(Guardian, foreign_keys="Black_list.blacklisting_guardian_id")
+
 
     def serialize(self):
         return {
             "id": self.id,
             "blacklisted_guardian_id": self.blacklisted_guardian_id,
+            "blacklisting_guardian_id": self.blacklisting_guardian_id,
         }

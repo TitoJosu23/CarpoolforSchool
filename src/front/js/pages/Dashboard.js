@@ -37,8 +37,6 @@ export const Dashboard = (props) => {
     actions.getChildren().then((payload) => setChildren(payload));
   }, []);
 
-  console.log(children);
-
   if (logStatus === null) {
     history.push("/user/login");
   }
@@ -57,7 +55,9 @@ export const Dashboard = (props) => {
       <div className="dashBoardHome">
         <IsRole roles={["guardian"]}>
           <p>Welcome Guardian</p>
-          <RideRequestDropdown children={children} />
+          {children.length != 0 ? (
+            <RideRequestDropdown children={children} />
+          ) : null}
         </IsRole>
         <div
           style={{ backgroundColor: "#F2F2F2" }}

@@ -1,4 +1,6 @@
-from flask import jsonify, url_for
+from flask import jsonify, url_for, request
+from api.models import School_Access
+from flask_jwt_extended import get_jwt_identity
 
 class APIException(Exception):
     status_code = 400
@@ -39,3 +41,25 @@ def generate_sitemap(app):
         <p>Start working on your project by following the <a href="https://start.4geeksacademy.com/starters/full-stack" target="_blank">Quick Start</a></p>
         <p>Remember to specify a real endpoint path like: </p>
         <ul style="text-align: left;">"""+links_html+"</ul></div>"
+
+def school_member(role=None):
+    def decorator(function):
+        def wrapper(*args, **kwargs):
+            school_id = None
+            if "school_id" in kwargs:
+                school_id=kwargs["school_id"]
+            elif "school_id" in request.GET:
+                school_id = request.GET["school_id"]
+            if school_id is None:
+                raise APIException("Missing School ID on the request!",401)
+            current_user_id=get_jwt_identity()
+            school_access=School_Access.query.filter_by(user_id=current_user_id,role=role,school_id=school_id).first()
+            if school_access is None:
+                raise APIException("School Accesss Denied!",401)
+            kwargs["school_access"]=school_access
+            print("hello!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+            return function(*args, **kwargs)
+
+        return wrapper
+
+    return decorator

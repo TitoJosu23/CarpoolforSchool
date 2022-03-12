@@ -49,6 +49,10 @@ const getState = ({ getStore, getActions, setStore }) => {
         const actions = getActions();
         return await actions._fetch(`/api/children`);
       },
+      clearSession: () => {
+        localStorage.removeItem("session");
+        setStore({ session: null });
+      },
     },
   };
 };
