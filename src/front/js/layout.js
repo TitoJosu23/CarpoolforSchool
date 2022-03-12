@@ -8,6 +8,8 @@ import { Dashboard } from "./pages/Dashboard.js";
 import { NavPage } from "./pages/NavPage";
 import { LandingPage } from "./pages/LandingPage";
 import { ForgotPassword } from "./pages/ForgotPassword";
+import { ModalView } from "./pages/ModalView";
+import { Rendering } from "./pages/Rendering";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -42,6 +44,12 @@ const Layout = () => {
             </Route>
             <Route exact path="/user/forgot">
               <ForgotPassword />
+            </Route>
+            <Route exact path="/modal">
+              <ModalView />
+            </Route>
+            <Route exact path="/rendering">
+              <Rendering />
             </Route>
             <Route>
               <h1>Not found!</h1>

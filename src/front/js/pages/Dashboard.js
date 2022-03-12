@@ -47,7 +47,6 @@ export const Dashboard = (props) => {
         <DashNavItems icon={<GrHomeRounded className="svg" />} />
         <DashNavItems icon={<BsFlag className="flag" />} />
         <DashNavItems icon={<RiMoneyDollarBoxLine className="tip" />} />
-
         <DashNavItems icon={<BsPerson className="person" />}>
           <DashDropDown></DashDropDown>
         </DashNavItems>
