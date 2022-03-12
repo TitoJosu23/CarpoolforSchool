@@ -21,7 +21,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${session.token}`,
           };
-        } else if (session == null) {
+        } else {
           options.headers = { "Content-Type": "application/json" };
         }
         const response = await fetch(process.env.BACKEND_URL + url, options);
