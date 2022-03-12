@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useState, useContext } from "react";
+import PropTypes from "prop-types";
+import { Context } from "../store/appContext";
+
 import "../../styles/modal.css";
 
 export const ModalGuardianInformation = (props) => {
