@@ -21,6 +21,7 @@ import { BsPerson } from "react-icons/bs";
 import { DashNavBar } from "../component/DashNavBar.jsx";
 import { DashDropDown } from "../component/DashDropDown.jsx";
 import { CSSTransition } from "react-transition-group";
+import { NavReuse } from "../component/NavReuse.jsx";
 
 // Nav items
 
@@ -41,7 +42,8 @@ export const Dashboard = (props) => {
   }
   return (
     <>
-      <DashNavBar>
+      <NavReuse />
+      {/* <DashNavBar>
         <DashNavItems icon={<GrHomeRounded className="svg" />} />
         <DashNavItems icon={<BsFlag className="flag" />} />
         <DashNavItems icon={<RiMoneyDollarBoxLine className="tip" />} />
@@ -49,7 +51,7 @@ export const Dashboard = (props) => {
         <DashNavItems icon={<BsPerson className="person" />}>
           <DashDropDown></DashDropDown>
         </DashNavItems>
-      </DashNavBar>
+      </DashNavBar> */}
       <div className="dashBoardHome">
         <IsRole roles={["guardian"]}>
           <p>Welcome Guardian</p>
