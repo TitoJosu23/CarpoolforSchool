@@ -146,6 +146,5 @@ def get_complaint(school_id,school_access):
     for items in complaint_against_list:
         if items is not None:
             items.serialize()
-            valid_complaints.append(items)
-    print (valid_complaints)
-    return ("check console for complaint_against_list")
+            valid_complaints.append(items.serialize())
+    return jsonify(valid_complaints),200
