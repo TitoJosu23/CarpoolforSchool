@@ -37,7 +37,7 @@ def create_user():
     access_token = create_access_token(identity=user.id)
     return jsonify({**user.serialize(),"token":access_token,"roles":[{"role":"user"}]})
 
-@api.route("/guardian", methods=["POST"])
+@api.route("/guardian/create", methods=["POST"])
 @jwt_required()
 def create_guardian():
     current_user_id=get_jwt_identity()
@@ -103,15 +103,17 @@ def get_children():
 @jwt_required()
 def get_guardian_for_school(current_school_id):
     current_user_id=get_jwt_identity()
-    school_access = School_Access.query.filter_by(user_id=current_user_id,school_id=current_school_id).first()
+    school_access = School_Access.query.filter_by(user_id=current_user_id,school_id=current_school_id,accepted=True).first()
     if school_access is None:
         raise APIException ("School Not Found!")
     school_access = School_Access.query.filter_by(school_id=current_school_id)
     guardian_list=[]
     for access in school_access:
         guardian = Guardian.query.filter_by(user_id=access.user_id).first()
-        guardian_list.append(guardian.serialize())
+        if guardian is not None:
+            guardian_list.append(guardian.serialize())
     return jsonify(guardian_list),200
+    
 @api.route("/school/<int:school_id>/complaint/<int:flagged_guardian_id>", methods=["POST"])
 @jwt_required()
 def create_complaint(flagged_guardian_id):
