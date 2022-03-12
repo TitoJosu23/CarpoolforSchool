@@ -97,8 +97,7 @@ def get_children():
     children = guardian["children"]
     if children is None:
         raise APIException ("No Children Found")
-    child_list = [child.serialize() for child in children]
-    return jsonify(child_list)
+    return jsonify(children)
 
 @api.route("/guardian/school/<int:current_school_id>", methods=["GET"])
 @jwt_required()
@@ -150,4 +149,3 @@ def get_complaint(school_id,school_access):
             valid_complaints.append(items)
     print (valid_complaints)
     return ("check console for complaint_against_list")
-    
