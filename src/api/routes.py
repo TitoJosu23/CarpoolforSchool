@@ -35,7 +35,7 @@ def create_user():
     db.session.add(user)
     db.session.commit()
     access_token = create_access_token(identity=user.id)
-    return jsonify({**user.serialize(),"token":access_token})
+    return jsonify({**user.serialize(),"token":access_token,"roles":[{"role":"user"}]})
 
 @api.route("/guardian", methods=["POST"])
 @jwt_required()
