@@ -21,6 +21,7 @@ import { BsPerson } from "react-icons/bs";
 import { DashNavBar } from "../component/DashNavBar.jsx";
 import { DashDropDown } from "../component/DashDropDown.jsx";
 import { CSSTransition } from "react-transition-group";
+import { NavReuse } from "../component/NavReuse.jsx";
 
 // Nav items
 
@@ -36,8 +37,6 @@ export const Dashboard = (props) => {
     actions.getChildren().then((payload) => setChildren(payload));
   }, []);
 
-  console.log(children);
-
   if (logStatus === null) {
     history.push("/user/login");
   }
@@ -51,10 +50,19 @@ export const Dashboard = (props) => {
           <DashDropDown></DashDropDown>
         </DashNavItems>
       </DashNavBar>
+      <NavReuse />
       <div className="dashBoardHome">
+        <IsRole roles={["user"]}>
+          <p>Welcome User!</p>
+        </IsRole>
+        <IsRole roles={["admin"]}>
+          <p>Welcome Admin!</p>
+        </IsRole>
         <IsRole roles={["guardian"]}>
           <p>Welcome Guardian</p>
-          <RideRequestDropdown children={children} />
+          {children != null ? (
+            <RideRequestDropdown children={children} />
+          ) : null}
         </IsRole>
         <div
           style={{ backgroundColor: "#F2F2F2" }}

@@ -12,6 +12,7 @@ import { ModalView } from "./pages/ModalView";
 import { Rendering } from "./pages/Rendering";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { GuardianSchedule } from "./pages/GuardianSchedule.jsx";
 
 import injectContext from "./store/appContext";
 
@@ -50,6 +51,9 @@ const Layout = () => {
             </Route>
             <Route exact path="/rendering">
               <Rendering />
+            </Route>
+            <Route exact path="/user/schedule">
+              <GuardianSchedule />
             </Route>
             <Route>
               <h1>Not found!</h1>
