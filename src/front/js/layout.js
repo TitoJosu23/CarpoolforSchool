@@ -9,7 +9,7 @@ import { NavPage } from "./pages/NavPage";
 import { LandingPage } from "./pages/LandingPage";
 import { ForgotPassword } from "./pages/ForgotPassword";
 import { ModalView } from "./pages/ModalView";
-import { Rendering } from "./pages/Rendering";
+import { Profile } from "./pages/Profile";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { GuardianSchedule } from "./pages/GuardianSchedule.jsx";
@@ -49,8 +49,8 @@ const Layout = () => {
             <Route exact path="/modal">
               <ModalView />
             </Route>
-            <Route exact path="/rendering">
-              <Rendering />
+            <Route exact path="/profile">
+              <Profile />
             </Route>
             <Route exact path="/user/schedule">
               <GuardianSchedule />
