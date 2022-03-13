@@ -8,13 +8,27 @@ import { BsFlag } from "react-icons/bs";
 import { RiMoneyDollarBoxLine } from "react-icons/ri";
 import { BsPerson } from "react-icons/bs";
 import { GrHomeRounded } from "react-icons/gr";
+import { useHistory } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 export const NavReuse = () => {
+  const history = useHistory();
+  const { store, actions } = useContext(Context);
+
   return (
     <>
       {" "}
       <DashNavBar>
-        <DashNavItems icon={<GrHomeRounded className="svg" />} />
+        <DashNavItems
+          icon={
+            <GrHomeRounded
+              onClick={() => {
+                history.push("/user/home");
+              }}
+              className="svg"
+            />
+          }
+        />
         <DashNavItems icon={<BsFlag className="flag" />} />
         <DashNavItems icon={<RiMoneyDollarBoxLine className="tip" />} />
 

@@ -11,6 +11,7 @@ import { ForgotPassword } from "./pages/ForgotPassword";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { GuardianSchedule } from "./pages/GuardianSchedule.jsx";
+import { ProfileDetails } from "./pages/ProfileDetails.jsx";
 
 import injectContext from "./store/appContext";
 
@@ -40,6 +41,9 @@ const Layout = () => {
             </Route>
             <Route exact path="/user/home">
               <Dashboard />
+            </Route>
+            <Route exact path="/user/details">
+              <ProfileDetails />
             </Route>
             <Route exact path="/user/forgot">
               <ForgotPassword />
