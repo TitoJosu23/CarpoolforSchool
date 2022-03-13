@@ -44,9 +44,15 @@ export const Dashboard = (props) => {
     <>
       <NavReuse />
       <div className="dashBoardHome">
+        <IsRole roles={["user"]}>
+          <p>Welcome User!</p>
+        </IsRole>
+        <IsRole roles={["admin"]}>
+          <p>Welcome Admin!</p>
+        </IsRole>
         <IsRole roles={["guardian"]}>
           <p>Welcome Guardian</p>
-          {children.length != 0 ? (
+          {children != null ? (
             <RideRequestDropdown children={children} />
           ) : null}
         </IsRole>

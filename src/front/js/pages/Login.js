@@ -61,10 +61,10 @@ export const UserLogin = () => {
               <button className="btn btn-dark">Submit</button>
             </div>
             <div className="d-inline-block text-center">
-              <Link to={"/user/create"}>
+              <Link className="text-dark" to={"/user/create"}>
                 <p className="text-center">New Account!</p>
               </Link>
-              <Link to={"/user/forgot"}>
+              <Link className="text-dark" to={"/user/forgot"}>
                 <p className="text-center">Forgot Password?</p>
               </Link>
             </div>

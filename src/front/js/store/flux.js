@@ -45,7 +45,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           }),
         };
         const payload = await actions._fetch(`/api/user`, options);
-        actions.setSessionStore(payload.token, payload.id);
+        actions.setSessionStore(payload.token, payload.id, payload.roles);
         return payload;
       },
       createNewSession: async (email, password) => {
