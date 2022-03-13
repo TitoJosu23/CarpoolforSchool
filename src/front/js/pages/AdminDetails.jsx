@@ -3,16 +3,15 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { useHistory } from "react-router-dom";
 import { NavReuse } from "../component/NavReuse.jsx";
-import { UserProfileDetails } from "../component/UserProfileDetails.jsx";
-import "../../styles/profileDetails.css";
+import { AdminProfileDetails } from "../component/AdminProfileDetails.js";
 
-export const ProfileDetails = (props) => {
-  const [active, setActive] = useState(<UserProfileDetails />);
+export const AdminDetails = () => {
   return (
     <>
       <NavReuse />
-
-      <UserProfileDetails />
+      <div>
+        <AdminProfileDetails />
+      </div>
     </>
   );
 };

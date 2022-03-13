@@ -1,6 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import CssBaseline from "@mui/material/CssBaseline";
-import Box from "@mui/material/Box";
 
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -10,7 +8,6 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { GuardianProfileDetails } from "./GuardianProfileDetails";
 
 let theme = createTheme({
   palette: {
@@ -34,16 +31,11 @@ let theme = createTheme({
   },
 });
 
-export const UserProfileDetails = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [phoneNumber, setPhoneNumnber] = useState("");
-  const [email, setEmail] = useState("");
-  const [role, setRole] = useState("");
-  const [value, setValue] = useState("");
+export const GuardianProfileDetails = () => {
+  const [driver, setDriver] = useState("");
 
   const handleChange = (e) => {
-    setRole(e.target.value);
+    setDriver(e.target.value);
   };
 
   return (
@@ -52,52 +44,43 @@ export const UserProfileDetails = () => {
       <ThemeProvider theme={theme}>
         <React.Fragment>
           <Dialog open fullWidth maxWidth="sm" color="primary">
-            <h1>Profile Details</h1>
+            <h1>Guardian Details</h1>
             <TextField
               color="primary"
-              placeholder="Enter Your First Name"
+              placeholder="Enter Address"
               id="outlined-basic"
-              label="First Name"
+              label="Address"
               fullWidth
             />
             <br />
-            <TextField
-              placeholder="Enter Your Last Name"
-              id="outlined-basic"
-              label="Last Name"
-              fullWidth
-            />
-            <br />
-            <TextField
-              placeholder="Enter Your Email"
-              id="outlined-basic"
-              label="Email"
-              fullWidth
-            />
-            <br />
-            <TextField
-              placeholder="Mobile"
-              id="outlined-basic"
-              label="Phone Number"
-              fullWidth
-            />
+
             <br />
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Role</InputLabel>
+              <InputLabel id="demo-simple-select-label">
+                Drive-Enabled
+              </InputLabel>
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={role}
-                label="Role"
+                value={driver}
+                label="Drive-Enabled"
                 onChange={handleChange}
               >
-                <MenuItem value={"Guardian"}>Guardian</MenuItem>
-                <MenuItem value={"Admin"}>Admin</MenuItem>
+                <MenuItem value={"Yes"}>Yes</MenuItem>
+                <MenuItem value={"No"}>No</MenuItem>
               </Select>
             </FormControl>
             <br />
+            <TextField
+              placeholder="Enter School Code"
+              id="outlined-basic"
+              label="School Code"
+              fullWidth
+            />
+            <br />
+
             <Button color="secondary" variant="contained">
-              Continue
+              Request to become a Guardian
             </Button>
           </Dialog>
         </React.Fragment>
