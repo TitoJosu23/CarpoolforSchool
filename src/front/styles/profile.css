@@ -7,3 +7,17 @@
 .profile img {
   width: 300px;
 }
+.profile .picture {
+  margin-top: 100px;
+  margin-right: 500px;
+  display: inline-block;
+}
+.profile .profile-information {
+  position: absolute;
+  display: inline-block;
+  margin-top: 140px;
+  right: 600px;
+}
+.profile-title {
+  margin-top: 50px;
+}
