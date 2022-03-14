@@ -102,7 +102,32 @@ def create_school_access():
     db.session.commit()
     return jsonify(school_access.serialize())
 
-@api.route("/school_access/<int:school_access_id>/accept", methods=["GET"])
+@api.route("/school_access/pending", methods=["GET"])
+@jwt_required()
+def get_pending_requests():
+    current_user_id=get_jwt_identity()
+    user = User.query.get(current_user_id)
+    check_admin = School_Access.query.filter_by(user_id=current_user_id,role="admin").first()
+    if check_admin is None:
+        raise APIException("You Do Not Have Admin Rights!")
+    requested_school = check_admin.school_id
+    school_access_list = School_Access.query.filter_by(school_id=requested_school,accepted=False)
+    pending_requests = []
+    for items in school_access_list:
+        if items is not None:
+            items.serialize()
+            pending_requests.append(items.serialize())
+    people_requesting=[]
+    for people in pending_requests:
+        guardian = Guardian.query.filter_by(user_id=people["user_id"]).first()
+        if guardian is not None:
+            people_requesting.append({"first_name":guardian.first_name, "last_name":guardian.last_name,"phone":guardian.phone})
+    if not people_requesting:
+        return("You have no pending requests!")
+    return jsonify(people_requesting)
+
+
+@api.route("/school_access/accept", methods=["PUT"])
 @jwt_required()
 def accept_school_invite(school_access_id):
     current_user_id=get_jwt_identity()
