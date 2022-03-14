@@ -19,7 +19,7 @@ class School(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     school_name = db.Column(db.String(255), unique=True, nullable=False)
     school_address = db.Column(db.String(255), unique=True, nullable=False)
-    school_logo_url = db.Column(db.String(255), unique=False, nullable=False)
+    school_logo_url = db.Column(db.String(255), unique=False, nullable=True)
     active_complaints = db.Column(db.Integer, db.ForeignKey('complaint.id'))
     access_list = db.relationship("School_Access")
 
@@ -76,15 +76,14 @@ class School_Access(db.Model):
             "wednesday":self.wednesday,
             "thursday":self.thursday,
             "friday":self.friday,
-            "accepted":self.accepted,
         }
 Child_to_guardian = db.Table('child_to_guardian',
-    db.Column('guardian_id', db.ForeignKey('guardian.id')),
-    db.Column('child_id', db.ForeignKey('child.id'))
+    db.Column('guardian_id',db.Integer, db.ForeignKey('guardian.id')),
+    db.Column('child_id',db.Integer, db.ForeignKey('child.id'))
 )
 class Child(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    first_Name = db.Column(db.String(255), unique=False, nullable=False)
+    first_name = db.Column(db.String(255), unique=False, nullable=False)
     last_name = db.Column(db.String(255), unique=False, nullable=False)
     class_grade = db.Column(db.String(255), unique=False, nullable=False)
     gender = db.Column(db.String(255), unique=False)
@@ -95,7 +94,7 @@ class Child(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "first_name":self.first_Name,
+            "first_name":self.first_name,
             "last_name":self.last_name,
             "class_grade":self.class_grade,
             "gender":self.gender,

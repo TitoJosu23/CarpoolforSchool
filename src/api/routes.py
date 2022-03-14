@@ -54,46 +54,63 @@ def create_guardian():
     db.session.commit()
     return jsonify(guardian.serialize())
 
-# @api.route("/school/create", methods=["POST"])
-# @jwt_required
-# def create_school():
-#     current_user_id=get_jwt_identity()
-#     user = User.query.get(current_user_id)
-#     check_admin = School_Access.query.filter_by(user_id=current_user_id,role="admin").first()
-#     if check_admin is not None:
-#         raise APIException("Cannot Create Multiple Schools!")
-#     school_name= request.json.get("school_name", None)
-#     school_address= request.json.get("school_address", None)
-#     school_logo_url= request.json.get("school_logo_url", None)
-#     school = School(school_name=school_name,school_address=school_address,school_logo_url=school_logo_url)
-#     db.session.add(school)
-#     added_school = School.query.filter_by(school_name=school_name).first()
-#     if added_school is None:
-#         raise APIException("School registration failed!")
-#     school_id = added_school.id
-#     school_access = School_Access(user_id=current_user_id,school_id=school_id,role="admin")
-#     db.session.add(school_access)
-#     return jsonify(school_access.serialize()),200
+@api.route("/child/create", methods=["POST"])
+@jwt_required()
+def create_child():
+    current_user_id=get_jwt_identity()
+    user = User.query.get(current_user_id)
+    guardian = Guardian.query.filter_by(user_id=current_user_id).first()
+    if guardian is None:
+        raise APIException ("Please register as a guardian first!")
+    print(guardian.first_name,guardian.last_name)
+    first_name = request.json.get("firstName", None)
+    last_name = request.json.get("lastName", None)
+    class_grade = request.json.get("classGrade",None)
+    gender = request.json.get("gender",None)
+    phone = request.json.get("phone", None)
+    child = Child(first_name=first_name, last_name=last_name,class_grade=class_grade,gender=gender,phone=phone)
+    db.session.add(child)
+    added_child = Child.query.filter_by(first_name=first_name, last_name=last_name,class_grade=class_grade,gender=gender,phone=phone).first()
+    if added_child is None:
+        raise APIException ("Failed to add child!")
+    print(added_child)
+    # child_to_guardian=Child_to_guardian(guardian_id=guardian.id,child_id=added_child.id)
+    # db.session.add(child_to_guardian)
+    db.session.commit()
+    return jsonify(child.serialize()),200
 
-# @api.route("/school_access/<int:school_access_id>/accept", methods=["GET"])
-# @jwt_required()
-# @school_member(role="admin")
-# def accept_school_invite(school_access_id):
-#     current_user_id=get_jwt_identity()
-#     school_access = SchoolAccess.query.get(school_access_id)
-#     school_access.accepted=True
-#     db.session.add(school_access)
-#     db.session.commit()
-#     return f"<h1>Invite Accepted,You can now login to {school_access.school.school_name}</h1>"
+@api.route("/school/access", methods=["POST"])
+@jwt_required()
+def create_school_access():
+    current_user_id=get_jwt_identity()
+    user = User.query.get(current_user_id)
+    guardian = Guardian.query.filter_by(user_id=current_user_id).first()
+    if guardian is None:
+        raise APIException("Register as a guardian before applying to school!")
+    requested_school = request.json.get("schoolName", None)
+    school = School.query.filter_by(school_name=requested_school).first()
+    if school is None:
+        raise APIException("School Does Not Exist!")
+    check_access_true = School_Access.query.filter_by(user_id=current_user_id,accepted=True).first()
+    if check_access_true is not None:
+        raise APIException("You already belong to that school")
+    check_access_false = School_Access.query.filter_by(user_id=current_user_id,accepted=False).first()
+    if check_access_false is not None:
+        raise APIException("You have a pending request, please be patient")
+    school_access = School_Access(user_id=current_user_id,school_id=school.id,role="guardian")
+    db.session.add(school_access)
+    db.session.commit()
+    return jsonify(school_access.serialize())
 
-# @api.route("/guardian/access", methods=["POST"])
-# def create_school_access():
-#     current_user_id=get_jwt_identity()
-#     user = User.query.get(current_user_id)
-#     guardian = Guardian(first_name=first_name, last_name=last_name, seats_available= seats_available,payment_info=payment_info, address=address)
-#     db.session.add(guardian)
-#     db.session.commit()
-#     return jsonify(guardian.serialize())
+@api.route("/school_access/<int:school_access_id>/accept", methods=["GET"])
+@jwt_required()
+def accept_school_invite(school_access_id):
+    current_user_id=get_jwt_identity()
+    school_access = SchoolAccess.query.get(school_access_id)
+    school_access.accepted=True
+    db.session.add(school_access)
+    db.session.commit()
+    return f"<h1>Invite Accepted,You can now login to {school_access.school.school_name}</h1>"
 
 @api.route("/children", methods=["GET"])
 @jwt_required()
@@ -159,3 +176,24 @@ def get_complaint(school_id,school_access):
             items.serialize()
             valid_complaints.append(items.serialize())
     return jsonify(valid_complaints),200
+
+# @api.route("/school/create", methods=["POST"])
+# @jwt_required
+# def create_school():
+#     current_user_id=get_jwt_identity()
+#     user = User.query.get(current_user_id)
+#     check_admin = School_Access.query.filter_by(user_id=current_user_id,role="admin").first()
+#     if check_admin is not None:
+#         raise APIException("Cannot Create Multiple Schools!")
+#     school_name= request.json.get("school_name", None)
+#     school_address= request.json.get("school_address", None)
+#     school_logo_url= request.json.get("school_logo_url", None)
+#     school = School(school_name=school_name,school_address=school_address,school_logo_url=school_logo_url)
+#     db.session.add(school)
+#     added_school = School.query.filter_by(school_name=school_name).first()
+#     if added_school is None:
+#         raise APIException("School registration failed!")
+#     school_id = added_school.id
+#     school_access = School_Access(user_id=current_user_id,school_id=school_id,role="admin")
+#     db.session.add(school_access)
+#     return jsonify(school_access.serialize()),200
