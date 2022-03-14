@@ -129,13 +129,21 @@ def get_pending_requests():
 
 @api.route("/school_access/accept", methods=["PUT"])
 @jwt_required()
-def accept_school_invite(school_access_id):
+def accept_school_invite():
     current_user_id=get_jwt_identity()
-    school_access = SchoolAccess.query.get(school_access_id)
-    school_access.accepted=True
-    db.session.add(school_access)
+    user = User.query.get(current_user_id)
+    check_admin = School_Access.query.filter_by(user_id=current_user_id,role="admin").first()
+    if check_admin is None:
+        raise APIException("You Do Not Have Admin Rights!")
+    guardian_phone = request.json.get("phone", None)
+    guardian = Guardian.query.filter_by(phone=guardian_phone).first()
+    access_request = School_Access.query.filter_by(user_id=guardian.user_id).first()
+    access_request.accepted=True
+    db.session.add(access_request)
     db.session.commit()
-    return f"<h1>Invite Accepted,You can now login to {school_access.school.school_name}</h1>"
+    return ("Guardian Access Succesfully Granted")
+
+
 
 @api.route("/children", methods=["GET"])
 @jwt_required()
