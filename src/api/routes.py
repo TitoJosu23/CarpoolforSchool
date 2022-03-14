@@ -74,8 +74,8 @@ def create_child():
     if added_child is None:
         raise APIException ("Failed to add child!")
     print(added_child)
-    # child_to_guardian=Child_to_guardian(guardian_id=guardian.id,child_id=added_child.id)
-    # db.session.add(child_to_guardian)
+    guardian.children.append(added_child)
+    db.session.add(guardian)
     db.session.commit()
     return jsonify(child.serialize()),200
 
