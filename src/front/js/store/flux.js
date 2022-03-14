@@ -55,6 +55,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           body: JSON.stringify({ email: email, password: password }),
         };
         const payload = await actions._fetch(`/api/token`, options);
+        console.log("this is the payload", payload);
         actions.setSessionStore(payload.token, payload.user_id, payload.roles);
         return payload;
       },
