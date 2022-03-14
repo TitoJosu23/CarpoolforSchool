@@ -14,6 +14,7 @@ import { GuardianSchedule } from "./pages/GuardianSchedule.jsx";
 import { ProfileDetails } from "./pages/ProfileDetails.jsx";
 import { GuardianDetails } from "./pages/GuardianDetails.jsx";
 import { AdminDetails } from "./pages/AdminDetails.jsx";
+import { GuardianSearch } from "./pages/GuardianSearch.jsx";
 
 import injectContext from "./store/appContext";
 
@@ -58,6 +59,9 @@ const Layout = () => {
             </Route>
             <Route exact path="/user/admin">
               <AdminDetails />
+            </Route>
+            <Route exact path="/user/search">
+              <GuardianSearch />
             </Route>
             <Route>
               <h1>Not found!</h1>

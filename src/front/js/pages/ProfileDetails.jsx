@@ -7,7 +7,6 @@ import { UserProfileDetails } from "../component/UserProfileDetails.jsx";
 import "../../styles/profileDetails.css";
 
 export const ProfileDetails = (props) => {
-  const [active, setActive] = useState(<UserProfileDetails />);
   return (
     <>
       <NavReuse />
