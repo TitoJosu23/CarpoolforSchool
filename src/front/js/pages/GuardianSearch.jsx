@@ -5,57 +5,54 @@ import "../../styles/guardianSearch.css";
 
 export const GuardianSearch = () => {
   return (
-    <>
+    <div className="guardianSearch">
       <NavReuse />
       <h1>Search For Guardian</h1>
       <div className="search container-fluid">
         <div className="guardianSearch container">
           <SearchBar />
         </div>
-        <div className="guardian search-card-container">
-          <GuardianCard />
-        </div>
       </div>
-    </>
+    </div>
   );
 };
-const GuardianCard = () => {
-  return (
-    <>
-      {" "}
-      <div className="card" style={{ width: "18rem" }}>
-        <img
-          src="https://www.seekpng.com/png/small/72-729700_account-avatar-face-head-person-profile-user-comments.png"
-          class="card-img-top"
-          alt="..."
-        />
-        <div className="card-body">
-          <h5 className="card-title">Guardian</h5>
-          <p className="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-        </div>
-        <ul className="list-group list-group-flush">
-          <li className="nameInfo list-group-item">Guardian Name</li>
-          <li className="phoneInfo list-group-item">Phone Number</li>
-          <li className="seatsInfo list-group-item">Seats Available</li>
-        </ul>
-        <div className="card-body">
-          <a href="#" className="card-link">
-            Guardian Profile
-          </a>
-          <a href="#" className="card-link">
-            Flag Guardian
-          </a>
-        </div>
-      </div>
-    </>
-  );
-};
+// const GuardianCard = () => {
+//   return (
+//     <div className="guardianSearch">
+//       {" "}
+//       <div className="card" style={{ width: "18rem" }}>
+//         <img
+//           src="https://www.seekpng.com/png/small/72-729700_account-avatar-face-head-person-profile-user-comments.png"
+//           class="card-img-top"
+//           alt="..."
+//         />
+//         <div className="card-body">
+//           <h5 className="card-title">Guardian</h5>
+//           <p className="card-text">
+//             Some quick example text to build on the card title and make up the
+//             bulk of the card's content.
+//           </p>
+//         </div>
+//         <ul className="list-group list-group-flush">
+//           <li className="nameInfo list-group-item">Guardian Name</li>
+//           <li className="phoneInfo list-group-item">Phone Number</li>
+//           <li className="seatsInfo list-group-item">Seats Available</li>
+//         </ul>
+//         <div className="card-body">
+//           <a href="#" className="card-link">
+//             Guardian Profile
+//           </a>
+//           <a href="#" className="card-link">
+//             Flag Guardian
+//           </a>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
 const SearchBar = () => {
   return (
-    <>
+    <div className="guardianSearch">
       <form className="d-flex">
         <input
           className="form-control me-2"
@@ -69,7 +66,10 @@ const SearchBar = () => {
           Search Guardians
         </button>
       </form>
-    </>
+      <div className="returnTable">
+        <GuardianSearchList />
+      </div>
+    </div>
   );
 };
 const SchoolSelect = () => {
@@ -94,5 +94,32 @@ const SchoolSelect = () => {
         </select>
       </form>
     </>
+  );
+};
+
+const GuardianSearchList = () => {
+  return (
+    <div className="searchReturn">
+      <div>
+        <div style={{ marginTop: "5em" }} className="list-group">
+          <a
+            href="#"
+            className="list-group-item list-group-item-action active"
+            aria-current="true"
+          >
+            Bob Dylan
+          </a>
+          <a href="#" className="list-group-item list-group-item-action">
+            Kanye West
+          </a>
+          <a href="#" className="list-group-item list-group-item-action">
+            Pete Davidson
+          </a>
+          <a href="#" className="list-group-item list-group-item-action">
+            Arianna Grande
+          </a>
+        </div>
+      </div>
+    </div>
   );
 };
