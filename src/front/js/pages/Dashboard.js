@@ -11,7 +11,6 @@ import { ModalSearchGuardian } from "../component/ModalSearchGuardian";
 import { GuardianChildCard } from "../component/GuardianChildCard.jsx";
 import { RideRequestDropdown } from "../component/RideRequestDropdown.jsx";
 import "../../styles/dashboard.css";
-import { SchoolsAcceptedCarousel } from "../component/SchoolsAcceptedCarousel.jsx";
 import { IsRole } from "../component/IsRole.jsx";
 import { AdminNavBar } from "../component/AdminNavBar.js";
 
@@ -56,23 +55,6 @@ export const Dashboard = (props) => {
             <RideRequestDropdown children={children} />
           ) : null}
         </IsRole>
-        <div
-          style={{ backgroundColor: "#F2F2F2" }}
-          className="carouselContainer"
-        >
-          <div className="text">
-            <h1>Schools</h1>
-          </div>
-          <div className="acceptedSchool">
-            <h3>Accepted</h3>
-            <div>
-              <SchoolsAcceptedCarousel />
-            </div>
-          </div>
-          <div className="pendingSchool">
-            <h3>Pending</h3>
-          </div>
-        </div>
       </div>
     </>
   );
