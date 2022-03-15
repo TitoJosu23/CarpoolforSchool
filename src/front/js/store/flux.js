@@ -1,7 +1,9 @@
 import { toast } from "react-toastify";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
-    store: {},
+    store: {
+      userName: [],
+    },
 
     actions: {
       getCurrentSession: () => {
@@ -61,6 +63,10 @@ const getState = ({ getStore, getActions, setStore }) => {
       getChildren: async () => {
         const actions = getActions();
         return await actions._fetch(`/api/children`);
+      },
+      getSelf: async () => {
+        const actions = getActions();
+        return await actions._fetch(`/api/guardian`);
       },
       clearSession: () => {
         localStorage.removeItem("session");

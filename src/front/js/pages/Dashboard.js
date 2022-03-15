@@ -6,7 +6,6 @@ import { Context } from "../store/appContext";
 import { DashNavItems } from "../component/DashNavItems.jsx";
 import { GrHomeRounded } from "react-icons/gr";
 
-import { GuardianNav } from "../component/GuardianNavBar.jsx";
 import { ModalSearchGuardian } from "../component/ModalSearchGuardian";
 import { GuardianChildCard } from "../component/GuardianChildCard.jsx";
 import { RideRequestDropdown } from "../component/RideRequestDropdown.jsx";
@@ -27,6 +26,7 @@ import { NavReuse } from "../component/NavReuse.jsx";
 // Dashboard
 export const Dashboard = (props) => {
   const [children, setChildren] = useState([]);
+  const [name, setName] = useState("");
   const history = useHistory();
   const { store, actions } = useContext(Context);
   const params = useParams();
@@ -39,18 +39,19 @@ export const Dashboard = (props) => {
   if (logStatus === null) {
     history.push("/user/login");
   }
+  console.log(name);
   return (
     <>
       <NavReuse />
       <div className="dashBoardHome">
         <IsRole roles={[null]}>
-          <p>Welcome User!</p>
+          <p>USER RENDER HERE</p>
         </IsRole>
         <IsRole roles={["admin"]}>
-          <p>Welcome Admin!</p>
+          <p>ADMIN RENDER HERE</p>
         </IsRole>
         <IsRole roles={["guardian"]}>
-          <p>Welcome Guardian</p>
+          <p>GUARDIAN RENDER HERE</p>
           {children != null ? (
             <RideRequestDropdown children={children} />
           ) : null}

@@ -1,0 +1,82 @@
+USERS:[
+    {"email": "SteveGrossMan@hotmail.com"}
+    {"email": "PeteBern@gmail.com"}
+    {"email": "BollyRick@yahoo.com"}
+    {"email": "CarlSutherby@gmail.com"}
+]
+
+GUARDIANS:[
+    {
+        "firstName":"Steve",
+        "lastName":"Grossman",
+        "address":"1042 S Exit Lane",
+        "phone":"786-234-2422"
+    }
+    {
+        "firstName":"Pete",
+        "lastName":"Bernquist",
+        "address":"99921 west deupont street",
+        "phone":"787-223-1345"
+    }
+    {
+        "firstName":"Rick",
+        "lastName":"Bolly",
+        "address":"7989 N bluff Road",
+        "phone":"302-042-9515"
+    }
+    {
+        "firstName":"Carl",
+        "lastName":"Sutherby",
+        "address":"3413 North Tula Drive",
+        "phone":"308-434-5614"
+    }
+]
+
+CHILDREN:[
+    {
+        "firstName":"Alex",
+        "lastName":"Grossman",
+        "classGrade":"3rd Grade",
+        "gender":"Male",
+        "phone":"305-242-1539"
+    }
+    {
+        "firstName":"Cynthia",
+        "lastName":"Bernquist",
+        "classGrade":"3rd Grade",
+        "gender":"Female",
+        "phone":"550-221-2402"
+    }
+    {
+        "firstName":"Sebastian",
+        "lastName":"Bolly",
+        "classGrade":"3rd Grade",
+        "gender":"Male",
+        "phone":"442-314-5021"
+    }
+    {
+        "firstName":"Alexis",
+        "lastName":"Sutherby",
+        "classGrade":"3rd Grade",
+        "gender":"Female",
+        "phone":"305-360-1029"
+    }
+]
+
+SCHOOLS:[
+    {
+        "school_name":"Miami High",
+        "school_address":"2450 SW 1st St, Miami, FL 33135",
+        "school_logo_url":"https://www.merionpartners.com/wp-content/uploads/2015/10/400x4005.png"
+    }
+    {
+        "school_name":"Killian High",
+        "school_address":"10655 SW 97th Ave, Miami, FL 33176",
+        "school_logo_url":"https://www.merionpartners.com/wp-content/uploads/2015/10/400x4005.png"
+    }
+    {
+        "school_name":"South Miami Lutheran",
+        "school_address":"7190 Sunset Dr, Miami, FL 33143",
+        "school_logo_url":"https://www.merionpartners.com/wp-content/uploads/2015/10/400x4005.png"
+    }
+]
