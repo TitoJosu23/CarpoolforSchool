@@ -4,3 +4,8 @@ body {
   margin: 0px;
   text-align: center;
 }
+.footer {
+  width: 100%;
+  top: 100%;
+  position: absolute;
+}

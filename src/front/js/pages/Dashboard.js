@@ -42,17 +42,9 @@ export const Dashboard = (props) => {
   }
   return (
     <>
-      <DashNavBar>
-        <DashNavItems icon={<GrHomeRounded className="svg" />} />
-        <DashNavItems icon={<BsFlag className="flag" />} />
-        <DashNavItems icon={<RiMoneyDollarBoxLine className="tip" />} />
-        <DashNavItems icon={<BsPerson className="person" />}>
-          <DashDropDown></DashDropDown>
-        </DashNavItems>
-      </DashNavBar>
       <NavReuse />
       <div className="dashBoardHome">
-        <IsRole roles={["user"]}>
+        <IsRole roles={[null]}>
           <p>Welcome User!</p>
         </IsRole>
         <IsRole roles={["admin"]}>

@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
+import { Footer } from "./component/footer";
 
 import { UserLogin } from "./pages/Login.js";
 import { UserSignup } from "./pages/UserSignup.jsx";
@@ -59,6 +60,7 @@ const Layout = () => {
               <h1>Not found!</h1>
             </Route>
           </Switch>
+          <Footer />
         </ScrollToTop>
       </BrowserRouter>
     </div>
