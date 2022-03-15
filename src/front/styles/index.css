@@ -1,5 +1,11 @@
 body {
+  background-color: rgb(38, 33, 41);
   padding: 0px;
   margin: 0px;
   text-align: center;
+}
+.footer {
+  width: 100%;
+  top: 100%;
+  position: absolute;
 }

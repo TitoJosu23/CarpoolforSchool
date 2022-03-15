@@ -46,7 +46,7 @@ export const DashDropDown = () => {
   return (
     <>
       <div
-        className="dropdown"
+        className="dashdropdown dropdown"
         style={{ height: "menuHeight" }}
         ref={dropdownRef}
       >

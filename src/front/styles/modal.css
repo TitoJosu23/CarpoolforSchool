@@ -1,0 +1,96 @@
+.modal-card {
+  background-color: rgb(58, 49, 49);
+  width: 25rem;
+  height: 40rem;
+  margin: auto;
+  border-radius: 3px;
+}
+.modal-card .dropdown {
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+.modal-card li {
+  margin: 15%;
+  margin-top: 10px;
+}
+.modal-card button {
+  margin: 10px;
+}
+.modal-card .dropdown-checkbox {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+.modal-card .filters {
+  display: inline-block;
+}
+.modal-card .button {
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 5px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+.modal-card .button2 {
+  margin-top: 200px;
+}
+.modal-card .center-side {
+  margin-left: 10px;
+  margin: auto;
+}
+.open-button {
+  margin: 100px 10px 100px 10px;
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 5px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+.modalview {
+  color: white;
+}
+.guardian-information {
+  color: black;
+}
+
+.guardian-information .card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  border: 1px solid black;
+  text-align: center;
+}
+
+.guardian-information .title {
+  color: grey;
+  font-size: 18px;
+}
+
+.guardian-information .button3 {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+.guardian-information a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+.guardian-information button:hover,
+a:hover {
+  opacity: 0.7;
+}

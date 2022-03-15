@@ -100,7 +100,7 @@ a {
 
 /* Dropdown Menu */
 
-.dropdown {
+/* .dropdown {
   position: absolute;
   top: 58px;
   width: 300px;
@@ -111,7 +111,7 @@ a {
   padding: 1rem;
   overflow: hidden;
   transition: height var(--speed) ease;
-}
+} */
 
 .menu {
   width: 100%;

@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
+import { Footer } from "./component/footer";
 
 import { UserLogin } from "./pages/Login.js";
 import { UserSignup } from "./pages/UserSignup.jsx";
@@ -8,6 +9,8 @@ import { Dashboard } from "./pages/Dashboard.js";
 import { NavPage } from "./pages/NavPage";
 import { LandingPage } from "./pages/LandingPage";
 import { ForgotPassword } from "./pages/ForgotPassword";
+import { ModalView } from "./pages/ModalView";
+import { Profile } from "./pages/Profile";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { GuardianSchedule } from "./pages/GuardianSchedule.jsx";
@@ -51,6 +54,12 @@ const Layout = () => {
             <Route exact path="/user/forgot">
               <ForgotPassword />
             </Route>
+            <Route exact path="/modal">
+              <ModalView />
+            </Route>
+            <Route exact path="/profile">
+              <Profile />
+            </Route>
             <Route exact path="/user/schedule">
               <GuardianSchedule />
             </Route>
@@ -67,6 +76,7 @@ const Layout = () => {
               <h1>Not found!</h1>
             </Route>
           </Switch>
+          <Footer />
         </ScrollToTop>
       </BrowserRouter>
     </div>

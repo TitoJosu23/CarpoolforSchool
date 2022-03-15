@@ -10,7 +10,6 @@ import { ModalSearchGuardian } from "../component/ModalSearchGuardian";
 import { GuardianChildCard } from "../component/GuardianChildCard.jsx";
 import { RideRequestDropdown } from "../component/RideRequestDropdown.jsx";
 import "../../styles/dashboard.css";
-import { SchoolsAcceptedCarousel } from "../component/SchoolsAcceptedCarousel.jsx";
 import { IsRole } from "../component/IsRole.jsx";
 import { AdminNavBar } from "../component/AdminNavBar.js";
 
