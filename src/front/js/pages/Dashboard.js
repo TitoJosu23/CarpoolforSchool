@@ -43,7 +43,7 @@ export const Dashboard = (props) => {
     <>
       <NavReuse />
       <div className="dashBoardHome">
-        <IsRole roles={["user"]}>
+        <IsRole roles={[null]}>
           <p>Welcome User!</p>
         </IsRole>
         <IsRole roles={["admin"]}>
