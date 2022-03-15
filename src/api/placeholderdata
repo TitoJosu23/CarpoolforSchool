@@ -1,0 +1,56 @@
+GUARDIANS:
+{
+    "firstName":"Steve",
+    "lastName":"Grossman",
+    "address":"1042 S Exit Lane",
+    "phone":"786-234-2422"
+}
+{
+    "firstName":"Pete",
+    "lastName":"Bernquist",
+    "address":"99921 west deupont street",
+    "phone":"787-223-1345"
+}
+{
+    "firstName":"Rick",
+    "lastName":"Bolly",
+    "address":"7989 N bluff Road",
+    "phone":"302-042-9515"
+}
+{
+    "firstName":"Carl",
+    "lastName":"Sutherby",
+    "address":"3413 North Tula Drive",
+    "phone":"308-434-5614"
+}
+
+
+CHILDREN:
+{
+    "firstName":"Alex",
+    "lastName":"Grossman",
+    "classGrade":"3rd Grade",
+    "gender":"Male",
+    "phone":"305-242-1539"
+}
+{
+    "firstName":"Cynthia",
+    "lastName":"Bernquist",
+    "classGrade":"3rd Grade",
+    "gender":"Male",
+    "phone":"305-360-1029"
+}
+{
+    "firstName":"Sebastian",
+    "lastName":"Bolly",
+    "classGrade":"3rd Grade",
+    "gender":"Male",
+    "phone":"305-360-1029"
+}
+{
+    "firstName":"",
+    "lastName":"",
+    "classGrade":"3rd Grade",
+    "gender":"Male",
+    "phone":"305-360-1029"
+}
