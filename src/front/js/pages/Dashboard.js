@@ -6,7 +6,6 @@ import { Context } from "../store/appContext";
 import { DashNavItems } from "../component/DashNavItems.jsx";
 import { GrHomeRounded } from "react-icons/gr";
 
-import { GuardianNav } from "../component/GuardianNavBar.jsx";
 import { ModalSearchGuardian } from "../component/ModalSearchGuardian";
 import { GuardianChildCard } from "../component/GuardianChildCard.jsx";
 import { RideRequestDropdown } from "../component/RideRequestDropdown.jsx";

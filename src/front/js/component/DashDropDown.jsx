@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import propTypes from "prop-types";
 // import "../../styles/dashboard.css";
 import { FiSettings } from "react-icons/fi";
@@ -9,11 +9,16 @@ import { ImEyeBlocked } from "react-icons/im";
 import { GrLogout } from "react-icons/gr";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { CSSTransition } from "react-transition-group";
+import { useHistory } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 export const DashDropDown = () => {
   const [activeMenu, setActiveMenu] = useState("main");
   const [menuHeight, setMenuHeight] = useState(null);
   const dropdownRef = useRef(null);
+  const history = useHistory();
+  const { store, actions } = useContext(Context);
+
   useEffect(() => {
     setMenuHeight(dropdownRef.current?.firstChild.offsetHeight);
   }, []);
@@ -76,10 +81,27 @@ export const DashDropDown = () => {
             <DropItem goToMenu="main" leftIcon={<AiOutlineArrowLeft />}>
               <h2>Preferences</h2>
             </DropItem>
-            <DropItem leftIcon={<AiOutlineSchedule />}>Schedule</DropItem>
+            <DropItem leftIcon={<AiOutlineSchedule />}>
+              <div
+                onClick={() => {
+                  history.push("/user/schedule");
+                }}
+              >
+                Schedule
+              </div>
+            </DropItem>
             <DropItem leftIcon={<FaChild />}>Children</DropItem>
             <DropItem leftIcon={<ImEyeBlocked />}>BlackList</DropItem>
-            <DropItem leftIcon={<GrLogout />}>LogOut</DropItem>
+            <DropItem leftIcon={<GrLogout />}>
+              <div
+                onClick={() => {
+                  actions.clearSession();
+                  history.push("/user/login");
+                }}
+              >
+                LogOut
+              </div>
+            </DropItem>
           </div>
         </CSSTransition>
       </div>
