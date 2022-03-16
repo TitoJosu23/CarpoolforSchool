@@ -18,7 +18,7 @@ import { ProfileDetails } from "./pages/ProfileDetails.jsx";
 import { GuardianDetails } from "./pages/GuardianDetails.jsx";
 import { AdminDetails } from "./pages/AdminDetails.jsx";
 import { GuardianSearch } from "./pages/GuardianSearch.jsx";
-
+import { AddAChild } from "./pages/AddAChild.jsx";
 import injectContext from "./store/appContext";
 
 //create your first component
@@ -68,6 +68,9 @@ const Layout = () => {
             </Route>
             <Route exact path="/user/admin">
               <AdminDetails />
+            </Route>
+            <Route exact path="/user/child">
+              <AddAChild />
             </Route>
             <Route exact path="/user/search">
               <GuardianSearch />

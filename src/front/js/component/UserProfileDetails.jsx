@@ -39,11 +39,11 @@ export const UserProfileDetails = () => {
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumnber] = useState("");
   const [email, setEmail] = useState("");
-  const [role, setRole] = useState("");
+  const [driver, setDriver] = useState("");
   const [value, setValue] = useState("");
 
   const handleChange = (e) => {
-    setRole(e.target.value);
+    setDriver(e.target.value);
   };
 
   return (
@@ -52,7 +52,7 @@ export const UserProfileDetails = () => {
       <ThemeProvider theme={theme}>
         <React.Fragment>
           <Dialog open fullWidth maxWidth="sm" color="primary">
-            <h1>Profile Details</h1>
+            <h1>Guardian Profile Details</h1>
             <TextField
               color="primary"
               placeholder="Enter Your First Name"
@@ -82,22 +82,27 @@ export const UserProfileDetails = () => {
               fullWidth
             />
             <br />
+            <br />
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Role</InputLabel>
+              <InputLabel id="demo-simple-select-label">
+                Drive-Enabled
+              </InputLabel>
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={role}
-                label="Role"
+                value={driver}
+                label="Drive-Enabled"
                 onChange={handleChange}
               >
-                <MenuItem value={"Guardian"}>Guardian</MenuItem>
-                <MenuItem value={"Admin"}>Admin</MenuItem>
+                <MenuItem value={"Yes"}>Yes</MenuItem>
+                <MenuItem value={"No"}>No</MenuItem>
               </Select>
             </FormControl>
             <br />
+
+            <br />
             <Button color="secondary" variant="contained">
-              Continue
+              Save Guardian Information
             </Button>
           </Dialog>
         </React.Fragment>
