@@ -5,7 +5,6 @@ import { Context } from "../store/appContext";
 
 export const Profile = (props) => {
   const [opened, setOpened] = useState(true);
-
   const [name, setName] = useState("Name");
   const [lastName, setLastName] = useState("Last Name");
   const [seats, setSeats] = useState("");

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
+import { Context } from "../store/appContext";
 
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -11,6 +12,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { GuardianProfileDetails } from "./GuardianProfileDetails";
+import { Link, useParams } from "react-router-dom";
 
 let theme = createTheme({
   palette: {
@@ -35,11 +37,11 @@ let theme = createTheme({
 });
 
 export const UserProfileDetails = () => {
+  const { store, actions } = useContext(Context);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [phoneNumber, setPhoneNumnber] = useState("");
-  const [email, setEmail] = useState("");
-  const [role, setRole] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
   const [value, setValue] = useState("");
 
   const handleChange = (e) => {
@@ -54,6 +56,8 @@ export const UserProfileDetails = () => {
           <Dialog open fullWidth maxWidth="sm" color="primary">
             <h1>Profile Details</h1>
             <TextField
+              onChange={(e) => setFirstName(e.target.value)}
+              value={firstName}
               color="primary"
               placeholder="Enter Your First Name"
               id="outlined-basic"
@@ -62,6 +66,8 @@ export const UserProfileDetails = () => {
             />
             <br />
             <TextField
+              onChange={(e) => setLastName(e.target.value)}
+              value={lastName}
               placeholder="Enter Your Last Name"
               id="outlined-basic"
               label="Last Name"
@@ -69,36 +75,36 @@ export const UserProfileDetails = () => {
             />
             <br />
             <TextField
+              onChange={(e) => setAddress(e.target.value)}
+              value={address}
               placeholder="Enter Your Email"
               id="outlined-basic"
-              label="Email"
+              label="Address"
               fullWidth
             />
             <br />
             <TextField
+              onChange={(e) => setPhone(e.target.value)}
+              value={phone}
               placeholder="Mobile"
               id="outlined-basic"
               label="Phone Number"
               fullWidth
             />
             <br />
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Role</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={role}
-                label="Role"
-                onChange={handleChange}
-              >
-                <MenuItem value={"Guardian"}>Guardian</MenuItem>
-                <MenuItem value={"Admin"}>Admin</MenuItem>
-              </Select>
-            </FormControl>
             <br />
-            <Button color="secondary" variant="contained">
-              Continue
+            <Button
+              onClick={() => {
+                actions.updateGuardian(firstName, lastName, address, phone);
+              }}
+              color="secondary"
+              variant="contained"
+            >
+              Update Information
             </Button>
+            <Link to={"/home"}>
+              <Button>Cancel</Button>
+            </Link>
           </Dialog>
         </React.Fragment>
       </ThemeProvider>

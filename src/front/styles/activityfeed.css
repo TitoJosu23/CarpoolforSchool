@@ -1,0 +1,17 @@
+.timeline {
+  width: 100%;
+}
+
+.bubble {
+  background: rgba(255, 255, 255, 0.418);
+  width: 80%;
+  border-radius: 20px;
+  box-shadow: 0px 0px 15px 5px;
+}
+.eventText {
+  width: 80%;
+  background: linear-gradient(to right, #51abf5, #667ff0);
+  border-radius: 15px;
+  color: rgb(0, 0, 0);
+  font-size: 20px;
+}

@@ -2,9 +2,10 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { Footer } from "./component/footer";
+import "../styles/registration.css";
 
-import { UserLogin } from "./pages/Login.js";
-import { UserSignup } from "./pages/UserSignup.jsx";
+import { Login } from "./pages/Login.js";
+import { Registration } from "./pages/Registration.jsx";
 import { Dashboard } from "./pages/Dashboard.js";
 import { NavPage } from "./pages/NavPage";
 import { LandingPage } from "./pages/LandingPage";
@@ -18,7 +19,6 @@ import { ProfileDetails } from "./pages/ProfileDetails.jsx";
 import { GuardianDetails } from "./pages/GuardianDetails.jsx";
 import { AdminDetails } from "./pages/AdminDetails.jsx";
 import { GuardianSearch } from "./pages/GuardianSearch.jsx";
-
 import injectContext from "./store/appContext";
 
 //create your first component
@@ -33,19 +33,13 @@ const Layout = () => {
         <ScrollToTop>
           <ToastContainer />
           <Switch>
-            <Route exact path="/nav">
-              <NavPage />
-            </Route>
             <Route exact path="/">
-              <LandingPage />
+              <Login />
             </Route>
-            <Route exact path="/user/login">
-              <UserLogin />
+            <Route exact path="/registration">
+              <Registration />
             </Route>
-            <Route exact path="/user/create">
-              <UserSignup />
-            </Route>
-            <Route exact path="/user/home">
+            <Route exact path="/home">
               <Dashboard />
             </Route>
             <Route exact path="/user/details">
@@ -60,16 +54,16 @@ const Layout = () => {
             <Route exact path="/profile">
               <Profile />
             </Route>
-            <Route exact path="/user/schedule">
+            <Route exact path="/guardian/schedule">
               <GuardianSchedule />
             </Route>
-            <Route exact path="/user/guardian">
+            <Route exact path="/guardian/details">
               <GuardianDetails />
             </Route>
-            <Route exact path="/user/admin">
+            <Route exact path="/admin">
               <AdminDetails />
             </Route>
-            <Route exact path="/user/search">
+            <Route exact path="/guardian/search">
               <GuardianSearch />
             </Route>
             <Route>

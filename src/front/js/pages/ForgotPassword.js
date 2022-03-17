@@ -1,5 +1,4 @@
 import React from "react";
-import "../../styles/userLogin.css";
 import { Link } from "react-router-dom";
 
 export const ForgotPassword = () => {

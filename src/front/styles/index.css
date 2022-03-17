@@ -1,11 +1,9 @@
 body {
-  background-color: rgb(38, 33, 41);
+  background-color: #51abf5a9;
   padding: 0px;
   margin: 0px;
   text-align: center;
 }
-.footer {
-  width: 100%;
-  top: 100%;
-  position: absolute;
+.dashBody {
+  min-height: 95.8vh;
 }
