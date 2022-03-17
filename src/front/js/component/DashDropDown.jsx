@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import propTypes from "prop-types";
-// import "../../styles/dashboard.css";
 import { FiSettings } from "react-icons/fi";
 import { BsChevronRight } from "react-icons/bs";
 import { AiOutlineSchedule } from "react-icons/ai";
@@ -11,8 +10,10 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import { CSSTransition } from "react-transition-group";
 import { useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
+import { Link, useParams } from "react-router-dom";
+import { BsPerson } from "react-icons/bs";
 
-export const DashDropDown = () => {
+export const DashDropDown = (props) => {
   const [activeMenu, setActiveMenu] = useState("main");
   const [menuHeight, setMenuHeight] = useState(null);
   const dropdownRef = useRef(null);
@@ -29,17 +30,21 @@ export const DashDropDown = () => {
   };
   const DropItem = (props) => {
     return (
-      <>
-        <a
-          href="#"
-          className="menu-item"
-          onClick={() => props.goToMenu && setActiveMenu(props.goToMenu)}
+      <div className="dropItem">
+        <div
+          className="menu-item btn"
+          onClick={() => {
+            if (props.goToMenu) setActiveMenu(props.goToMenu);
+            if (props.onClick) props.onClick();
+          }}
         >
-          <span className="icon-button">{props.leftIcon}</span>
+          <div className={"icon-button" + " " + props.task}>
+            {props.leftIcon}
+          </div>
           {props.children}
-          <span className="icon-right">{props.rightIcon}</span>
-        </a>
-      </>
+          <div className="icon-right">{props.rightIcon}</div>
+        </div>
+      </div>
     );
   };
 
@@ -58,8 +63,14 @@ export const DashDropDown = () => {
           onEnter={calcHeight}
         >
           <div className="menu">
-            <DropItem>My Profile</DropItem>
-
+            <Link to={"/user/details"}>
+              <DropItem
+                leftIcon={<BsPerson className="person" />}
+                task={props.guardianStatus}
+              >
+                My Profile
+              </DropItem>
+            </Link>
             <DropItem
               leftIcon={<FiSettings />}
               rightIcon={<BsChevronRight />}
@@ -92,15 +103,14 @@ export const DashDropDown = () => {
             </DropItem>
             <DropItem leftIcon={<FaChild />}>Children</DropItem>
             <DropItem leftIcon={<ImEyeBlocked />}>BlackList</DropItem>
-            <DropItem leftIcon={<GrLogout />}>
-              <div
-                onClick={() => {
-                  actions.clearSession();
-                  history.push("/user/login");
-                }}
-              >
-                LogOut
-              </div>
+            <DropItem
+              onClick={() => {
+                actions.clearSession();
+                history.push("/");
+              }}
+              leftIcon={<GrLogout />}
+            >
+              LogOut
             </DropItem>
           </div>
         </CSSTransition>

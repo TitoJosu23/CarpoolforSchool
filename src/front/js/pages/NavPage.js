@@ -11,7 +11,7 @@ export const NavPage = () => {
       <Link to={"/user/create"}>
         <button>User Create</button>
       </Link>
-      <Link to={"/user/home"}>
+      <Link to={"/home"}>
         <button>Dashboard</button>
       </Link>
       <Link to={"/user/login"}>

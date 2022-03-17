@@ -39,7 +39,9 @@ def create_user():
 @jwt_required()
 def create_guardian():
     current_user_id=get_jwt_identity()
-    user = User.query.get(current_user_id)
+    check_admin = School_Access.query.filter_by(user_id=current_user_id,role="admin")
+    if check_admin is not None:
+        raise APIException("Please Create Seperate Account For Guardian")
     check_guardian=Guardian.query.filter_by(user_id=current_user_id).first()
     if check_guardian is not None:
         raise APIException("Guardian Already Established!")
@@ -85,7 +87,7 @@ def get_self_guardian():
     current_user_id=get_jwt_identity()
     guardian = Guardian.query.filter_by(user_id=current_user_id).first()
     if guardian is None:
-        raise APIException ("No Guardian Found")
+        return jsonify("No Guardian Found")
     guardian = guardian.serialize()
     return jsonify(guardian)
 

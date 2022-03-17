@@ -27,7 +27,7 @@
   }
 }
 .landingPage {
-  height: 95vh;
+  height: 100vh;
 }
 .landingPage .centerImage {
   position: absolute;
@@ -125,6 +125,7 @@
   .landingPage .guardianView .splitText p {
     color: rgb(212, 182, 12);
     font-size: 8vw;
+    opacity: 100%;
   }
   .landingPage .guardianView {
     animation-name: unblur;

@@ -69,7 +69,7 @@ export const AdminDetails = () => {
               color="secondary"
               variant="contained"
               onClick={() => {
-                history.push("/user/home");
+                history.push("/home");
               }}
             >
               CREATE A SCHOOL
