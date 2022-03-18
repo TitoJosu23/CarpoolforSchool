@@ -86,8 +86,6 @@ class Child(db.Model):
     first_name = db.Column(db.String(255), unique=False, nullable=False)
     last_name = db.Column(db.String(255), unique=False, nullable=False)
     class_grade = db.Column(db.String(255), unique=False, nullable=False)
-    gender = db.Column(db.String(255), unique=False)
-    phone = db.Column(db.String(255), unique=True)
     guardians = db.relationship("Guardian",
                     secondary=Child_to_guardian)
 

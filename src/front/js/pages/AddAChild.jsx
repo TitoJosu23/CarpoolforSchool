@@ -91,17 +91,18 @@ export const AddAChild = () => {
               </Select>
             </FormControl>
             <br />
-
-            <br />
             <Button
               onClick={(e) => {
-                actions.addChild(firstName, lastName, grade, "gender", "phone");
+                actions
+                  .addChild(firstName, lastName, grade, "gender", "phone")
+                  .then(history.push("/"));
               }}
               color="secondary"
               variant="contained"
             >
               Save Child
             </Button>
+            <br />
           </Dialog>
         </div>
       </ThemeProvider>

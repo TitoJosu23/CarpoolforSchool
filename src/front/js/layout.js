@@ -17,6 +17,7 @@ import { GuardianDetails } from "./pages/GuardianDetails.jsx";
 import { AdminDetails } from "./pages/AdminDetails.jsx";
 import { GuardianSearch } from "./pages/GuardianSearch.jsx";
 import injectContext from "./store/appContext";
+import { AddAChild } from "./pages/AddAChild.jsx";
 
 //create your first component
 const Layout = () => {
@@ -56,6 +57,9 @@ const Layout = () => {
             </Route>
             <Route exact path="/guardian/search">
               <GuardianSearch />
+            </Route>
+            <Route exact path="/child">
+              <AddAChild />
             </Route>
             <Route>
               <h1>Not found!</h1>

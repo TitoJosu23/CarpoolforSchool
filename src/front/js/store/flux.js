@@ -77,9 +77,9 @@ const getState = ({ getStore, getActions, setStore }) => {
         const options = {
           method: "POST",
           body: JSON.stringify({
-            first_name: first_name,
-            last_name: last_name,
-            class_grade: class_grade,
+            firstName: first_name,
+            lastName: last_name,
+            classGrade: class_grade,
             gender: gender,
             phone: phone,
           }),
