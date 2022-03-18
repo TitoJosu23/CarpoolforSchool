@@ -1,5 +1,19 @@
-.driving-enabled-toggle {
-  display: flex;
-  justify-content: center;
-  margin-top: 15%;
+.guardian-schedule {
+  margin-top: 100px;
+}
+.guardian-schedule .box {
+  margin: auto;
+  margin-top: 10px;
+  width: 14%;
+  height: 40px;
+  background-color: gray;
+}
+.custom-control-input {
+  size: 20px;
+  margin-right: 80px;
+  margin-top: 13px;
+  float: right;
+}
+.guardian-schedule label {
+  margin-top: 7px;
 }
