@@ -1,123 +1,108 @@
 import React, { useState, useEffect, useContext } from "react";
-import PropTypes from "prop-types";
+import { Link, useParams, useHistory } from "react-router-dom";
+import { Context } from "../store/appContext";
 import { NavReuse } from "../component/NavReuse.jsx";
-import "../../styles/guardianSearch.css";
 
-export const GuardianSearch = () => {
+export const GuardianSearch = (props) => {
+  //react declarations
+  const history = useHistory();
+  const { store, actions } = useContext(Context);
+  const params = useParams();
+  const logStatus = JSON.parse(localStorage.getItem("session"));
+  //declare states here vvvv
+  const [state, setState] = useState("State");
+  if (logStatus === null) {
+    history.push("/");
+  }
   return (
-    <div className="guardianSearch">
+    <div className="dashBody w-100">
       <NavReuse />
-      <h1>Search For Guardian</h1>
-      <div className="search container-fluid">
-        <div className="guardianSearch container">
+      <div className="dashBoardHome">
+        <h1>Search Guardians</h1>
+        <div className="search container-fluid">
           <SearchBar />
+
+          <div className="searchedlist">
+            <GuardianSearchList />
+          </div>
         </div>
       </div>
     </div>
   );
 };
-// const GuardianCard = () => {
-//   return (
-//     <div className="guardianSearch">
-//       {" "}
-//       <div className="card" style={{ width: "18rem" }}>
-//         <img
-//           src="https://www.seekpng.com/png/small/72-729700_account-avatar-face-head-person-profile-user-comments.png"
-//           class="card-img-top"
-//           alt="..."
-//         />
-//         <div className="card-body">
-//           <h5 className="card-title">Guardian</h5>
-//           <p className="card-text">
-//             Some quick example text to build on the card title and make up the
-//             bulk of the card's content.
-//           </p>
-//         </div>
-//         <ul className="list-group list-group-flush">
-//           <li className="nameInfo list-group-item">Guardian Name</li>
-//           <li className="phoneInfo list-group-item">Phone Number</li>
-//           <li className="seatsInfo list-group-item">Seats Available</li>
-//         </ul>
-//         <div className="card-body">
-//           <a href="#" className="card-link">
-//             Guardian Profile
-//           </a>
-//           <a href="#" className="card-link">
-//             Flag Guardian
-//           </a>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
+
 const SearchBar = () => {
   return (
-    <div className="guardianSearch">
-      <form className="d-flex">
-        <input
-          className="form-control me-2"
-          type="search"
-          placeholder="Search "
-          aria-label="Search"
-        />
-        <SchoolSelect />
-
-        <button className="btn btn-outline-success" type="submit">
-          Search Guardians
-        </button>
-      </form>
-      <div className="returnTable">
-        <GuardianSearchList />
-      </div>
+    <div class="guardianSearchBar input-group">
+      <br />
+      <br />
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search Guardians"
+        aria-label="Text input with segmented dropdown button"
+      ></input>
+      <button type="button" class="btn btn-outline-secondary">
+        School Filter
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        <span class="visually-hidden">Toggle Dropdown</span>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end">
+        <li>
+          <a class="dropdown-item" href="#">
+            School 1
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="#">
+            School 2
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="#">
+            School 3
+          </a>
+        </li>
+      </ul>
     </div>
-  );
-};
-const SchoolSelect = () => {
-  const [value, setValue] = useState("");
-
-  const handleChange = (e) => {
-    setValue(e.target.value);
-  };
-
-  return (
-    <>
-      <form>
-        <select
-          className="schoolSelectOptions"
-          value={value}
-          onChange={handleChange}
-        >
-          <option value="Village Green ">Village Green Elem</option>
-          <option value="Doolin">Doolin Middle</option>
-          <option value="Kendall Lakes">Kendall Lakes Elem</option>
-          <option value="Felix Varela">Felix Varela</option>
-        </select>
-      </form>
-    </>
   );
 };
 
 const GuardianSearchList = () => {
   return (
-    <div className="searchReturn">
-      <div>
-        <div style={{ marginTop: "5em" }} className="list-group">
-          <a
-            href="#"
-            className="list-group-item list-group-item-action active"
-            aria-current="true"
-          >
-            Bob Dylan
-          </a>
-          <a href="#" className="list-group-item list-group-item-action">
-            Kanye West
-          </a>
-          <a href="#" className="list-group-item list-group-item-action">
-            Pete Davidson
-          </a>
-          <a href="#" className="list-group-item list-group-item-action">
-            Arianna Grande
-          </a>
+    <div className="guardList container mt-5 over">
+      <div className="row d-flex">
+        <div className="guardianPanel col-md-6 col-12">
+          <div className="guardianInnerPanel col-12">
+            <ul className="guardLine">
+              <li className="eventItem d-flex justify-content-center">
+                <a href="#" className="eventText mt-3 p-3" aria-current="true">
+                  Bob Dylan
+                </a>
+              </li>
+              <li className="eventItem d-flex justify-content-center">
+                <a href="#" className="eventText mt-3 p-3">
+                  Kanye West
+                </a>
+              </li>
+              <li className="eventItem d-flex justify-content-center">
+                <a href="#" className="eventText mt-3 p-3">
+                  Pete Davidson
+                </a>
+              </li>
+              <li className="eventItem d-flex justify-content-center">
+                <a href="#" className="eventText mt-3 p-3">
+                  Arianna Grande
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
