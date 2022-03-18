@@ -9,9 +9,9 @@ import { GrHomeRounded } from "react-icons/gr";
 import { ModalSearchGuardian } from "../component/ModalSearchGuardian";
 import { GuardianChildCard } from "../component/GuardianChildCard.jsx";
 import { RideRequestDropdown } from "../component/RideRequestDropdown.jsx";
-import "../../styles/dashboard.css";
 import { IsRole } from "../component/IsRole.jsx";
-import { AdminNavBar } from "../component/AdminNavBar.js";
+import { ActivityFeed } from "../component/ActivityFeed.jsx";
+import { ScrollingComponents } from "../component/ScrollingComponents.jsx";
 
 import { BsFlag } from "react-icons/bs";
 import { RiMoneyDollarBoxLine } from "react-icons/ri";
@@ -20,6 +20,7 @@ import { DashNavBar } from "../component/DashNavBar.jsx";
 import { DashDropDown } from "../component/DashDropDown.jsx";
 import { CSSTransition } from "react-transition-group";
 import { NavReuse } from "../component/NavReuse.jsx";
+import { Profile } from "../component/Profile.jsx";
 
 // Nav items
 
@@ -37,26 +38,29 @@ export const Dashboard = (props) => {
   }, []);
 
   if (logStatus === null) {
-    history.push("/user/login");
+    history.push("/");
   }
   console.log(name);
   return (
-    <>
+    <div className="dashBody w-100">
       <NavReuse />
       <div className="dashBoardHome">
         <IsRole roles={[null]}>
-          <p>USER RENDER HERE</p>
+          <h2 className="text-light">THIS WILL NOT EXIST!</h2>
         </IsRole>
         <IsRole roles={["admin"]}>
-          <p>ADMIN RENDER HERE</p>
+          <h2 className="text-light">ADMIN RENDER HERE</h2>
         </IsRole>
         <IsRole roles={["guardian"]}>
-          <p>GUARDIAN RENDER HERE</p>
-          {children != null ? (
-            <RideRequestDropdown children={children} />
-          ) : null}
+          <ActivityFeed />
+          {/* <Profile /> */}
         </IsRole>
       </div>
-    </>
+    </div>
   );
 };
+
+// ride request conditional render
+// {children != null ? (
+//   <RideRequestDropdown children={children} />
+// ) : null}

@@ -1,0 +1,16 @@
+.timeline {
+  width: 100%;
+  padding: 0;
+}
+.eventText {
+  width: 90%;
+  background-color: rgba(86, 139, 155, 0.774);
+  border-radius: 15px;
+  color: rgb(0, 0, 0);
+  font-size: 20px;
+}
+.innerPanel {
+  background: rgba(255, 255, 255, 0.644);
+  border-radius: 20px;
+  box-shadow: 0px 0px 15px 5px;
+}

@@ -10,7 +10,6 @@ export const ProfileDetails = (props) => {
   return (
     <>
       <NavReuse />
-
       <UserProfileDetails />
     </>
   );
