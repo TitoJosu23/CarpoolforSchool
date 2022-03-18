@@ -7,3 +7,18 @@ body {
 .dashBody {
   min-height: 95.8vh;
 }
+.search-bar {
+  text-align: center;
+  margin: auto;
+  margin-top: 10px;
+  width: 170px;
+  text-decoration: none;
+}
+.dropdownContainer .eventText {
+  margin-top: 30px;
+  width: 80%;
+  background: linear-gradient(to right, #51abf5, #667ff0);
+  border-radius: 15px;
+  color: rgb(0, 0, 0);
+  font-size: 20px;
+}

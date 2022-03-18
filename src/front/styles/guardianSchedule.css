@@ -1,5 +1,22 @@
-.driving-enabled-toggle {
-  display: flex;
-  justify-content: center;
-  margin-top: 15%;
+.guardian-schedule {
+  border: 1px solid black;
+  font-size: 0.9rem;
+  border-radius: 10px;
+  margin-top: 100px;
+  margin-bottom: 10% !important;
+  background-color: darkkhaki;
+  margin: auto;
+  width: 25rem;
+  height: 42rem;
+}
+.guardian-schedule .container-sc {
+  border-top: 5px solid rgb(0, 0, 0);
+}
+.guardian-schedule label {
+  float: left;
+  margin-top: 7px;
+  margin-right: 200px;
+}
+.switch {
+  padding: 10px;
 }

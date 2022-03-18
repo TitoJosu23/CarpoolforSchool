@@ -34,7 +34,7 @@ export const NavReuse = (props) => {
     });
   }, []);
   return (
-    <div>
+    <div className="navreuse">
       <DashNavBar name={name}>
         <Link to={"/home"}>
           <DashNavItems icon={<GrHomeRounded className="svg" />} />

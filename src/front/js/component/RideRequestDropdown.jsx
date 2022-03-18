@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import propTypes from "prop-types";
 import { Context } from "../store/appContext";
+import "../../styles/index.css";
 
 export const RideRequestDropdown = (props) => {
   return (
