@@ -271,7 +271,11 @@ export const Registration = (props) => {
                                 Previous
                               </p>
                               <p
-                                // onClick={() =>()}
+                                onClick={(e) => {
+                                  actions
+                                    .addChild(firstName, lastName, grade, age)
+                                    .then(history.push("/"));
+                                }}
                                 className="btn submitBtn border-1 border-dark"
                               >
                                 Submit
@@ -426,7 +430,16 @@ export const Registration = (props) => {
                                 Previous
                               </p>
                               <p
-                                // onClick={() =>()}
+                                onClick={(e) => {
+                                  actions.createUser(email, password);
+                                  actions
+                                    .createSchool(
+                                      school_name,
+                                      school_address,
+                                      school_phone
+                                    )
+                                    .then(history.push("/"));
+                                }}
                                 className="btn submitBtn border-1 border-dark"
                               >
                                 Submit
