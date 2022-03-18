@@ -67,7 +67,9 @@ export const DashDropDown2 = (props) => {
               <DropItem leftIcon={<FaCar />}>Request Ride</DropItem>
             </div>
             <div className="mt-4">
-              <DropItem leftIcon={<BsSearch />}>Search Guardians</DropItem>
+              <Link to={"/guardian/search"}>
+                <DropItem leftIcon={<BsSearch />}>Search Guardians</DropItem>
+              </Link>
             </div>
             <div className="mt-4">
               <DropItem leftIcon={<FaSchool />}>Search Schools</DropItem>

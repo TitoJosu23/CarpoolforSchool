@@ -95,8 +95,6 @@ class Child(db.Model):
             "first_name":self.first_name,
             "last_name":self.last_name,
             "class_grade":self.class_grade,
-            "gender":self.gender,
-            "phone":self.phone,
         }
 class Guardian(db.Model):
     id = db.Column(db.Integer, primary_key=True)

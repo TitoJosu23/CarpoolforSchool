@@ -3,7 +3,7 @@ import { Link, useParams, useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { NavReuse } from "../component/NavReuse.jsx";
 
-export const RequestRide = (props) => {
+export const PageName = (props) => {
   //react declarations
   const history = useHistory();
   const { store, actions } = useContext(Context);

@@ -3,16 +3,10 @@ import "../../styles/profile.css";
 import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
 
-export const Profile = (props) => {
-  const [opened, setOpened] = useState(true);
-  const [name, setName] = useState("Steve");
-  const [lastName, setLastName] = useState("Grossman");
-  const [seats, setSeats] = useState("4");
-  const [address, setAdress] = useState("1023 Burren Drive");
-  const [phone, setPhone] = useState("305-323-1223");
+export const ChildCard = (props) => {
   return (
     <div className="profile row">
-      <div className="profile-container mt-5 col-lg-4 col-10 mx-auto">
+      <div className="childCard mt-5 col-lg-4 col-10 mx-auto">
         {" "}
         <div>
           <div className="picture">
@@ -28,17 +22,18 @@ export const Profile = (props) => {
                 {props.last_name}
               </p>
               <p className="col-12 text-nowrap fs-5 border-bottom">
-                Seats Available <br></br>
+                Class Grade <br></br>
                 {props.seats_available}
               </p>
               <p className="col-12 text-nowrap fs-5 border-bottom pb-3">
-                Address <br></br>
+                Age <br></br>
                 {props.address}
               </p>
-              <p className="col-12 text-nowrap fs-5">
-                Phone <br></br>
-                {props.phone}
-              </p>
+            </div>
+            <div className="cardButtons row justify-content-center">
+              <button className="btn requestButton col-8 mb-3 fs-4">
+                Request Ride
+              </button>
             </div>
           </div>
         </div>

@@ -11,7 +11,6 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { GuardianProfileDetails } from "./GuardianProfileDetails";
 import { Link, useParams } from "react-router-dom";
 
 let theme = createTheme({
@@ -36,7 +35,7 @@ let theme = createTheme({
   },
 });
 
-export const UserProfileDetails = () => {
+export const GuardianProfileDetails = () => {
   const { store, actions } = useContext(Context);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");

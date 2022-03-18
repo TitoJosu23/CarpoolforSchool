@@ -68,11 +68,9 @@ def create_child():
     first_name = request.json.get("firstName", None)
     last_name = request.json.get("lastName", None)
     class_grade = request.json.get("classGrade",None)
-    gender = request.json.get("gender",None)
-    phone = request.json.get("phone", None)
-    child = Child(first_name=first_name, last_name=last_name,class_grade=class_grade,gender=gender,phone=phone)
+    child = Child(first_name=first_name, last_name=last_name,class_grade=class_grade)
     db.session.add(child)
-    added_child = Child.query.filter_by(first_name=first_name, last_name=last_name,class_grade=class_grade,gender=gender,phone=phone).first()
+    added_child = Child.query.filter_by(first_name=first_name, last_name=last_name,class_grade=class_grade).first()
     if added_child is None:
         raise APIException ("Failed to add child!")
     print(added_child)
@@ -91,7 +89,7 @@ def get_self_guardian():
     guardian = guardian.serialize()
     return jsonify(guardian)
 
-@api.route("/child", methods=["GET"])
+@api.route("/children", methods=["GET"])
 @jwt_required()
 def get_children():
     current_user_id=get_jwt_identity()
