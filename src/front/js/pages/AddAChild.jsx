@@ -37,6 +37,7 @@ export const AddAChild = () => {
   const history = useHistory();
   const { store, actions } = useContext(Context);
   const [firstName, setFirstName] = useState("");
+  const [age, setAge] = useState("");
   const [lastName, setLastName] = useState("");
   const [grade, setGrade] = useState("");
 
@@ -62,6 +63,16 @@ export const AddAChild = () => {
                 placeholder="Child Last Name"
                 id="outlined-basic"
                 label="Last Name"
+                fullWidth
+              />
+              <br />
+              <TextField
+                onChange={(e) => setAge(e.target.value)}
+                color="primary"
+                placeholder="Age"
+                id="outlined-basic"
+                label="First Name"
+                type="number"
                 fullWidth
               />
               <br />
@@ -97,7 +108,7 @@ export const AddAChild = () => {
                 className="w-75 mx-auto fs-4"
                 onClick={(e) => {
                   actions
-                    .addChild(firstName, lastName, grade, "gender", "phone")
+                    .addChild(firstName, lastName, grade, age)
                     .then(history.push("/"));
                 }}
                 color="secondary"
