@@ -431,14 +431,16 @@ export const Registration = (props) => {
                               </p>
                               <p
                                 onClick={() => {
-                                  actions.createUser(email, password),
                                   actions
-                                    .createSchool(
-                                      school_name,
-                                      school_address,
-                                      school_phone
+                                    .createUser(email, password)
+                                    .then(
+                                      actions.createSchool(
+                                        school_name,
+                                        school_address,
+                                        school_phone
+                                      )
                                     )
-                                    .then(history.push("/"));
+                                    .then(history.push("/home"));
                                 }}
                                 className="btn submitBtn border-1 border-dark"
                               >
