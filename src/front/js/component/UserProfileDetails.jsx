@@ -40,14 +40,8 @@ export const UserProfileDetails = () => {
   const { store, actions } = useContext(Context);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-<<<<<<< HEAD
-  const [phoneNumber, setPhoneNumnber] = useState("");
-  const [email, setEmail] = useState("");
-  const [driver, setDriver] = useState("");
-=======
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
->>>>>>> 3ce65a3d4b8d6646b7cac3d3d1681b11d4b8db8d
   const [value, setValue] = useState("");
 
   const handleChange = (e) => {
@@ -98,29 +92,6 @@ export const UserProfileDetails = () => {
               fullWidth
             />
             <br />
-<<<<<<< HEAD
-            <br />
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">
-                Drive-Enabled
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={driver}
-                label="Drive-Enabled"
-                onChange={handleChange}
-              >
-                <MenuItem value={"Yes"}>Yes</MenuItem>
-                <MenuItem value={"No"}>No</MenuItem>
-              </Select>
-            </FormControl>
-            <br />
-
-            <br />
-            <Button color="secondary" variant="contained">
-              Save Guardian Information
-=======
             <br />
             <Button
               onClick={() => {
@@ -130,7 +101,6 @@ export const UserProfileDetails = () => {
               variant="contained"
             >
               Update Information
->>>>>>> 3ce65a3d4b8d6646b7cac3d3d1681b11d4b8db8d
             </Button>
             <Link to={"/home"}>
               <Button>Cancel</Button>

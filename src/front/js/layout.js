@@ -9,11 +9,6 @@ import { Registration } from "./pages/Registration.jsx";
 import { Dashboard } from "./pages/Dashboard.js";
 import { ForgotPassword } from "./pages/ForgotPassword";
 import { ModalView } from "./pages/ModalView";
-<<<<<<< HEAD
-import { Profile } from "./pages/Profile";
-import { PlayGroundView } from "./pages/PlayGroundView.jsx";
-=======
->>>>>>> 3ce65a3d4b8d6646b7cac3d3d1681b11d4b8db8d
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { GuardianSchedule } from "./pages/GuardianSchedule.jsx";
@@ -21,10 +16,6 @@ import { ProfileDetails } from "./pages/ProfileDetails.jsx";
 import { GuardianDetails } from "./pages/GuardianDetails.jsx";
 import { AdminDetails } from "./pages/AdminDetails.jsx";
 import { GuardianSearch } from "./pages/GuardianSearch.jsx";
-<<<<<<< HEAD
-import { AddAChild } from "./pages/AddAChild.jsx";
-=======
->>>>>>> 3ce65a3d4b8d6646b7cac3d3d1681b11d4b8db8d
 import injectContext from "./store/appContext";
 
 //create your first component
@@ -63,17 +54,7 @@ const Layout = () => {
             <Route exact path="/admin">
               <AdminDetails />
             </Route>
-<<<<<<< HEAD
-            <Route exact path="/user/child">
-              <AddAChild />
-            </Route>
-            <Route exact path="/user/play">
-              <PlayGroundView />
-            </Route>
-            <Route exact path="/user/search">
-=======
             <Route exact path="/guardian/search">
->>>>>>> 3ce65a3d4b8d6646b7cac3d3d1681b11d4b8db8d
               <GuardianSearch />
             </Route>
             <Route>
