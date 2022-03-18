@@ -66,3 +66,8 @@
   background: rgba(86, 139, 155, 0.774);
   border-radius: 15px;
 }
+@media (max-width: 576px) {
+  .childRow {
+    width: 90%;
+  }
+}

@@ -32,7 +32,6 @@ export const Dashboard = (props) => {
         </IsRole>
         <IsRole roles={["guardian"]}>
           <ActivityFeed />
-          <Profile />
         </IsRole>
       </div>
     </div>

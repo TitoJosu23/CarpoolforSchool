@@ -26,8 +26,15 @@ export const ViewChildren = (props) => {
     <div className="dashBody w-100">
       <NavReuse />
       <div className="dashBoardHome">
-        {props.children?.map((child, index) => {
-          return <ChildCard />;
+        {children?.map((child, index) => {
+          return (
+            <ChildCard
+              first_name={child.first_name}
+              last_name={child.last_name}
+              class_grade={child.class_grade}
+              age={"Age"}
+            />
+          );
         })}
       </div>
     </div>
