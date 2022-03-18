@@ -3,6 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       userName: [],
+      child: [],
     },
 
     actions: {
@@ -71,6 +72,27 @@ const getState = ({ getStore, getActions, setStore }) => {
       clearSession: () => {
         localStorage.removeItem("session");
         setStore({ session: null });
+      },
+      addChild: async (first_name, last_name, gender, class_grade) => {
+        const options = {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            first_name: first_name,
+            last_name: last_name,
+            gender: gender,
+            class_grade: class_grade,
+          }),
+        };
+        const response = await fetch(
+          process.env.BACKEND_URL + `/api/children`,
+          options
+        );
+        if (response.status === 200) {
+          const payload = await response.json();
+          console.log("Child created successfully");
+          return payload;
+        }
       },
     },
   };

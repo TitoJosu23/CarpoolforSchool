@@ -9,6 +9,9 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+import { useHistory } from "react-router-dom";
+import { Context } from "../store/appContext";
+
 let theme = createTheme({
   palette: {
     primary: {
@@ -31,28 +34,46 @@ let theme = createTheme({
   },
 });
 
+// const [firstName, setFirstName] = useState("");
+// const [lastName, setLastName] = useState("");
+// const [grade, setGrade] = useState("");
+// const [gender, setGender] = useState("");
 export const AddAChild = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [grade, setGrade] = useState("");
+  const history = useHistory();
+  const { store, actions } = useContext(Context);
+  const [formData, setFormData] = useState({});
   const [gender, setGender] = useState("");
-
-  const handleChange = (e) => {
-    setGrade(e.target.value);
-  };
-
-  const handleGender = (e) => {
-    setGender(e.target.value);
-  };
 
   return (
     <>
       <NavReuse />{" "}
       <ThemeProvider theme={theme}>
-        <React.Fragment>
-          <Dialog open fullWidth maxWidth="sm" color="primary">
+        <div className="addChild">
+          <Dialog
+            open
+            fullWidth
+            maxWidth="sm"
+            color="primary"
+            onSubmit={(e) => {
+              actions
+                .addChild(
+                  formData.first_name,
+                  formData.last_Name,
+                  formData.gender,
+                  formData.phone_number,
+                  formData.class_grade
+                )
+                .then(() => {
+                  actions.getChildren(), history.push("/");
+                });
+              e.preventDefault();
+            }}
+          >
             <h1>Add A Child</h1>
             <TextField
+              onChange={(e) =>
+                setFormData({ ...formData, first_name: e.target.value })
+              }
               color="primary"
               placeholder="Child First Name"
               id="outlined-basic"
@@ -61,6 +82,9 @@ export const AddAChild = () => {
             />
             <br />
             <TextField
+              onChange={(e) =>
+                setFormData({ ...formData, last_name: e.target.value })
+              }
               placeholder="Child Last Name"
               id="outlined-basic"
               label="Last Name"
@@ -76,7 +100,9 @@ export const AddAChild = () => {
                 id="demo-simple-select"
                 value={gender}
                 label="Child Gender"
-                onChange={handleGender}
+                onChange={(e) =>
+                  setFormData({ ...formData, gender: e.target.value })
+                }
               >
                 <MenuItem value={"Male"}>Male</MenuItem>
                 <MenuItem value={"Female"}>Female</MenuItem>
@@ -84,6 +110,9 @@ export const AddAChild = () => {
             </FormControl>
             <br />
             <TextField
+              onChange={(e) =>
+                setFormData({ ...formData, phone_number: e.target.value })
+              }
               placeholder="Mobile"
               id="outlined-basic"
               label="Phone Number"
@@ -98,7 +127,9 @@ export const AddAChild = () => {
                 id="demo-simple-select"
                 value={grade}
                 label="Child Grade"
-                onChange={handleChange}
+                onChange={(e) =>
+                  setFormData({ ...formData, class_grade: e.target.value })
+                }
               >
                 <MenuItem value={"Kindergarten"}>Kindergarten</MenuItem>
                 <MenuItem value={"First"}>First</MenuItem>
@@ -122,7 +153,7 @@ export const AddAChild = () => {
               Save Child
             </Button>
           </Dialog>
-        </React.Fragment>
+        </div>
       </ThemeProvider>
     </>
   );
