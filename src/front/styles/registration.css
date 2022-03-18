@@ -3,12 +3,12 @@
   background-position: center;
   background-size: cover;
 }
-.dropdown-menu {
+.register .dropdown-menu {
   width: 100%;
   border-radius: 20px;
   background: transparent;
 }
-.dropdown-item {
+.register .dropdown-item {
   font-weight: bold;
   text-align: center;
   height: 60px;
@@ -30,11 +30,13 @@
   .register .dropText {
     font-size: 36px;
   }
-  .dropdown-item {
-    font-size: 20px;
+  .register .dropdown-item {
     text-align: center;
     width: 80%;
     margin-left: 35px;
+  }
+  .dropOption {
+    font-size: 28px;
   }
 }
 @media (min-width: 1200px) {
@@ -42,7 +44,7 @@
     height: 80px;
   }
   .dropdown-item div {
-    font-size: 40px;
+    font-size: 36px;
   }
 }
 .formContainer {
@@ -132,4 +134,8 @@
 .dropdown-menu .dropdown-item {
   background: linear-gradient(to right, #51abf5, #667ff0);
   color: white;
+}
+.dropOption {
+  height: 100%;
+  margin: auto;
 }

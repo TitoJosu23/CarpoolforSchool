@@ -35,7 +35,7 @@ export const Login = (props) => {
                     />
                   </div>
                   <div className="col-sm-12 col-md-6 col-lg-6 d-flex align-items-center">
-                    <div className="formContainer form-floating card-body p-4 p-lg-5 text-black ">
+                    <div className="formContainer form-floating card-body ms-4 text-black ">
                       {error && (
                         <div className="alert alert-danger">{error}</div>
                       )}
@@ -98,12 +98,9 @@ export const Login = (props) => {
                                 Forgot Password?
                               </Link>
                             </div>
-                            <button className="btn col nextBtn">Login</button>
-                            <div className="buttonContainer row mt-4 ">
-                              <div className="col"> </div>
-
-                              <div className="col"> </div>
-                            </div>
+                            <button className="btn border-2 border-dark col nextBtn">
+                              Login
+                            </button>
                           </div>
                         </div>
                       </form>

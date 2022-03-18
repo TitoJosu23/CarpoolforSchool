@@ -47,6 +47,7 @@ export const Registration = (props) => {
               onClick={() => history.push("/")}
               src={logo}
               alt="login form"
+              wwwwwwwwwwwwww
               className={
                 "img-fluid btn " +
                 `${registerStatus != "Select Account Type" && "d-none"}`
@@ -62,7 +63,7 @@ export const Registration = (props) => {
               <div className="row g-0 justify-content-between">
                 <button
                   className={
-                    "fw-normal dropdownToggle text-break border-0 col-6 mx-auto " +
+                    "fw-normal dropdownToggle text-break border-2 border-dark rounded-3 col-md-6 mx-auto " +
                     hide
                   }
                   id="dropdownMenu2"
@@ -76,21 +77,21 @@ export const Registration = (props) => {
                   aria-labelledby="dropdownMenu2"
                 >
                   <li
-                    className="dropdown-item mt-3 btn border"
+                    className="dropdown-item mt-3 btn border border-2 border-dark"
                     onClick={() => {
                       setRegisterStatus("Create Guardian Account"),
                         setHide("d-none");
                     }}
                   >
-                    <div className="mt-2">Guardian</div>
+                    <div className="dropOption">Guardian</div>
                   </li>
                   <li
-                    className="dropdown-item btn border mt-3"
+                    className="dropdown-item btn border mt-3 border-2 border-dark"
                     onClick={() => {
                       setRegisterStatus("Register School"), setHide("d-none");
                     }}
                   >
-                    <div className="mt-2">Admin</div>
+                    <div className="dropOption">Admin</div>
                   </li>
                 </ul>
                 <div className="row">
@@ -125,13 +126,13 @@ export const Registration = (props) => {
                   <div className="col-sm-12 col-md-6 col-lg-6 d-flex align-items-center">
                     <div
                       className={
-                        "formContainer form-floating card-body p-4 p-lg-5 text-black " +
+                        "formContainer ms-4 form-floating card-body text-black " +
                         `${
                           registerStatus == "Select Account Type" && "inActive"
                         }`
                       }
                     >
-                      <div className="progressContainer mb-5">
+                      <div className="progressContainer mt-4 mb-5">
                         <div
                           className={`${
                             registerStatus == "Select Account Type" &&
@@ -203,11 +204,14 @@ export const Registration = (props) => {
                             <div className="buttonContainer d-flex justify-content-center mt-4 ">
                               <p
                                 onClick={() => nextStep(count)}
-                                className="btn nextBtn"
+                                className="btn border-1 border-dark nextBtn"
                               >
                                 Next
                               </p>
                             </div>
+                            <Link className="text-primary" to={"/"}>
+                              Back To Login
+                            </Link>
                           </div>
                         </div>
                       </form>
@@ -258,13 +262,13 @@ export const Registration = (props) => {
                               {" "}
                               <p
                                 onClick={() => previousStep(count)}
-                                className="btn previousBtn"
+                                className="btn previousBtn border-1 border-dark"
                               >
                                 Previous
                               </p>
                               <p
                                 // onClick={() =>()}
-                                className="btn submitBtn"
+                                className="btn submitBtn border-1 border-dark"
                               >
                                 Submit
                               </p>

@@ -13,8 +13,8 @@ import { Context } from "../store/appContext";
 import { Link, useParams } from "react-router-dom";
 import { BsPerson } from "react-icons/bs";
 
-export const DashDropDown = (props) => {
-  const [activeMenu, setActiveMenu] = useState("main");
+export const DashDropDown2 = (props) => {
+  const [activeMenu2, setActiveMenu2] = useState("main2");
   const [menuHeight, setMenuHeight] = useState(null);
   const dropdownRef = useRef(null);
   const history = useHistory();
@@ -34,7 +34,7 @@ export const DashDropDown = (props) => {
         <div
           className="menu-item btn"
           onClick={() => {
-            if (props.goToMenu) setActiveMenu(props.goToMenu);
+            if (props.goToMenu) setActiveMenu2(props.goToMenu);
             if (props.onClick) props.onClick();
           }}
         >
@@ -51,69 +51,27 @@ export const DashDropDown = (props) => {
   return (
     <>
       <div
-        className="navdropdown"
+        className="navdropdown2"
         style={{ height: "menuHeight" }}
         ref={dropdownRef}
       >
         <CSSTransition
-          in={activeMenu === "main"}
+          in={activeMenu2 === "main2"}
           timeout={500}
           classNames="menu-primary"
           unmountOnExit
           onEnter={calcHeight}
         >
-          <div className="menu">
-            <Link to={"/user/details"}>
-              <DropItem
-                leftIcon={<BsPerson className="person" />}
-                task={props.guardianStatus}
-              >
-                My Profile
-              </DropItem>
-            </Link>
-            <div className="mt-3">
-              {" "}
-              <DropItem
-                leftIcon={<FaCog />}
-                rightIcon={<BsChevronRight />}
-                goToMenu="settings"
-              >
-                Settings
-              </DropItem>
+          <div className="menu2">
+            <div className="mt-2">
+              <DropItem leftIcon={<FaCar />}>Request Ride</DropItem>
             </div>
-          </div>
-        </CSSTransition>
-        <CSSTransition
-          in={activeMenu === "settings"}
-          timeout={500}
-          classNames="menu-secondary"
-          unmountOnExit
-          onEnter={calcHeight}
-        >
-          <div className="menu">
-            <DropItem goToMenu="main" leftIcon={<AiOutlineArrowLeft />}>
-              <h2>Go Back</h2>
-            </DropItem>
-            <DropItem leftIcon={<AiOutlineSchedule />}>
-              <div
-                onClick={() => {
-                  history.push("/user/schedule");
-                }}
-              >
-                Schedule
-              </div>
-            </DropItem>
-            <DropItem leftIcon={<FaChild />}>Children</DropItem>
-            <DropItem leftIcon={<ImEyeBlocked />}>BlackList</DropItem>
-            <DropItem
-              onClick={() => {
-                actions.clearSession();
-                history.push("/");
-              }}
-              leftIcon={<GrLogout />}
-            >
-              LogOut
-            </DropItem>
+            <div className="mt-4">
+              <DropItem leftIcon={<BsSearch />}>Search Guardians</DropItem>
+            </div>
+            <div className="mt-4">
+              <DropItem leftIcon={<FaSchool />}>Search Schools</DropItem>
+            </div>
           </div>
         </CSSTransition>
       </div>

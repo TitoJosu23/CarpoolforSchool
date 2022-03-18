@@ -7,11 +7,8 @@ import "../styles/registration.css";
 import { Login } from "./pages/Login.js";
 import { Registration } from "./pages/Registration.jsx";
 import { Dashboard } from "./pages/Dashboard.js";
-import { NavPage } from "./pages/NavPage";
-import { LandingPage } from "./pages/LandingPage";
 import { ForgotPassword } from "./pages/ForgotPassword";
 import { ModalView } from "./pages/ModalView";
-import { Profile } from "./pages/Profile";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { GuardianSchedule } from "./pages/GuardianSchedule.jsx";
@@ -47,12 +44,6 @@ const Layout = () => {
             </Route>
             <Route exact path="/user/forgot">
               <ForgotPassword />
-            </Route>
-            <Route exact path="/modal">
-              <ModalView />
-            </Route>
-            <Route exact path="/profile">
-              <Profile />
             </Route>
             <Route exact path="/guardian/schedule">
               <GuardianSchedule />

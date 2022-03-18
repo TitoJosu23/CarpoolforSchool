@@ -20,6 +20,7 @@ import { DashNavBar } from "../component/DashNavBar.jsx";
 import { DashDropDown } from "../component/DashDropDown.jsx";
 import { CSSTransition } from "react-transition-group";
 import { NavReuse } from "../component/NavReuse.jsx";
+import { Profile } from "../component/Profile.jsx";
 
 // Nav items
 
@@ -52,6 +53,7 @@ export const Dashboard = (props) => {
         </IsRole>
         <IsRole roles={["guardian"]}>
           <ActivityFeed />
+          {/* <Profile /> */}
         </IsRole>
       </div>
     </div>

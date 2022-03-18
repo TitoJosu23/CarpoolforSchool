@@ -12,68 +12,33 @@ export const ActivityFeed = (props) => {
   return (
     <div className="container mt-5 over">
       <div className="row d-flex">
-        <div className="rideFeed col-md-6 col-12 d-flex justify-content-center">
-          <div className="bubble mx-auto">
-            <ul className="timeline mx-auto">
-              <li className="eventItem d-flex justify-content-center">
-                <p className="eventText mt-3 p-3">
-                  Child was picked up at school by Guardian.
-                </p>
-              </li>
-              <li className="eventItem d-flex justify-content-center">
-                <p className="eventText mt-2 p-3">
-                  Child was dropped off at school by Guardian
-                </p>
-              </li>
-              <li className="eventItem d-flex justify-content-center">
-                <p className="eventText mt-2 p-3">
-                  Child 2 was picked up by Guardian.
-                </p>
-              </li>
-              <li className="eventItem d-flex justify-content-center">
-                <p className="eventText mt-2 p-3">
-                  Child 2 was dropped off by Guardian.
-                </p>
-              </li>
-              <li className="eventItem d-flex justify-content-center">
-                <p className="eventText mt-2 p-3">
-                  Child 2 was dropped off by Guardian.
-                </p>
-              </li>
-              <li className="eventItem d-flex justify-content-center">
-                <p className="eventText mt-2 p-3">
-                  Child 2 was dropped off by Guardian.
-                </p>
-              </li>
-              <li className="eventItem d-flex justify-content-center">
-                <p className="eventText mt-2 p-3">
-                  Child 2 was dropped off by Guardian.
-                </p>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className="utilityPanel order-1 col-md-6 col-12">
-          <div className="schoolPanel col-12 ">
-            <ul className="timeline mx-auto">
+        <div className="feedPanel order-1 col-md-6 col-12">
+          <div className="innerPanel col-12">
+            <ul className="timeline">
               <li className="eventItem d-flex justify-content-center">
                 <p className="eventText mt-3 p-3">School1</p>
               </li>
               <li className="eventItem d-flex justify-content-center">
                 <p className="eventText mt-2 p-3">School 2</p>
               </li>
-              <li className="eventItem d-flex justify-content-center">
+              <li className="eventItem d-flex justify-content-center ">
                 <p className="eventText mt-2 p-3">School 3</p>
               </li>
             </ul>
           </div>
-          <div className="actionsPanel col-12 ">
-            <ul className="timeline mx-auto">
+        </div>
+        <div className="infoPanel order-1 col-md-6 col-12">
+          <div className="innerPanel col-12">
+            <ul className="timeline">
               <li className="eventItem d-flex justify-content-center">
-                <RideRequestDropdown />
+                <p className="eventText mt-3 p-3">School1</p>
               </li>
-              <li className="eventItem d-flex justify-content-center"></li>
-              <li className="eventItem d-flex justify-content-center"></li>
+              <li className="eventItem d-flex justify-content-center">
+                <p className="eventText mt-2 p-3">School 2</p>
+              </li>
+              <li className="eventItem d-flex justify-content-center ">
+                <p className="eventText mt-2 p-3">School 3</p>
+              </li>
             </ul>
           </div>
         </div>
