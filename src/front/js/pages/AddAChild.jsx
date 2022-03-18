@@ -34,46 +34,22 @@ let theme = createTheme({
   },
 });
 
-// const [firstName, setFirstName] = useState("");
-// const [lastName, setLastName] = useState("");
-// const [grade, setGrade] = useState("");
-// const [gender, setGender] = useState("");
 export const AddAChild = () => {
   const history = useHistory();
   const { store, actions } = useContext(Context);
-  const [formData, setFormData] = useState({});
-  const [gender, setGender] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [grade, setGrade] = useState("");
 
   return (
     <>
       <NavReuse />{" "}
       <ThemeProvider theme={theme}>
         <div className="addChild">
-          <Dialog
-            open
-            fullWidth
-            maxWidth="sm"
-            color="primary"
-            onSubmit={(e) => {
-              actions
-                .addChild(
-                  formData.first_name,
-                  formData.last_Name,
-                  formData.gender,
-                  formData.phone_number,
-                  formData.class_grade
-                )
-                .then(() => {
-                  actions.getChildren(), history.push("/");
-                });
-              e.preventDefault();
-            }}
-          >
+          <Dialog open fullWidth maxWidth="sm" color="primary">
             <h1>Add A Child</h1>
             <TextField
-              onChange={(e) =>
-                setFormData({ ...formData, first_name: e.target.value })
-              }
+              onChange={(e) => setFirstName(e.target.value)}
               color="primary"
               placeholder="Child First Name"
               id="outlined-basic"
@@ -82,40 +58,10 @@ export const AddAChild = () => {
             />
             <br />
             <TextField
-              onChange={(e) =>
-                setFormData({ ...formData, last_name: e.target.value })
-              }
+              onChange={(e) => setLastName(e.target.value)}
               placeholder="Child Last Name"
               id="outlined-basic"
               label="Last Name"
-              fullWidth
-            />
-            <br />
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">
-                Child Gender
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={gender}
-                label="Child Gender"
-                onChange={(e) =>
-                  setFormData({ ...formData, gender: e.target.value })
-                }
-              >
-                <MenuItem value={"Male"}>Male</MenuItem>
-                <MenuItem value={"Female"}>Female</MenuItem>
-              </Select>
-            </FormControl>
-            <br />
-            <TextField
-              onChange={(e) =>
-                setFormData({ ...formData, phone_number: e.target.value })
-              }
-              placeholder="Mobile"
-              id="outlined-basic"
-              label="Phone Number"
               fullWidth
             />
             <br />
@@ -127,9 +73,7 @@ export const AddAChild = () => {
                 id="demo-simple-select"
                 value={grade}
                 label="Child Grade"
-                onChange={(e) =>
-                  setFormData({ ...formData, class_grade: e.target.value })
-                }
+                onChange={(e) => setGrade(e.target.value)}
               >
                 <MenuItem value={"Kindergarten"}>Kindergarten</MenuItem>
                 <MenuItem value={"First"}>First</MenuItem>
@@ -149,7 +93,13 @@ export const AddAChild = () => {
             <br />
 
             <br />
-            <Button color="secondary" variant="contained">
+            <Button
+              onClick={(e) => {
+                actions.addChild(firstName, lastName, grade, "gender", "phone");
+              }}
+              color="secondary"
+              variant="contained"
+            >
               Save Child
             </Button>
           </Dialog>
