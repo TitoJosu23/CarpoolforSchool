@@ -45,7 +45,7 @@ export const UserProfileDetails = () => {
   const [value, setValue] = useState("");
 
   const handleChange = (e) => {
-    setRole(e.target.value);
+    setDriver(e.target.value);
   };
 
   return (
@@ -54,7 +54,7 @@ export const UserProfileDetails = () => {
       <ThemeProvider theme={theme}>
         <React.Fragment>
           <Dialog open fullWidth maxWidth="sm" color="primary">
-            <h1>Profile Details</h1>
+            <h1>Guardian Profile Details</h1>
             <TextField
               onChange={(e) => setFirstName(e.target.value)}
               value={firstName}

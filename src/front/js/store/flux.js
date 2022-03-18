@@ -72,6 +72,21 @@ const getState = ({ getStore, getActions, setStore }) => {
         localStorage.removeItem("session");
         setStore({ session: null });
       },
+      addChild: async (first_name, last_name, class_grade, gender, phone) => {
+        const actions = getActions();
+        const options = {
+          method: "POST",
+          body: JSON.stringify({
+            first_name: first_name,
+            last_name: last_name,
+            class_grade: class_grade,
+            gender: gender,
+            phone: phone,
+          }),
+        };
+        const payload = await actions._fetch(`/api/child`, options);
+        return payload;
+      },
     },
   };
 };
