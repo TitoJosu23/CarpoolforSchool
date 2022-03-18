@@ -430,8 +430,8 @@ export const Registration = (props) => {
                                 Previous
                               </p>
                               <p
-                                onClick={(e) => {
-                                  actions.createUser(email, password);
+                                onClick={() => {
+                                  actions.createUser(email, password),
                                   actions
                                     .createSchool(
                                       school_name,
