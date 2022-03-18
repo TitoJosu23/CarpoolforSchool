@@ -76,3 +76,8 @@
 .navBar .greetingText {
   font-size: 36px;
 }
+@media (max-width: 576px) {
+  .navBar .greetingText {
+    font-size: 24px;
+  }
+}

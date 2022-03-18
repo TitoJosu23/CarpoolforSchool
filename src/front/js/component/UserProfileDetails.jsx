@@ -20,7 +20,7 @@ let theme = createTheme({
       main: "#039be5",
     },
     secondary: {
-      main: "#448aff",
+      main: "#224758e1",
     },
     background: {
       paper: "#e1f5fe",
