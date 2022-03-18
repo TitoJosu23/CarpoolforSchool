@@ -95,13 +95,7 @@ export const DashDropDown = (props) => {
               <h2>Go Back</h2>
             </DropItem>
             <DropItem leftIcon={<AiOutlineSchedule />}>
-              <div
-                onClick={() => {
-                  history.push("/user/schedule");
-                }}
-              >
-                Schedule
-              </div>
+              <Link to={"/guardian/schedule"}>Schedule</Link>
             </DropItem>
             <DropItem leftIcon={<FaChild />}>Children</DropItem>
             <DropItem leftIcon={<ImEyeBlocked />}>BlackList</DropItem>
