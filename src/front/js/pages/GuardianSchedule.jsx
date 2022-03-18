@@ -1,123 +1,104 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import * as React from "react";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
 import { NavReuse } from "../component/NavReuse.jsx";
 
 import "../../styles/guardianSchedule.css";
 
+const label = { inputProps: { "aria-label": "Switch demo" } };
+
 export const GuardianSchedule = () => {
   return (
-    <div className="guardian-schedule">
-      <div className="custom-control custom-switch box">
-        <label className="custom-control-label" htmlFor="customSwitches">
-          Driver
-        </label>
-        <input
-          type="checkbox"
-          className="custom-control-input"
-          id="customSwitches"
-          readOnly
-        />
+    <div>
+      <NavReuse />
+      <div className="guardian-schedule">
+        <h2>Schedule</h2>
+        <div className="container-sc">
+          <div>
+            <FormControlLabel
+              className="switch"
+              value="start"
+              labelPlacement="start"
+              control={<Switch />}
+              label="Driver"
+            />
+          </div>
+          <div>
+            <FormControlLabel
+              className="switch"
+              value="start"
+              labelPlacement="start"
+              control={<Switch />}
+              label="Available"
+            />
+          </div>
+          <div>
+            <FormControlLabel
+              className="switch"
+              value="start"
+              labelPlacement="start"
+              control={<Switch />}
+              label="Morning  "
+            />
+          </div>
+          <div>
+            <FormControlLabel
+              className="switch"
+              value="start"
+              labelPlacement="start"
+              control={<Switch />}
+              label="Afternoon  "
+            />
+          </div>
+          <div>
+            <FormControlLabel
+              className="switch"
+              value="start"
+              labelPlacement="start"
+              control={<Switch />}
+              label="Monday  "
+            />
+          </div>
+          <div>
+            <FormControlLabel
+              className="switch"
+              value="start"
+              labelPlacement="start"
+              control={<Switch />}
+              label="Tuesday  "
+            />
+          </div>
+          <div>
+            <FormControlLabel
+              className="switch"
+              value="start"
+              labelPlacement="start"
+              control={<Switch />}
+              label="Wednesday  "
+            />
+          </div>
+          <div>
+            <FormControlLabel
+              className="switch"
+              value="start"
+              labelPlacement="start"
+              control={<Switch />}
+              label="Thursday  "
+            />
+          </div>
+          <div>
+            <FormControlLabel
+              className="switch"
+              value="start"
+              labelPlacement="start"
+              control={<Switch />}
+              label="Friday  "
+            />
+          </div>
+          <div>
+          </div>
+        </div>
       </div>
-      <div className="custom-control custom-switch box">
-        <label className="custom-control-label" htmlFor="customSwitchesChecked">
-          Availability
-        </label>
-        <input
-          type="checkbox"
-          className="custom-control-input"
-          id="customSwitches"
-          readOnly
-        />
-      </div>
-      <div className="custom-control custom-switch box">
-        <label className="custom-control-label" htmlFor="customSwitches">
-          Morning
-        </label>
-        <input
-          type="checkbox"
-          className="custom-control-input"
-          id="customSwitches"
-          readOnly
-        />
-      </div>
-      <div className="custom-control custom-switch box">
-        <label className="custom-control-label" htmlFor="customSwitchesChecked">
-          Afternoon
-        </label>
-        <input
-          type="checkbox"
-          className="custom-control-input"
-          id="customSwitchesChecked"
-          readOnly
-        />
-      </div>
-      <div className="custom-control custom-switch box">
-        <label className="custom-control-label" htmlFor="customSwitches">
-          Monday
-        </label>
-        <input
-          type="checkbox"
-          className="custom-control-input"
-          id="customSwitches"
-          readOnly
-        />
-      </div>
-      <div className="custom-control custom-switch box">
-        <label className="custom-control-label" htmlFor="customSwitchesChecked">
-          Tuesday
-        </label>
-        <input
-          type="checkbox"
-          className="custom-control-input"
-          id="customSwitchesChecked"
-          readOnly
-        />
-      </div>
-      <div className="custom-control custom-switch box">
-        <label className="custom-control-label" htmlFor="customSwitches">
-          Wednesday
-        </label>
-        <input
-          type="checkbox"
-          className="custom-control-input"
-          id="customSwitches"
-          readOnly
-        />
-      </div>
-      <div className="custom-control custom-switch box">
-        <label className="custom-control-label" htmlFor="customSwitchesChecked">
-          Thursday
-        </label>
-        <input
-          type="checkbox"
-          className="custom-control-input"
-          id="customSwitchesChecked"
-          readOnly
-        />
-      </div>
-      <div className="custom-control custom-switch box">
-        <label className="custom-control-label" htmlFor="customSwitches">
-          Friday
-        </label>
-        <input
-          type="checkbox"
-          className="custom-control-input"
-          id="customSwitches"
-          readOnly
-        />
-      </div>
-      <div className="custom-control custom-switch box">
-        <label className="custom-control-label" htmlFor="customSwitchesChecked">
-          Accepted
-        </label>
-        <input
-          type="checkbox"
-          className="custom-control-input"
-          id="customSwitchesChecked"
-          readOnly
-        />
-      </div>
-      <input type="submit"/>
     </div>
   );
 };

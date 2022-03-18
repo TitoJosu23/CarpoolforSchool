@@ -1,19 +1,22 @@
 .guardian-schedule {
+  border: 1px solid black;
+  font-size: 0.9rem;
+  border-radius: 10px;
   margin-top: 100px;
-}
-.guardian-schedule .box {
+  margin-bottom: 10% !important;
+  background-color: darkkhaki;
   margin: auto;
-  margin-top: 10px;
-  width: 14%;
-  height: 40px;
-  background-color: gray;
+  width: 25rem;
+  height: 42rem;
 }
-.custom-control-input {
-  size: 20px;
-  margin-right: 80px;
-  margin-top: 13px;
-  float: right;
+.guardian-schedule .container-sc {
+  border-top: 5px solid rgb(0, 0, 0);
 }
 .guardian-schedule label {
+  float: left;
   margin-top: 7px;
+  margin-right: 200px;
+}
+.switch {
+  padding: 10px;
 }
