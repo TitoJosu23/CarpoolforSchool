@@ -30,18 +30,3 @@ export const RequestRide = () => {
     </div>
   );
 };
-
-{
-    children?.map((child, index) => {
-      return (
-        <li>
-          <div className="form-check">
-            <input className="form-check-input" type="checkbox" />
-            <label className="form-check-label" for="flexRadioDefault1">
-              {child.first_name}
-            </label>
-          </div>
-        </li>
-      );
-    });
-  }

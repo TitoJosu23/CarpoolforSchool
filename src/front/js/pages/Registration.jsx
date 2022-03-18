@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
-import logo from "/workspace/CarpoolforSchool/src/front/img/logo.png";
+import logo from "../../img/logo.png";
 
 export const Registration = (props) => {
   const history = useHistory();
