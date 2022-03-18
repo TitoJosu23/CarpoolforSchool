@@ -21,7 +21,7 @@ code {
   --speed: 500ms;
 }
 
-ul {
+.navreuse ul {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -97,7 +97,7 @@ a {
   height: 20px;
 }
 
-.dropdown {
+.navreuse .dropdown {
   position: absolute;
   top: 110px;
   width: 300px;
