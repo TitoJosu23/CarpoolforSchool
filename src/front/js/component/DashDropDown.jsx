@@ -94,9 +94,9 @@ export const DashDropDown = (props) => {
             <DropItem goToMenu="main" leftIcon={<AiOutlineArrowLeft />}>
               <h2>Go Back</h2>
             </DropItem>
-            <DropItem leftIcon={<AiOutlineSchedule />}>
-              <Link to={"/guardian/schedule"}>Schedule</Link>
-            </DropItem>
+            <Link to={"/guardian/schedule"}>
+              <DropItem leftIcon={<AiOutlineSchedule />}>Schedule</DropItem>
+            </Link>
             <DropItem leftIcon={<FaChild />}>Children</DropItem>
             <DropItem leftIcon={<ImEyeBlocked />}>BlackList</DropItem>
             <DropItem

@@ -18,6 +18,7 @@ import { AdminDetails } from "./pages/AdminDetails.jsx";
 import { GuardianSearch } from "./pages/GuardianSearch.jsx";
 import injectContext from "./store/appContext";
 import { AddAChild } from "./pages/AddAChild.jsx";
+import { RequestRide } from "./pages/RequestRide.jsx";
 
 //create your first component
 const Layout = () => {
@@ -61,6 +62,10 @@ const Layout = () => {
             <Route exact path="/child">
               <AddAChild />
             </Route>
+            <Route exact path="/ride">
+              <RequestRide />
+            </Route>
+
             <Route>
               <h1>Not found!</h1>
             </Route>
