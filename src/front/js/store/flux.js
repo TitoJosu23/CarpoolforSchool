@@ -72,7 +72,20 @@ const getState = ({ getStore, getActions, setStore }) => {
         localStorage.removeItem("session");
         setStore({ session: null });
       },
-      addChild: async (first_name, last_name, class_grade, gender, phone) => {
+      createSchool: async (school_name, school_address, school_phone) => {
+        const actions = getActions();
+        const options = {
+          method: "POST",
+          body: JSON.stringify({
+            school_name: school_name,
+            school_address: school_address,
+            school_phone: school_phone,
+          }),
+        };
+        const payload = await actions._fetch(`/school`, options);
+        return payload;
+      },
+      addChild: async (first_name, last_name, class_grade, age) => {
         const actions = getActions();
         const options = {
           method: "POST",
@@ -80,8 +93,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             firstName: first_name,
             lastName: last_name,
             classGrade: class_grade,
-            gender: gender,
-            phone: phone,
+            age: age,
           }),
         };
         const payload = await actions._fetch(`/api/child`, options);

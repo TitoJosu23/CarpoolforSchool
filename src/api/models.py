@@ -19,6 +19,7 @@ class School(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     school_name = db.Column(db.String(255), unique=True, nullable=False)
     school_address = db.Column(db.String(255), unique=True, nullable=False)
+    school_phone = db.Column(db.String(255), unique=True, nullable=False)
     school_logo_url = db.Column(db.String(255), unique=False, nullable=True)
     active_complaints = db.Column(db.Integer, db.ForeignKey('complaint.id'))
     access_list = db.relationship("School_Access")
@@ -29,6 +30,7 @@ class School(db.Model):
             "id": self.id,
             "school_name": self.school_name,
             "school_address": self.school_address,
+            "school_phone": self.school_phone,
             "school_logo_url": self.school_logo_url,
             "active_complaint":self.active_complaints
         }
@@ -86,6 +88,7 @@ class Child(db.Model):
     first_name = db.Column(db.String(255), unique=False, nullable=False)
     last_name = db.Column(db.String(255), unique=False, nullable=False)
     class_grade = db.Column(db.String(255), unique=False, nullable=False)
+    age = db.Column(db.String(255), nullable=False)
     guardians = db.relationship("Guardian",
                     secondary=Child_to_guardian)
 
@@ -95,8 +98,7 @@ class Child(db.Model):
             "first_name":self.first_name,
             "last_name":self.last_name,
             "class_grade":self.class_grade,
-            "gender":self.gender,
-            "phone":self.phone,
+            "age":self.age
         }
 class Guardian(db.Model):
     id = db.Column(db.Integer, primary_key=True)

@@ -7,17 +7,15 @@ import "../styles/registration.css";
 import { Login } from "./pages/Login.js";
 import { Registration } from "./pages/Registration.jsx";
 import { Dashboard } from "./pages/Dashboard.js";
-import { ForgotPassword } from "./pages/ForgotPassword";
 import { ModalView } from "./pages/ModalView";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { GuardianSchedule } from "./pages/GuardianSchedule.jsx";
-import { ProfileDetails } from "./pages/ProfileDetails.jsx";
-import { GuardianDetails } from "./pages/GuardianDetails.jsx";
-import { AdminDetails } from "./pages/AdminDetails.jsx";
+import { UserDetails } from "./pages/UserDetails.jsx";
 import { GuardianSearch } from "./pages/GuardianSearch.jsx";
 import injectContext from "./store/appContext";
 import { AddAChild } from "./pages/AddAChild.jsx";
+import { ViewChildren } from "./pages/ViewChildren.jsx";
 import { RequestRide } from "./pages/RequestRide.jsx";
 
 //create your first component
@@ -42,30 +40,23 @@ const Layout = () => {
               <Dashboard />
             </Route>
             <Route exact path="/user/details">
-              <ProfileDetails />
-            </Route>
-            <Route exact path="/user/forgot">
-              <ForgotPassword />
+              <UserDetails />
             </Route>
             <Route exact path="/guardian/schedule">
               <GuardianSchedule />
             </Route>
-            <Route exact path="/guardian/details">
-              <GuardianDetails />
-            </Route>
-            <Route exact path="/admin">
-              <AdminDetails />
-            </Route>
             <Route exact path="/guardian/search">
               <GuardianSearch />
             </Route>
-            <Route exact path="/child">
+            <Route exact path="/children">
+              <ViewChildren />
+            </Route>
+            <Route exact path="/children/add">
               <AddAChild />
             </Route>
             <Route exact path="/ride">
               <RequestRide />
             </Route>
-
             <Route>
               <h1>Not found!</h1>
             </Route>

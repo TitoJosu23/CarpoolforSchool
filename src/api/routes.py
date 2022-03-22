@@ -68,11 +68,10 @@ def create_child():
     first_name = request.json.get("firstName", None)
     last_name = request.json.get("lastName", None)
     class_grade = request.json.get("classGrade",None)
-    gender = request.json.get("gender",None)
-    phone = request.json.get("phone", None)
-    child = Child(first_name=first_name, last_name=last_name,class_grade=class_grade,gender=gender,phone=phone)
+    age = request.json.get("age",None)
+    child = Child(first_name=first_name, last_name=last_name,class_grade=class_grade,age=age)
     db.session.add(child)
-    added_child = Child.query.filter_by(first_name=first_name, last_name=last_name,class_grade=class_grade,gender=gender,phone=phone).first()
+    added_child = Child.query.filter_by(first_name=first_name, last_name=last_name,class_grade=class_grade,age=age).first()
     if added_child is None:
         raise APIException ("Failed to add child!")
     print(added_child)
@@ -91,7 +90,7 @@ def get_self_guardian():
     guardian = guardian.serialize()
     return jsonify(guardian)
 
-@api.route("/child", methods=["GET"])
+@api.route("/children", methods=["GET"])
 @jwt_required()
 def get_children():
     current_user_id=get_jwt_identity()
@@ -271,7 +270,8 @@ def create_school():
     school_name= request.json.get("school_name", None)
     school_address= request.json.get("school_address", None)
     school_logo_url= request.json.get("school_logo_url", None)
-    school = School(school_name=school_name,school_address=school_address,school_logo_url=school_logo_url)
+    school_phone= request.json.get("school_phone", None)
+    school = School(school_name=school_name,school_address=school_address,school_logo_url=school_logo_url,school_phone=school_phone)
     db.session.add(school)
     added_school = School.query.filter_by(school_name=school_name).first()
     if added_school is None:

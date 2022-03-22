@@ -97,7 +97,9 @@ export const DashDropDown = (props) => {
             <Link to={"/guardian/schedule"}>
               <DropItem leftIcon={<AiOutlineSchedule />}>Schedule</DropItem>
             </Link>
-            <DropItem leftIcon={<FaChild />}>Children</DropItem>
+            <Link to={"/children"}>
+              <DropItem leftIcon={<FaChild />}>Children</DropItem>
+            </Link>
             <DropItem leftIcon={<ImEyeBlocked />}>BlackList</DropItem>
             <DropItem
               onClick={() => {

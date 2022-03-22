@@ -22,10 +22,12 @@
 }
 .profile-information p {
   font-size: 1.8rem;
+  color: black;
 }
 @media (max-width: 576px) {
   .profile-information p {
     font-size: 1.2rem;
+    color: black;
   }
 }
 .dropdown-information input {
@@ -39,12 +41,33 @@
   margin: auto;
   width: 200px;
 }
-.profile .profile-container{
+.profile .profile-container {
   margin-top: 5%;
   display: inline-block;
   width: 24rem;
-  height: 42rem;
-  background-color:rgb(104, 104, 104);
-  border-radius:10px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
 }
- 
+.profile .childCard {
+  margin-top: 5%;
+  display: inline-block;
+  width: 24rem;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+}
+.cardButton {
+  border-radius: 15px;
+  background-color: black;
+}
+.childCard img {
+  width: 80%;
+}
+.requestButton {
+  background: rgba(86, 139, 155, 0.774);
+  border-radius: 15px;
+}
+@media (max-width: 576px) {
+  .childRow {
+    width: 90%;
+  }
+}

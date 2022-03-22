@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
-import logo from "/workspace/CarpoolforSchool/src/front/img/logo.png";
+import logo from "../../img/logo.png";
 
 export const Registration = (props) => {
   const history = useHistory();
@@ -12,6 +12,8 @@ export const Registration = (props) => {
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [firstName, setFirstName] = useState("");
+  const [schoolName, setSchoolName] = useState("");
+  const [schoolAddress, setSchoolAddress] = useState("");
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
@@ -128,7 +130,9 @@ export const Registration = (props) => {
                       className={
                         "formContainer ms-4 form-floating card-body text-black " +
                         `${
-                          registerStatus == "Select Account Type" && "inActive"
+                          (registerStatus == "Register School" ||
+                            registerStatus == "Select Account Type") &&
+                          "inActive"
                         }`
                       }
                     >
@@ -267,7 +271,177 @@ export const Registration = (props) => {
                                 Previous
                               </p>
                               <p
-                                // onClick={() =>()}
+                                onClick={(e) => {
+                                  actions
+                                    .addChild(firstName, lastName, grade, age)
+                                    .then(history.push("/"));
+                                }}
+                                className="btn submitBtn border-1 border-dark"
+                              >
+                                Submit
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <div
+                      className={
+                        "formContainer ms-4 form-floating card-body text-black " +
+                        `${
+                          (registerStatus == "Create Guardian Account" ||
+                            registerStatus == "Select Account Type") &&
+                          "inActive"
+                        }`
+                      }
+                    >
+                      <div className="progressContainer mt-4 mb-5">
+                        <div
+                          className={`${
+                            registerStatus == "Select Account Type" &&
+                            "progressHidden"
+                          }`}
+                        >
+                          <div className="progressBar row">
+                            <div
+                              className={`${
+                                step[count] == "oneActive"
+                                  ? "progress1"
+                                  : "progress2"
+                              }`}
+                            ></div>
+                            <div className="progressStep col">Login</div>
+                            <div className="progressStep col">Info</div>
+                          </div>
+                        </div>
+                      </div>
+                      {error && (
+                        <div className="alert alert-danger">{error}</div>
+                      )}
+                      <form
+                        className={`${
+                          step[count] != "oneActive" && "inActive"
+                        }`}
+                      >
+                        {/* This is the Dropdown Selector */}
+                        <div className="d-flex justify-content-center">
+                          <div className="form-outline form-floating mb-4">
+                            <input
+                              onChange={(e) => setEmail(e.target.value)}
+                              type="email"
+                              id="floatingEmail"
+                              placeholder="Email"
+                              className="form-control form-control-lg"
+                            />
+                            <label for="floatingEmail">Email address</label>
+                          </div>
+                        </div>
+                        <div className="d-flex justify-content-center">
+                          <div className="form-outline form-floating mb-4">
+                            <input
+                              onChange={(e) => setPassword(e.target.value)}
+                              type="password"
+                              id="floatingPassword"
+                              placeholder="Password"
+                              className="form-control form-control-lg"
+                            />
+                            <label className="" for="floatingPassword">
+                              Password
+                            </label>
+                          </div>
+                        </div>
+                        <div className="d-flex justify-content-center">
+                          <div className="form-outline form-floating mb-4">
+                            <input
+                              onChange={(e) =>
+                                setPasswordConfirm(e.target.value)
+                              }
+                              type="password"
+                              id="floatingConfirmPass"
+                              placeholder="Password"
+                              className="form-control form-control-lg"
+                            />
+                            <label className="" for="floatingConfirmPass">
+                              Confirm Password
+                            </label>
+                            <div className="buttonContainer d-flex justify-content-center mt-4 ">
+                              <p
+                                onClick={() => nextStep(count)}
+                                className="btn border-1 border-dark nextBtn"
+                              >
+                                Next
+                              </p>
+                            </div>
+                            <Link className="text-primary" to={"/"}>
+                              Back To Login
+                            </Link>
+                          </div>
+                        </div>
+                      </form>
+                      <form
+                        className={`${
+                          step[count] != "twoActive" && "inActive"
+                        }`}
+                      >
+                        <div className="d-flex justify-content-center">
+                          <div className="form-outline form-floating mb-4">
+                            <input
+                              onChange={(e) => setSchoolName(e.target.value)}
+                              type="text"
+                              id="floatingSchoolName"
+                              placeholder="School Name"
+                              className="form-control form-control-lg"
+                            />
+                            <label for="floatingFirst">School Name</label>
+                          </div>
+                        </div>
+                        <div className="d-flex justify-content-center">
+                          <div className="form-outline form-floating mb-4">
+                            <input
+                              onChange={(e) => setSchoolAddress(e.target.value)}
+                              type="text"
+                              id="floatingAddress"
+                              placeholder="School Address"
+                              className="form-control form-control-lg"
+                            />
+                            <label className="" for="floatingAddress">
+                              School Address
+                            </label>
+                          </div>
+                        </div>
+                        <div className="d-flex justify-content-center">
+                          <div className="form-outline form-floating mb-4">
+                            <input
+                              onChange={(e) => setPhone(e.target.value)}
+                              type="text"
+                              id="floatingPhone"
+                              placeholder="School Phone"
+                              className="form-control form-control-lg"
+                            />
+                            <label className="" for="floatingPhone">
+                              School Phone
+                            </label>
+                            <div className="buttonContainer d-flex justify-content-between mt-4 ">
+                              {" "}
+                              <p
+                                onClick={() => previousStep(count)}
+                                className="btn previousBtn border-1 border-dark"
+                              >
+                                Previous
+                              </p>
+                              <p
+                                onClick={async() => {
+                                  actions
+                                    .createUser(email, password)
+                                    .then(
+                                      actions.createSchool(
+                                        school_name,
+                                        school_address,
+                                        school_phone
+                                      )
+                                    )
+                                    .then(history.push("/home"));
+                                }}
                                 className="btn submitBtn border-1 border-dark"
                               >
                                 Submit

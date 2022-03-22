@@ -24,20 +24,20 @@ export const Profile = (props) => {
           <div className="profile-information">
             <div className="row justify-content-center">
               <p className="col-12 text-nowrap fs-1">
-                {name ? name : ""} {props.first_name}
-                {lastName ? lastName : ""} {props.last_name}
+                {props.first_name}
+                {props.last_name}
               </p>
               <p className="col-12 text-nowrap fs-5 border-bottom">
                 Seats Available <br></br>
-                {seats ? seats : ""} {props.seats_available}
+                {props.seats_available}
               </p>
               <p className="col-12 text-nowrap fs-5 border-bottom pb-3">
                 Address <br></br>
-                {address ? address : ""} {props.address}
+                {props.address}
               </p>
               <p className="col-12 text-nowrap fs-5">
                 Phone <br></br>
-                {phone ? phone : ""} {props.phone}
+                {props.phone}
               </p>
             </div>
           </div>
