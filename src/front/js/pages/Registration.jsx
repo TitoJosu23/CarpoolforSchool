@@ -430,7 +430,7 @@ export const Registration = (props) => {
                                 Previous
                               </p>
                               <p
-                                onClick={() => {
+                                onClick={async() => {
                                   actions
                                     .createUser(email, password)
                                     .then(

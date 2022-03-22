@@ -32,7 +32,7 @@ export const ViewChildren = (props) => {
               first_name={child.first_name}
               last_name={child.last_name}
               class_grade={child.class_grade}
-              age={"Age"}
+              age={child.age}
             />
           );
         })}
