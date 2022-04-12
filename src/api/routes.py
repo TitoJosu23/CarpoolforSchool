@@ -190,6 +190,13 @@ def get_schools():
         school_name_id.append({"School_Name":name,"School_Id":school_id})
     return jsonify(school_name_id)
 
+@api.route("/guardians", methods=["GET"])
+# @jwt_required()
+def get_all_guardians():
+    guardians= Guardian.query.all()
+    guardian_list=[guardian.serialize() for guardian in guardians]
+    print (guardian_list)
+    return jsonify(guardian_list)
 
 # @api.route("/guardian/school/<int:school_id>", methods=["GET"])
 # @jwt_required()
