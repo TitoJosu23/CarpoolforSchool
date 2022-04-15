@@ -1,123 +1,64 @@
 import React, { useState, useEffect, useContext } from "react";
-import PropTypes from "prop-types";
+import { Link, useParams, useHistory } from "react-router-dom";
+import { Context } from "../store/appContext";
 import { NavReuse } from "../component/NavReuse.jsx";
-import "../../styles/guardianSearch.css";
+import "../../styles/searchGuard.css";
+import { GuardianSearchBar } from "../component/GuardianSearchBar.jsx";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+// import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
+// import CheckBoxIcon from "@mui/icons-material/CheckBox";
 
-export const GuardianSearch = () => {
+export const GuardianSearch = (props) => {
+  //react declarations
+  const history = useHistory();
+  const { store, actions } = useContext(Context);
+  const params = useParams();
+  const logStatus = JSON.parse(localStorage.getItem("session"));
+
+  const [state, setState] = useState("State");
+  const [guardians, setGuardians] = useState(null);
+  useEffect(() => {
+    setGuardians(store.guardians);
+  }, [store.guardians]);
+
+  if (logStatus === null) {
+    history.push("/");
+  }
   return (
-    <div className="guardianSearch">
+    <div className="dashBody w-100">
       <NavReuse />
-      <h1>Search For Guardian</h1>
-      <div className="search container-fluid">
-        <div className="guardianSearch container">
-          <SearchBar />
-        </div>
-      </div>
-    </div>
-  );
-};
-// const GuardianCard = () => {
-//   return (
-//     <div className="guardianSearch">
-//       {" "}
-//       <div className="card" style={{ width: "18rem" }}>
-//         <img
-//           src="https://www.seekpng.com/png/small/72-729700_account-avatar-face-head-person-profile-user-comments.png"
-//           class="card-img-top"
-//           alt="..."
-//         />
-//         <div className="card-body">
-//           <h5 className="card-title">Guardian</h5>
-//           <p className="card-text">
-//             Some quick example text to build on the card title and make up the
-//             bulk of the card's content.
-//           </p>
-//         </div>
-//         <ul className="list-group list-group-flush">
-//           <li className="nameInfo list-group-item">Guardian Name</li>
-//           <li className="phoneInfo list-group-item">Phone Number</li>
-//           <li className="seatsInfo list-group-item">Seats Available</li>
-//         </ul>
-//         <div className="card-body">
-//           <a href="#" className="card-link">
-//             Guardian Profile
-//           </a>
-//           <a href="#" className="card-link">
-//             Flag Guardian
-//           </a>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-const SearchBar = () => {
-  return (
-    <div className="guardianSearch">
-      <form className="d-flex">
-        <input
-          className="form-control me-2"
-          type="search"
-          placeholder="Search "
-          aria-label="Search"
-        />
-        <SchoolSelect />
+      <div className="dashBoardHome">
+        <div className="searchGuard-content">
+          <h1 className="title">Search Guardians</h1>
+          <div className="searchArea container-fluid">
+            <GuardianSearchBar
+              func={(array) => {
+                setGuardians(array);
+              }}
+            />
 
-        <button className="btn btn-outline-success" type="submit">
-          Search Guardians
-        </button>
-      </form>
-      <div className="returnTable">
-        <GuardianSearchList />
-      </div>
-    </div>
-  );
-};
-const SchoolSelect = () => {
-  const [value, setValue] = useState("");
-
-  const handleChange = (e) => {
-    setValue(e.target.value);
-  };
-
-  return (
-    <>
-      <form>
-        <select
-          className="schoolSelectOptions"
-          value={value}
-          onChange={handleChange}
-        >
-          <option value="Village Green ">Village Green Elem</option>
-          <option value="Doolin">Doolin Middle</option>
-          <option value="Kendall Lakes">Kendall Lakes Elem</option>
-          <option value="Felix Varela">Felix Varela</option>
-        </select>
-      </form>
-    </>
-  );
-};
-
-const GuardianSearchList = () => {
-  return (
-    <div className="searchReturn">
-      <div>
-        <div style={{ marginTop: "5em" }} className="list-group">
-          <a
-            href="#"
-            className="list-group-item list-group-item-action active"
-            aria-current="true"
-          >
-            Bob Dylan
-          </a>
-          <a href="#" className="list-group-item list-group-item-action">
-            Kanye West
-          </a>
-          <a href="#" className="list-group-item list-group-item-action">
-            Pete Davidson
-          </a>
-          <a href="#" className="list-group-item list-group-item-action">
-            Arianna Grande
-          </a>
+            <div className="searchedlist">
+              <div className="guardList container mt-5 over">
+                <div className="row d-flex justify-content-center">
+                  <div className="guardianPanel col-md-6 col-12">
+                    <div className="guardianInnerPanel col-12">
+                      <ul className="guardLine">
+                        {guardians?.map((guardian, index) => {
+                          return (
+                            <li className="eventItem d-flex justify-content-space-between">
+                              <div className="eventText mt-3 p-3 d-flex justify-content-space-between">
+                                {guardian.first_name} {guardian.phone}
+                              </div>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -3,6 +3,9 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       userName: [],
+      children: [],
+      guardians: [],
+      schools: [],
     },
 
     actions: {
@@ -83,6 +86,18 @@ const getState = ({ getStore, getActions, setStore }) => {
           }),
         };
         const payload = await actions._fetch(`/school`, options);
+        return payload;
+      },
+      getGuardians: async () => {
+        const actions = getActions();
+        const payload = await actions._fetch(`/api/guardians`);
+        setStore({ guardians: payload });
+        return payload;
+      },
+      getGuardianSchools: async () => {
+        const actions = getActions();
+        const payload = await actions._fetch("/user/schools");
+        setStore({ schools: payload });
         return payload;
       },
       addChild: async (first_name, last_name, class_grade, age) => {
