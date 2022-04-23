@@ -18,8 +18,6 @@ import { AddAChild } from "./pages/AddAChild.jsx";
 import { ViewChildren } from "./pages/ViewChildren.jsx";
 import { RequestRide } from "./pages/RequestRide.jsx";
 import { ModalGuardianInformation } from "./component/ModalGuardianInformation.js";
-import { UiSampleBuild } from "./pages/UiSampleBuild.jsx";
-import { UiSampleBuild2 } from "./pages/UiSampleBuild2.jsx";
 
 //create your first component
 const Layout = () => {
@@ -53,14 +51,6 @@ const Layout = () => {
             </Route>
             <Route exact path="/guardian/search">
               <GuardianSearch />
-            </Route>
-
-            <Route exact path="/user/sample">
-              <UiSampleBuild />
-            </Route>
-
-            <Route exact path="/sample2">
-              <UiSampleBuild2 />
             </Route>
             <Route exact path="/children">
               <ViewChildren />

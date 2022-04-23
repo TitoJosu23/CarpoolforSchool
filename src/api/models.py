@@ -107,7 +107,7 @@ class Guardian(db.Model):
     last_name = db.Column(db.String(255), unique=False, nullable=False)
     seats_available = db.Column(db.Integer)
     payment_info = db.Column(db.String(255), unique=False)
-    address = db.Column(db.String(255), unique=True, nullable=False)
+    address = db.Column(db.String(255), unique=True)
     phone = db.Column(db.String(255), unique=True, nullable=False)
     children = db.relationship("Child",
                     secondary=Child_to_guardian)

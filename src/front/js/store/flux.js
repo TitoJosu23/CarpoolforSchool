@@ -35,9 +35,11 @@ const getState = ({ getStore, getActions, setStore }) => {
         } else if (response.status >= 400 && response.status < 500) {
           const error = await response.json();
           toast(error.message);
+          throw error;
         } else {
           alert("Unknown Error");
           console.log(await response.text());
+          throw "unknown error";
         }
       },
       createUser: async (email, password) => {
@@ -50,7 +52,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           }),
         };
         const payload = await actions._fetch(`/api/user`, options);
-        actions.setSessionStore(payload.token, payload.id, payload.roles);
         return payload;
       },
       createNewSession: async (email, password) => {
@@ -60,7 +61,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           body: JSON.stringify({ email: email, password: password }),
         };
         const payload = await actions._fetch(`/api/token`, options);
-        actions.setSessionStore(payload.token, payload.user_id, payload.roles);
+        actions.setSessionStore(payload.token, payload.user_id, payload.role);
         return payload;
       },
       getChildren: async () => {
@@ -69,29 +70,49 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       getSelf: async () => {
         const actions = getActions();
-        return await actions._fetch(`/api/guardian`);
+        return await actions._fetch(`/api/access`);
       },
       clearSession: () => {
         localStorage.removeItem("session");
         setStore({ session: null });
       },
-      createSchool: async (school_name, school_address, school_phone) => {
+      createSchool: async (
+        school_name,
+        school_address,
+        school_phone,
+        email
+      ) => {
         const actions = getActions();
         const options = {
           method: "POST",
           body: JSON.stringify({
+            email: email,
             school_name: school_name,
             school_address: school_address,
             school_phone: school_phone,
           }),
         };
-        const payload = await actions._fetch(`/school`, options);
+        const payload = await actions._fetch(`/api/school`, options);
         return payload;
       },
       getGuardians: async () => {
         const actions = getActions();
         const payload = await actions._fetch(`/api/guardians`);
         setStore({ guardians: payload });
+        return payload;
+      },
+      createGuardian: async (first_name, last_name, phone, email) => {
+        const actions = getActions();
+        const options = {
+          method: "POST",
+          body: JSON.stringify({
+            email: email,
+            first_name: first_name,
+            last_name: last_name,
+            phone: phone,
+          }),
+        };
+        const payload = await actions._fetch(`/api/guardian`, options);
         return payload;
       },
       getGuardianSchools: async () => {

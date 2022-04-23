@@ -21,9 +21,9 @@ export const NavReuse = (props) => {
 
   useEffect(() => {
     actions.getSelf().then((payload) => {
-      console.log("THIS IS THE PAYLOAD" + payload);
-      if (payload === "No Guardian Found") {
-        setName("Welcome");
+      console.log(payload);
+      if (payload.school_name) {
+        setName("Welcome: " + payload.school_name);
         setGuardianTask("bg-danger");
       } else if (payload === undefined) {
         setTimeout(actions.clearSession()[10000]);
