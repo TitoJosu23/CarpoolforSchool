@@ -26,6 +26,9 @@ export const ViewChildren = (props) => {
     <div className="dashBody w-100">
       <NavReuse />
       <div className="dashBoardHome">
+        <Link className="route" to="/children/add">
+          <button className="btn addButton p-3 my-3 fs-4">Add A Child</button>
+        </Link>
         {children?.map((child, index) => {
           return (
             <ChildCard

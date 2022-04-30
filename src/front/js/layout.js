@@ -52,7 +52,6 @@ const Layout = () => {
             <Route exact path="/guardian/search">
               <GuardianSearch />
             </Route>
-
             <Route exact path="/children">
               <ViewChildren />
             </Route>

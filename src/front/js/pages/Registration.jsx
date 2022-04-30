@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import logo from "../../img/logo.png";
+import { toast } from "react-toastify";
 
 export const Registration = (props) => {
   const history = useHistory();
@@ -25,20 +26,27 @@ export const Registration = (props) => {
   const nextStep = (x) => {
     if (x < step.length) {
       setCount(x + 1);
-      console.log(count);
     } else if (x == step.length - 1) {
       setCount(0);
-      console.log(count);
     }
   };
   const previousStep = (x) => {
     setCount(x - 1);
   };
 
+  const checkPasswords = (pass1, pass2) => {
+    if (pass1 != pass2) {
+      return toast.error("Passwords Do Not Match");
+    } else {
+      nextStep(count);
+    }
+  };
+
   return (
     <section className="vh-100 register" style={{ backgroundColor: "#ACE3E8" }}>
       <div className="container py-5 h-100">
         <div
+          // Account Type Selector, Renders account creation forms based off selection.
           className={
             "row justify-content-center align-items-center " +
             `${registerStatus != "Select Account Type" && "h-100"}`
@@ -57,8 +65,9 @@ export const Registration = (props) => {
               style={{ borderRadius: "1rem 0 0 1rem" }}
             />
             <div
+              //Parent div for creation forms. Conditionally renders when Account type has been selected.
               className={
-                "" + `${registerStatus != "Select Account Type" && "card"}`
+                "mt-5 " + `${registerStatus != "Select Account Type" && "card"}`
               }
               style={{ borderRadius: "1rem" }}
             >
@@ -207,7 +216,9 @@ export const Registration = (props) => {
                             </label>
                             <div className="buttonContainer d-flex justify-content-center mt-4 ">
                               <p
-                                onClick={() => nextStep(count)}
+                                onClick={() => {
+                                  checkPasswords(password, passwordConfirm);
+                                }}
                                 className="btn border-1 border-dark nextBtn"
                               >
                                 Next
@@ -271,10 +282,26 @@ export const Registration = (props) => {
                                 Previous
                               </p>
                               <p
-                                onClick={(e) => {
-                                  actions
-                                    .addChild(firstName, lastName, grade, age)
-                                    .then(history.push("/"));
+                                onClick={async () => {
+                                  try {
+                                    const payload = await actions.createUser(
+                                      email,
+                                      password
+                                    );
+                                    const payload2 =
+                                      await actions.createGuardian(
+                                        firstName,
+                                        lastName,
+                                        phone,
+                                        email
+                                      );
+                                    const payload3 =
+                                      await actions.createNewSession(
+                                        email,
+                                        password
+                                      );
+                                    history.push("/home");
+                                  } catch {}
                                 }}
                                 className="btn submitBtn border-1 border-dark"
                               >
@@ -366,7 +393,9 @@ export const Registration = (props) => {
                             </label>
                             <div className="buttonContainer d-flex justify-content-center mt-4 ">
                               <p
-                                onClick={() => nextStep(count)}
+                                onClick={() =>
+                                  checkPasswords(password, passwordConfirm)
+                                }
                                 className="btn border-1 border-dark nextBtn"
                               >
                                 Next
@@ -430,17 +459,27 @@ export const Registration = (props) => {
                                 Previous
                               </p>
                               <p
-                                onClick={async() => {
-                                  actions
-                                    .createUser(email, password)
-                                    .then(
-                                      actions.createSchool(
-                                        school_name,
-                                        school_address,
-                                        school_phone
-                                      )
-                                    )
-                                    .then(history.push("/home"));
+                                onClick={async () => {
+                                  if (password != passwordConfirm) {
+                                  }
+                                  try {
+                                    const payload4 = await actions.createUser(
+                                      email,
+                                      password
+                                    );
+                                    const payload5 = await actions.createSchool(
+                                      schoolName,
+                                      schoolAddress,
+                                      phone,
+                                      email
+                                    );
+                                    const payload6 =
+                                      await actions.createNewSession(
+                                        email,
+                                        password
+                                      );
+                                    history.push("/home");
+                                  } catch {}
                                 }}
                                 className="btn submitBtn border-1 border-dark"
                               >

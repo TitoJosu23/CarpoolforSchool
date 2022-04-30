@@ -107,7 +107,7 @@ class Guardian(db.Model):
     last_name = db.Column(db.String(255), unique=False, nullable=False)
     seats_available = db.Column(db.Integer)
     payment_info = db.Column(db.String(255), unique=False)
-    address = db.Column(db.String(255), unique=True, nullable=False)
+    address = db.Column(db.String(255), unique=True)
     phone = db.Column(db.String(255), unique=True, nullable=False)
     children = db.relationship("Child",
                     secondary=Child_to_guardian)
@@ -157,3 +157,23 @@ class Black_list(db.Model):
             "blacklisted_guardian_id": self.blacklisted_guardian_id,
             "blacklisting_guardian_id": self.blacklisting_guardian_id,
         }
+
+# class Ride_request(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     requesting_guardian_id = db.Column(db.Integer, db.ForeignKey("guardian.id"))
+#     accepting_guardian_id = db.Column(db.Integer, db.ForeignKey("guardian.id"))
+#     requested_day = db.Column(db.String(255), nullable=False)
+#     requested_seats = db.Column(db.Integer)
+#     requested_school = 
+#     requesting_guardian = db.relationship(Guardian, foreign_keys="Complaint.flag_creator_id",
+#         backref=db.backref('complaint'))
+#     flagged_guardian = db.relationship(Guardian, foreign_keys="Complaint.flagged_guardian_id")
+
+#     def serialize(self):
+#         return {
+#             "id": self.id,
+#             "flagged_guardian_id": self.flagged_guardian_id,
+#             "flag_creator_id": self.flag_creator_id,
+#             "flag_comment": self.flag_comment,
+#                 # do not serialize the password, its a security breach
+#             }

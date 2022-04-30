@@ -71,3 +71,7 @@
     width: 90%;
   }
 }
+.addButton {
+  background: rgba(255, 255, 255, 0.774);
+  border-radius: 15px;
+}
