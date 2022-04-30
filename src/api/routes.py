@@ -58,6 +58,20 @@ def create_guardian():
     db.session.commit()
     return jsonify(guardian.serialize())
 
+@api.route("/guardian", methods=["PUT"])
+@jwt_required()
+def update_guardian():
+    current_user_id=get_jwt_identity()
+    user = User.query.get(current_user_id)
+    guardian = Guardian.query.filter_by(user_id=user.id).first()
+    guardian.first_name = request.json.get("first_name")
+    guardian.last_name = request.json.get("last_name")
+    guardian.address = request.json.get("address")
+    guardian.phone = request.json.get("phone")
+    db.session.add(guardian)
+    db.session.commit()
+    return ("Guardian information succesfully updated")
+
 @api.route("/child", methods=["POST"])
 @jwt_required()
 def create_child():
@@ -196,7 +210,6 @@ def accept_school_access():
     db.session.commit()
     return ("Guardian Access Succesfully Granted")
 
-
 @api.route("/user/schools", methods=["GET"])
 @jwt_required()
 def get_schools():
@@ -218,13 +231,13 @@ def get_schools():
         school_name_id.append({"School_Name":name,"School_Id":school_id})
     return jsonify(school_name_id)
 
-@api.route("/guardians", methods=["GET"])
+# @api.route("/guardians", methods=["GET"])
 # @jwt_required()
-def get_all_guardians():
-    guardians= Guardian.query.all()
-    guardian_list=[guardian.serialize() for guardian in guardians]
-    print (guardian_list)
-    return jsonify(guardian_list)
+# def get_all_guardians():
+#     guardians= Guardian.query.all()
+#     guardian_list=[guardian.serialize() for guardian in guardians]
+#     print (guardian_list)
+#     return jsonify(guardian_list)
 
 # @api.route("/guardian/school/<int:school_id>", methods=["GET"])
 # @jwt_required()

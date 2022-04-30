@@ -11,7 +11,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 
 let theme = createTheme({
   palette: {
@@ -36,16 +36,30 @@ let theme = createTheme({
 });
 
 export const GuardianProfileDetails = () => {
+  const history = useHistory();
   const { store, actions } = useContext(Context);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [value, setValue] = useState("");
+  const test = actions.getSelf();
+  console.log("this is test" + test);
 
   const handleChange = (e) => {
     setDriver(e.target.value);
   };
+
+  const updateFields = () => {
+    setFirstName(self.first_name);
+    setLastName(self.last_name);
+    setAddress(self.address);
+    setPhone(self.phone);
+  };
+
+  useEffect(() => {
+    updateFields();
+  }, []);
 
   return (
     <>
@@ -76,7 +90,7 @@ export const GuardianProfileDetails = () => {
             <TextField
               onChange={(e) => setAddress(e.target.value)}
               value={address}
-              placeholder="Enter Your Email"
+              placeholder="Enter Your Address"
               id="outlined-basic"
               label="Address"
               fullWidth
@@ -94,7 +108,9 @@ export const GuardianProfileDetails = () => {
             <br />
             <Button
               onClick={() => {
-                actions.updateGuardian(firstName, lastName, address, phone);
+                actions
+                  .updateGuardian(firstName, lastName, address, phone)
+                  .then(history.push("/home"));
               }}
               color="secondary"
               variant="contained"

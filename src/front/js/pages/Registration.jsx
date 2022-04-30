@@ -34,11 +34,19 @@ export const Registration = (props) => {
     setCount(x - 1);
   };
 
+  const checkPasswords = (pass1, pass2) => {
+    if (pass1 != pass2) {
+      return toast.error("Passwords Do Not Match");
+    } else {
+      nextStep(count);
+    }
+  };
+
   return (
     <section className="vh-100 register" style={{ backgroundColor: "#ACE3E8" }}>
       <div className="container py-5 h-100">
         <div
-          // Account Type Selector, Renders creations forms based off selection.
+          // Account Type Selector, Renders account creation forms based off selection.
           className={
             "row justify-content-center align-items-center " +
             `${registerStatus != "Select Account Type" && "h-100"}`
@@ -209,7 +217,7 @@ export const Registration = (props) => {
                             <div className="buttonContainer d-flex justify-content-center mt-4 ">
                               <p
                                 onClick={() => {
-                                  checkPasswords(), nextStep(count);
+                                  checkPasswords(password, passwordConfirm);
                                 }}
                                 className="btn border-1 border-dark nextBtn"
                               >
@@ -385,7 +393,9 @@ export const Registration = (props) => {
                             </label>
                             <div className="buttonContainer d-flex justify-content-center mt-4 ">
                               <p
-                                onClick={() => nextStep(count)}
+                                onClick={() =>
+                                  checkPasswords(password, passwordConfirm)
+                                }
                                 className="btn border-1 border-dark nextBtn"
                               >
                                 Next

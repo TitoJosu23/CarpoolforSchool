@@ -2,7 +2,6 @@ import { toast } from "react-toastify";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      userName: [],
       children: [],
       guardians: [],
       schools: [],
@@ -70,7 +69,8 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       getSelf: async () => {
         const actions = getActions();
-        return await actions._fetch(`/api/access`);
+        const payload = await actions._fetch(`/api/access`);
+        return payload;
       },
       clearSession: () => {
         localStorage.removeItem("session");
@@ -113,6 +113,20 @@ const getState = ({ getStore, getActions, setStore }) => {
           }),
         };
         const payload = await actions._fetch(`/api/guardian`, options);
+        return payload;
+      },
+      updateGuardian: async (first_name, last_name, address, phone) => {
+        const actions = getActions();
+        const options = {
+          method: "PUT",
+          body: JSON.stringify({
+            first_name: first_name,
+            last_name: last_name,
+            address: address,
+            phone: phone,
+          }),
+        };
+        const payload = await actions._fetch("/api/guardian", options);
         return payload;
       },
       getGuardianSchools: async () => {

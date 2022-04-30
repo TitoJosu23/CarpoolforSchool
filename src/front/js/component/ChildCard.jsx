@@ -22,11 +22,11 @@ export const ChildCard = (props) => {
               </div>
               <div className="col-12 text-nowrap fs-5 border-bottom text-dark m-0 pb-3">
                 <br></br>
-                {props.class_grade}
+                Grade: {props.class_grade}
               </div>
               <div className="col-12 text-nowrap fs-5 border-bottom text-dark mb-3 pb-3">
                 <br></br>
-                {props.age}
+                Age: {props.age}
               </div>
             </div>
             <div className="cardButtons row justify-content-center">

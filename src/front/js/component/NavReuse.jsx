@@ -17,11 +17,10 @@ export const NavReuse = (props) => {
   const [guardianTask, setGuardianTask] = useState("");
   const [childrenTask, setChildrenTask] = useState("");
   const [name, setName] = useState("");
-  const [payload, setPayLoad] = useState("");
 
   useEffect(() => {
     actions.getSelf().then((payload) => {
-      console.log(payload);
+      console.log("This is get-self payload on NavReuse Useffect" + payload);
       if (payload.school_name) {
         setName("Welcome: " + payload.school_name);
         setGuardianTask("bg-danger");

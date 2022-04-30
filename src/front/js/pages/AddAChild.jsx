@@ -17,7 +17,7 @@ let theme = createTheme({
       main: "#51ABF5",
     },
     secondary: {
-      main: "#51ABF5",
+      main: "#568b9bc5",
     },
     background: {
       paper: "#FFFFFF",
@@ -71,7 +71,7 @@ export const AddAChild = () => {
                 color="primary"
                 placeholder="Age"
                 id="outlined-basic"
-                label="First Name"
+                label="Age"
                 type="number"
                 fullWidth
               />
@@ -105,21 +105,21 @@ export const AddAChild = () => {
               </FormControl>
               <br />
               <Button
-                className="w-75 mx-auto fs-4"
+                className="text-dark w-75 mx-auto fs-4"
                 onClick={(e) => {
                   actions
                     .addChild(firstName, lastName, grade, age)
-                    .then(history.push("/"));
+                    .then(history.push("/children"));
                 }}
                 color="secondary"
                 variant="contained"
               >
                 Add Child
               </Button>
-              <Link to={"/home"}>
+              <Link to={"/children"}>
                 {" "}
                 <Button
-                  className="w-75 mx-auto mt-2 fs-4"
+                  className="text-dark w-75 mx-auto mt-3 fs-4"
                   color="secondary"
                   variant="contained"
                 >
