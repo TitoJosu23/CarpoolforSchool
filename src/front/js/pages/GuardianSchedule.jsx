@@ -147,9 +147,12 @@ export const GuardianSchedule = () => {
               >
                 {data.map((value) => (
                   <Card
-                    background={"#FFFFFF"}
+                    background={"#d6ecef"}
                     onClick={() => {
                       {
+                        {
+                          background = "#90EE90";
+                        }
                       }
                     }}
                     key={value.message}
