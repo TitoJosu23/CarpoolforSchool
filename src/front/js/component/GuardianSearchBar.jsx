@@ -16,7 +16,6 @@ export const GuardianSearchBar = (props) => {
 
   useEffect(() => {
     const qs = queryString.parse(location.hash);
-    console.log("This is parsed info: ", qs);
     searchFunction(qs.keyword);
   }, [store.guardians]);
 
