@@ -1,12 +1,14 @@
 import React from "react";
 import styled from "styled-components";
+import queryString from "query-string";
 import { IoClose, IoSearch } from "react-icons/io5";
 import { useState, useEffect, useContext } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useClickOutside } from "react-click-outside-hook";
 import { useRef } from "react";
 import { Context } from "../store/appContext";
-// import MoonLoader from "react-spinners/MoonLoader";
+import { MoonLoader } from "react-spinners/MoonLoader";
+import { GuardianLabel } from "../component/GuardianLabel.jsx";
 import { UseDebounce } from "../component/UseDebounce.jsx";
 
 const SearchBarContainer = styled(motion.div)`
@@ -111,32 +113,50 @@ const containerVariants = {
 };
 
 const containerTransition = { type: "spring", damping: 22, stiffness: 150 };
-export const SearchBar = () => {
+
+useEffect(() => {
+  const qs = queryString.parse(location.hash);
+  searchFunction(qs.keyword);
+}, [store.guardians]);
+
+const searchFunction = (keyword) => {
+  console.log("Search function keyword: ", keyword);
+  let filteredArray = store.guardians.filter((item) => {
+    if (keyword == "" || keyword == undefined) {
+      return item;
+    } else if (item.first_name.toLowerCase().includes(keyword.toLowerCase())) {
+      return item;
+    }
+  });
+  setGuardInfo(filteredArray);
+  props.func(filteredArray);
+};
+
+export const SearchBar = (props) => {
   const [isExpanded, setExpanded] = useState(false);
+  const { store, actions } = useContext(Context);
   const [parentRef, isClickedOutside] = useClickOutside();
   const inputRef = useRef();
-  const [searchQuery, setSearchQuery] = useState("");
-  const [isLoading, setLoading] = useState(false);
-  const { store, actions } = useContext(Context);
-  const [tvShows, setTvShows] = useState([]);
-  const [noTvShows, setNoTvShows] = useState(false);
 
-  const isEmpty = !tvShows || tvShows.length === 0;
-  const changeHandler = (e) => {
-    e.preventDefault();
-    if (e.target.value.trim() === "") setNoTvShows(false);
+  const [guardInfo, setGuardInfo] = useState([]);
 
-    setSearchQuery(e.target.value);
+  const searchHash = (event) => {
+    searchFunction(event);
+    if (event == "") {
+      // setGuardians(store.guardians);
+      props.func(store.guardians);
+    }
+    location.hash = `keyword=${event}`;
   };
-
   const expandContainer = () => {
     setExpanded(true);
   };
 
   const collapseContainer = () => {
     setExpanded(false);
-    setSearchQuery("");
-    setLoading(false);
+
+    setGuardInfo([]);
+    if (inputRef.current) inputRef.current.value = "";
   };
 
   useEffect(() => {
@@ -155,9 +175,11 @@ export const SearchBar = () => {
           <IoSearch />
         </SearchIcon>
         <SearchInput
-          placeholder="Search Other Guardians"
           onFocus={expandContainer}
           ref={inputRef}
+          onChange={(e) => {
+            searchHash(e.target.value);
+          }}
         />
 
         <AnimatePresence>
@@ -175,26 +197,10 @@ export const SearchBar = () => {
           )}
         </AnimatePresence>
       </SearchInputContainer>
-      {isExpanded && <LineSeperator />}
-      {isExpanded && (
-        <SearchContent>
-          {isLoading && (
-            <LoadingWrapper>
-              <MoonLoader loading color="#000" size={20} />
-            </LoadingWrapper>
-          )}
-          {!isLoading && isEmpty && !noTvShows && (
-            <LoadingWrapper>
-              <WarningMessage>Start typing to Search</WarningMessage>
-            </LoadingWrapper>
-          )}
-          {!isLoading && noTvShows && (
-            <LoadingWrapper>
-              <WarningMessage>No Guardians Found</WarningMessage>
-            </LoadingWrapper>
-          )}
-        </SearchContent>
-      )}
+
+      <SearchContent>
+        <GuardianLabel />
+      </SearchContent>
     </SearchBarContainer>
   );
 };
