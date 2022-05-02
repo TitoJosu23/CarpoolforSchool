@@ -80,6 +80,7 @@
     "framer-motion": "^6.2.9",
     "grommet": "^2.22.0",
     "grommet-icons": "^4.7.0",
+    "heroku": "^7.60.2",
     "prop-types": "^15.6.1",
     "query-string": "^7.1.1",
     "react": "^16.8.4",
