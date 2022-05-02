@@ -1,15 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
-import CssBaseline from "@mui/material/CssBaseline";
-import Box from "@mui/material/Box";
 import { Context } from "../store/appContext";
 
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import Button from "@mui/material/Button";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link, useParams, useHistory } from "react-router-dom";
 
@@ -40,25 +34,25 @@ export const GuardianProfileDetails = () => {
   const { store, actions } = useContext(Context);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
   const [value, setValue] = useState("");
-  const test = actions.getSelf();
-  console.log("this is test" + test);
 
   const handleChange = (e) => {
     setDriver(e.target.value);
   };
 
-  const updateFields = () => {
-    setFirstName(self.first_name);
-    setLastName(self.last_name);
-    setAddress(self.address);
-    setPhone(self.phone);
+  const updateFields = (data) => {
+    setFirstName(data.first_name);
+    setLastName(data.last_name);
+    setAddress(data.address);
+    setPhone(data.phone);
   };
 
   useEffect(() => {
-    updateFields();
+    actions.getSelf().then((payload) => {
+      updateFields(payload);
+    });
   }, []);
 
   return (

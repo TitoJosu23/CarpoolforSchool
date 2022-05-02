@@ -33,7 +33,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           return await response.json();
         } else if (response.status >= 400 && response.status < 500) {
           const error = await response.json();
-          toast(error.message);
+          toast(error.msg);
           throw error;
         } else {
           alert("Unknown Error");
@@ -69,8 +69,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       getSelf: async () => {
         const actions = getActions();
-        const payload = await actions._fetch(`/api/access`);
-        return payload;
+        return await actions._fetch(`/api/access`);
       },
       clearSession: () => {
         localStorage.removeItem("session");

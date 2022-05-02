@@ -20,7 +20,6 @@ export const GuardianSearch = (props) => {
   useEffect(() => {
     setGuardians(store.guardians);
   }, [store.guardians]);
-
   if (logStatus === null) {
     history.push("/");
   }

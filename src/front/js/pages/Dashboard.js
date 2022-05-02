@@ -2,12 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
-import { ActivityFeed } from "../component/ActivityFeed.jsx";
-
 import { NavReuse } from "../component/NavReuse.jsx";
-import { Profile } from "../component/Profile.jsx";
-
-// Nav items
 
 // Dashboard
 export const Dashboard = (props) => {
@@ -24,5 +19,5 @@ export const Dashboard = (props) => {
       <NavReuse />
       <div className="dashBoardHome"></div>
     </div>
-  );
+  );;
 };

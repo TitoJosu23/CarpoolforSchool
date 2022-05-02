@@ -110,7 +110,6 @@ def get_self():
         guardian = guardian.serialize()
         return jsonify(guardian)
 
-
 @api.route("/children", methods=["GET"])
 @jwt_required()
 def get_children():

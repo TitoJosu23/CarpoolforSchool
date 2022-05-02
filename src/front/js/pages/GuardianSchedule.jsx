@@ -3,7 +3,6 @@ import { Link, useParams, useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { NavReuse } from "../component/NavReuse.jsx";
 import { Calendar } from "grommet-icons";
-import { Toggle } from "../component/Toggle.jsx";
 // import { Box, Text, Grid } from "grommet";
 
 import {
