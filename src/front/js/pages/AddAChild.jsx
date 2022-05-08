@@ -37,9 +37,10 @@ export const AddAChild = () => {
   const history = useHistory();
   const { store, actions } = useContext(Context);
   const [firstName, setFirstName] = useState("");
-  const [age, setAge] = useState("");
   const [lastName, setLastName] = useState("");
+  const [age, setAge] = useState("");
   const [grade, setGrade] = useState("");
+  const [school, setSchool] = useState("");
 
   return (
     <div className="dashBody w-100">
@@ -76,7 +77,6 @@ export const AddAChild = () => {
                 fullWidth
               />
               <br />
-
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">
                   Child Grade
@@ -103,12 +103,33 @@ export const AddAChild = () => {
                   <MenuItem value={"Twelfth"}>Twelfth</MenuItem>
                 </Select>
               </FormControl>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-labl">
+                  Child School
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={school}
+                  label="Child School"
+                  onChange={(e) => setSchool(e.target.value)}
+                >
+                  {store.schools.map((x, id) => (
+                    <div>
+                      {" "}
+                      <MenuItem value={"Kindergarten"}>
+                        Kindergarten
+                      </MenuItem>{" "}
+                    </div>
+                  ))}
+                </Select>
+              </FormControl>
               <br />
               <Button
                 className="text-dark w-75 mx-auto fs-4"
                 onClick={(e) => {
                   actions
-                    .addChild(firstName, lastName, grade, age)
+                    .addChild(firstName, lastName, grade, age, school_id)
                     .then(history.push("/children"));
                 }}
                 color="secondary"

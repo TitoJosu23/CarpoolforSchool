@@ -72,84 +72,14 @@ export const GuardianSearchBar = (props) => {
               searchHash(e.target.value);
             }}
             placeholder="Search Guardians in your School"
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                color: "White",
+              },
+            }}
           />
         )}
       />
     </div>
   );
 };
-
-//useEffect(() => {
-//   setGuardians(store.guardians);
-// }, [store.guardians]);
-// console.log(guardians);
-
-// const [schoolInfo, setSchoolInfo] = useState([
-//   {
-//     schoolName: "Village Green Elementary",
-//     schoolAddress: "2265 SW 34th St, Miami, FL 33175",
-//   },
-//   {
-//     schoolName: "Doolin Middle School",
-//     schoolAddress: "6401 SW 152nd Ave, Miami, FL 33193",
-//   },
-//   {
-//     schoolName: "Felix Varela High School",
-//     schoolAddress: "15255 SW 96th St, Miami, FL 33196",
-//   },
-// ]);
-
-// const options = schoolInfo;
-// useEffect(() => {
-//   const qs = queryString.parse(location.hash);
-//   console.log("This is parsed info: ", qs);
-//   searchFunction(qs.keyword);
-// }, [schoolInfo]);
-
-// const searchFunction = (keyword) => {
-//   console.log("Search function keyword: ", keyword);
-//   let filteredArray = guardians.filter((item) => {
-//     if (keyword == "" || keyword == undefined) {
-//       return item;
-//     } else if (item.title.toLowerCase().includes(keyword.toLowerCase())) {
-//       return item;
-//     }
-//   });
-//   setGuardians(filteredArray);
-// };
-
-// const searchHash = (event) => {
-//   searchFunction(event.target.value);
-//   if (event.target.value == "") {
-//     setGuardians(store.guardians);
-//   }
-//   location.hash = `keyword=${event.target.value}`;
-// };
-// return (
-//   <div className="searchBar rounded-pill border border-dark border-3 d-flex container-fluid">
-//     <div className="school-selector">
-//       <select
-//         onChange={(e) => setSchoolName(e.target.value)}
-//         className="form-select rounded-pill"
-//       >
-//         <option selected>Filter by School</option>
-//         <option value={props.schoolName}>Village Green Elementary</option>
-//         <option value={props.schoolName}>Doolin Middle School</option>
-//         <option value={props.schoolName}>Felix Varela Highschool</option>
-//       </select>
-//     </div>
-//     <div className="search-field ">
-//       <input
-//         type="searchs"
-//         onChange={(e) => setSearchValue(e.target.value)}
-//         value={searchValue}
-//         className="form-control rounded-pill"
-//         placeholder="Search Guardian"
-//       ></input>
-//     </div>
-//     <button
-//       type="button"
-//       className="search-click btn btn-outline-info rounded-circle"
-//     >
-//       <FaSearch />
-//     </button>

@@ -81,13 +81,13 @@ def create_child():
     if guardian is None:
         raise APIException ("Please register as a guardian first!")
     print(guardian.first_name,guardian.last_name)
-    first_name = request.json.get("firstName", None)
-    last_name = request.json.get("lastName", None)
-    class_grade = request.json.get("classGrade",None)
+    first_name = request.json.get("first_name", None)
+    last_name = request.json.get("last_name", None)
+    class_grade = request.json.get("class_grade",None)
     age = request.json.get("age",None)
-    child = Child(first_name=first_name, last_name=last_name,class_grade=class_grade,age=age)
+    child = Child(first_name=first_name, last_name=last_name,class_grade=class_grade,age=age,school_id=school_id)
     db.session.add(child)
-    added_child = Child.query.filter_by(first_name=first_name, last_name=last_name,class_grade=class_grade,age=age).first()
+    added_child = Child.query.filter_by(first_name=first_name, last_name=last_name,class_grade=class_grade,age=age,school_id=school_id).first()
     if added_child is None:
         raise APIException ("Failed to add child!")
     print(added_child)
@@ -229,6 +229,28 @@ def get_schools():
         school_id = item.id
         school_name_id.append({"School_Name":name,"School_Id":school_id})
     return jsonify(school_name_id)
+
+@api.route("/schools", methods=["GET"])
+@jwt_required()
+def get_all_schools():
+    current_user_id=get_jwt_identity()
+    list_of_schools = School.query.all()
+    school_name_id = []
+    for item in list_of_schools:
+        school_name = item.school_name
+        school_id = item.id
+        school_address = item.school_address
+        school_phone = item.school_phone
+        school_name_id.append({"School_Name":school_name,"School_Id":school_id,"School_phone":school_phone})
+    return jsonify(school_name_id)
+
+@api.route("/school/detail/<int:school_id>", methods=["GET"])
+@jwt_required()
+def get_school(school_id):
+    current_user_id=get_jwt_identity()
+    school = School.query.filter_by(id=school_id)
+    return jsonify(school)
+
 
 # @api.route("/guardians", methods=["GET"])
 # @jwt_required()

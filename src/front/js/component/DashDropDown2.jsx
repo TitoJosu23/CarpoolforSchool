@@ -72,7 +72,9 @@ export const DashDropDown2 = (props) => {
               </Link>
             </div>
             <div className="mt-4">
-              <DropItem leftIcon={<FaSchool />}>Search Schools</DropItem>
+              <Link to={"/school/search"}>
+                <DropItem leftIcon={<FaSchool />}>Search Schools</DropItem>
+              </Link>
             </div>
           </div>
         </CSSTransition>

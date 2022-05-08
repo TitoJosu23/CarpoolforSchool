@@ -35,7 +35,6 @@ export const GuardianSearch = (props) => {
                 setGuardians(array);
               }}
             />
-
             <div className="searchedlist">
               <div className="guardList container mt-5 over">
                 <div className="row d-flex justify-content-center">
