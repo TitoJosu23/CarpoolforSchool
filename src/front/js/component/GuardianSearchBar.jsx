@@ -45,29 +45,18 @@ export const GuardianSearchBar = (props) => {
   return (
     <div className="searchBar">
       <Autocomplete
-        multiple
-        id="checkboxes-tags-demo"
+        sx={{ bgcolor: "#FFFFFF" }}
         freeSolo
         options={schoolInfo}
-        disableCloseOnSelect
-        getOptionLabel={(option) => option.school_Name}
-        renderOption={(props, option, { selected }) => (
-          <li {...props}>
-            <Checkbox
-              icon={<FaSchool />}
-              checkedIcon={<BsCheckLg />}
-              style={{ marginRight: 8 }}
-              checked={selected}
-            />
-            {option.school_Name}
-          </li>
-        )}
         style={{ width: 500 }}
         renderInput={(params) => (
           <TextField
             {...params}
             label="Guardian Search"
             type="search"
+            InputLabelProps={{
+              style: { color: "#000000" },
+            }}
             onChange={(e) => {
               searchHash(e.target.value);
             }}

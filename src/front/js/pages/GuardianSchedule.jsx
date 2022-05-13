@@ -2,7 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { NavReuse } from "../component/NavReuse.jsx";
-import { Calendar } from "grommet-icons";
+import { DaysOfWeekCards } from "../component/DaysOfWeekCards.jsx";
+import "../../styles/guardianSchedule.css";
+
 // import { Box, Text, Grid } from "grommet";
 
 import {
@@ -11,53 +13,15 @@ import {
   Heading,
   Paragraph,
   Box,
-  Card,
-  CardBody,
-  CardFooter,
-  Grid,
+  Button,
   Grommet,
   Text,
+  Accordion,
+  AccordionPanel,
+  Form,
+  FormField,
+  Select,
 } from "grommet";
-
-const data = [
-  {
-    color: "#d6ecef",
-    icon: <Calendar size="large" />,
-    title: "Monday",
-    subTitle: "Weekday",
-    message: "Schedule",
-  },
-  {
-    color: "#d6ecef",
-    icon: <Calendar size="large" />,
-    title: "Tuesday",
-    subTitle: "Weekday",
-    message: "Schedule",
-  },
-  {
-    color: "#d6ecef",
-    icon: <Calendar size="large" />,
-    title: "Wednesday",
-    subTitle: "Weekday",
-    message: "Schedule",
-  },
-  {
-    color: "#d6ecef",
-
-    icon: <Calendar size="large" />,
-    title: "Thursday",
-    subTitle: "WeekdaY",
-    message: "Schedule",
-  },
-  {
-    color: "#d6ecef",
-
-    icon: <Calendar size="large" />,
-    title: "Friday",
-    subTitle: "Weekday",
-    message: "Schedule",
-  },
-];
 
 const theme = {
   global: {
@@ -67,26 +31,7 @@ const theme = {
            "Segoe UI"`,
     },
   },
-  card: {
-    footer: {
-      pad: { horizontal: "medium", vertical: "small" },
-      background: "#FFFFFF27",
-    },
-    hover: {
-      container: {
-        elevation: "large",
-        background: "#90EE90",
-      },
-    },
-    container: {
-      elevation: "medium",
-      extend: `transition: all 0.2s ease-in-out;`,
-    },
-    footer: {
-      pad: { horizontal: "medium", vertical: "small" },
-      background: "#00000008",
-    },
-  },
+
   page: {
     full: {
       alignSelf: "center",
@@ -107,6 +52,9 @@ const theme = {
         margin: { vertical: "small", horizontal: "small" },
       },
     },
+  },
+  box: {
+    margin: { vertical: "medium" },
   },
 };
 
@@ -133,222 +81,133 @@ export const GuardianSchedule = () => {
   return (
     <div className="dashBody w-100">
       <NavReuse />
+
       <Grommet theme={theme}>
         <Page kind="full">
           <PageContent background="light-3">
             <Heading>School Schedule</Heading>
             <Paragraph>Set your Driving Schedule Here</Paragraph>
-            <Box pad="xsmall">
-              <Grid
-                gap="medium"
-                rows="small"
-                columns={{ count: "fit", size: "small" }}
-              >
-                {data.map((value) => (
-                  <Card
-                    background={"#d6ecef"}
-                    onClick={() => {
-                      {
-                        {
-                          background = "#90EE90";
-                        }
-                      }
-                    }}
-                    key={value.message}
-                  >
-                    <CardBody pad="small">
-                      <Identifier
-                        pad="small"
-                        title={value.title}
-                        subTitle={value.subTitle}
-                        size="small"
-                        align="start"
-                      >
-                        {value.icon}
-                      </Identifier>
-                    </CardBody>
-                    <CardFooter
-                      pad={{ horizontal: "medium", vertical: "small" }}
-                    >
-                      <Text size="xsmall">{value.message}</Text>
-                    </CardFooter>
-                  </Card>
-                ))}
-              </Grid>
+            <Box>
+              <Accordion>
+                <AccordionPanel label="Village Green Elementary">
+                  <Box background="light-2" overflow="auto" height="auto">
+                    <Box height="large" flex={false}>
+                      <Box fill align="center" justify="center">
+                        <Box marginTop="50px" height="large" width="medium">
+                          <Form>
+                            <FormField label="Seats available" name="size">
+                              <Select
+                                name="Seats"
+                                options={["1", "2", "3", "4", "5"]}
+                              />
+                            </FormField>
+                            <FormField label="Time of Day" name="size">
+                              <Select
+                                name="M/A"
+                                multiple
+                                options={["Morning", "Afternoon"]}
+                              />
+                            </FormField>
+                          </Form>
+                        </Box>
+                      </Box>
 
-              <Paragraph></Paragraph>
+                      <div style={{ marginTop: "200px" }}>
+                        <DaysOfWeekCards />
+                      </div>
+                    </Box>
+                    <div
+                      className="scheduleButtonGroup"
+                      style={{ marginTop: "80px", marginBottom: "5px" }}
+                    >
+                      <Box direction="row" justify="evenly" overflow="auto">
+                        <Button type="reset" label="Edit" />
+                        <Button type="submit" label="Update" primary />
+                      </Box>
+                    </div>
+                  </Box>
+                </AccordionPanel>
+                <AccordionPanel label="Doolin Middle School">
+                  <Box background="light-2" overflow="auto" height="medium">
+                    <Box height="large" flex={false}>
+                      <Box fill align="center" justify="center">
+                        <Box width="medium">
+                          <Form className="">
+                            <FormField label="Seats available" name="size">
+                              <Select
+                                name="Seats"
+                                multiple
+                                options={["1", "2", "3", "4", "5"]}
+                              />
+                            </FormField>
+                            <FormField label="Time of Day" name="size">
+                              <Select
+                                name="M/A"
+                                multiple
+                                options={["Morning", "Afternoon"]}
+                              />
+                            </FormField>
+                          </Form>
+                        </Box>
+                      </Box>
+                      <div style={{ marginTop: "200px" }}>
+                        <DaysOfWeekCards />
+                      </div>
+                    </Box>
+                    <div
+                      className="scheduleButtonGroup"
+                      style={{ marginTop: "80px", marginBottom: "5px" }}
+                    >
+                      <Box direction="row" justify="evenly" overflow="auto">
+                        <Button type="reset" label="Edit" />
+                        <Button type="submit" label="Update" primary />
+                      </Box>
+                    </div>
+                  </Box>
+                </AccordionPanel>
+                <AccordionPanel label="Varela Sr High">
+                  <Box background="light-2" overflow="auto" height="medium">
+                    <Box height="large" flex={false}>
+                      <Box fill align="center" justify="center">
+                        <Box width="medium">
+                          <Form>
+                            <FormField label="Seats available" name="size">
+                              <Select
+                                name="Seats"
+                                multiple
+                                options={["1", "2", "3", "4", "5"]}
+                              />
+                            </FormField>
+                            <FormField label="Time of Day" name="size">
+                              <Select
+                                name="M/A"
+                                multiple
+                                options={["Morning", "Afternoon"]}
+                              />
+                            </FormField>
+                          </Form>
+                        </Box>
+                      </Box>
+                      <div style={{ marginTop: "200px" }}>
+                        <DaysOfWeekCards />
+                      </div>
+                    </Box>
+                    <div
+                      className="scheduleButtonGroup"
+                      style={{ marginTop: "80px", marginBottom: "5px" }}
+                    >
+                      <Box direction="row" justify="evenly" overflow="auto">
+                        <Button type="reset" label="Edit" />
+                        <Button type="submit" label="Update" primary />
+                      </Box>
+                    </div>
+                  </Box>
+                </AccordionPanel>
+              </Accordion>
             </Box>
           </PageContent>
         </Page>
       </Grommet>
-      );
     </div>
   );
 };
-
-// export const UiSampleBuild = () => {
-//   const history = useHistory();
-//   const { store, actions } = useContext(Context);
-//   const params = useParams();
-//   const logStatus = JSON.parse(localStorage.getItem("session"));
-//   //declare states here vvvv
-//   const [state, setState] = useState("State");
-
-//     if (logStatus === null) {
-//       history.push("/");
-//     }
-//     const handleClick = () => {};
-// return (
-//   <div className="dashBody w-100">
-//     <NavReuse />
-//         <Grid gap="medium" rows="small" columns={{ count: "fit", size: "small" }}>
-//           <Box justify="center" align="center" pad="small">
-//             <Box
-//               border
-//               pad="large"
-//               align="center"
-//               round
-//               gap="small"
-//               hoverIndicator={{
-//               background: {
-//                 color: "background-contrast",
-//               },
-//               elevation: "medium",
-//             }}
-//             onClick={() => {
-//               background: {
-//                 color: "green";
-//               }
-//             }}
-//           >
-//             <Calendar size="large" />
-//             <Text>Monday</Text>
-//           </Box>
-//         </Box>
-//         <Box justify="center" align="center" pad="large">
-//           <Box
-//             border
-//             pad="large"
-//             align="center"
-//             round
-//             gap="small"
-//             hoverIndicator={{
-//               background: {
-//                 color: "background-contrast",
-//               },
-//               elevation: "medium",
-//             }}
-//             onClick={() => {
-//               background: {
-//                 color: "green";
-//               }
-//             }}
-//           >
-//             <Calendar size="large" />
-//             <Text>Tuesday</Text>
-//           </Box>
-//         </Box>
-
-//         <Box justify="center" align="center" pad="large">
-//           <Box
-//             border
-//             pad="large"
-//             align="center"
-//             round
-//             gap="small"
-//             hoverIndicator={{
-//               background: {
-//                 color: "background-contrast",
-//               },
-//               elevation: "medium",
-//             }}
-//             onClick={() => {
-//               background: {
-//                 color: "green";
-//               }
-//             }}
-//           >
-//             <Calendar size="large" />
-//             <Text>Wednesday</Text>
-//           </Box>
-//         </Box>
-//         <Box justify="center" align="center" pad="large">
-//           <Box
-//             border
-//             pad="large"
-//             align="center"
-//             round
-//             gap="small"
-//             hoverIndicator={{
-//               background: {
-//                 color: "background-contrast",
-//               },
-//               elevation: "medium",
-//             }}
-//             onClick={() => {
-//               background: {
-//                 color: "green";
-//               }
-//             }}
-//           >
-//             <Calendar size="large" />
-//             <Text>Thursday</Text>
-//           </Box>
-//         </Box>
-//         <Box justify="center" align="center" pad="large">
-//           <Box
-//             border
-//             pad="large"
-//             align="center"
-//             round
-//             gap="small"
-//             hoverIndicator={{
-//               background: {
-//                 color: "background-contrast",
-//               },
-//               elevation: "medium",
-//             }}
-//             onClick={() => {
-//               background: {
-//                 color: "green";
-//               }
-//             }}
-//           >
-//             <Calendar size="large" />
-//             <Text>Friday</Text>
-//           </Box>
-//         </Box>
-//       </Grid>
-//     </div>
-//   );
-// };
-
-// <Grommet theme={theme} full>
-//   <Box pad="large">
-//     {/* Responsive Grid */}
-//     <Grid
-//       gap="medium"
-//       rows="small"
-//       columns={{ count: "fit", size: "small" }}
-//     >
-//       {data.map((value) => (
-//         <Card background={value.color} key={value.message}>
-//           <CardBody pad="small">
-//             <Identifier
-//               pad="small"
-//               title={value.title}
-//               subTitle={value.subTitle}
-//               size="small"
-//               align="start"
-//             >
-//               {value.icon}
-//             </Identifier>
-//           </CardBody>
-//           <CardFooter pad={{ horizontal: "medium", vertical: "small" }}>
-//             <Text size="xsmall">{value.message}</Text>
-//           </CardFooter>
-//         </Card>
-//       ))}
-//     </Grid>
-//   </Box>
-// </Grommet>
