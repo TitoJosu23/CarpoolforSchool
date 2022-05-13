@@ -104,7 +104,11 @@ export const GuardianProfileDetails = () => {
               onClick={() => {
                 actions
                   .updateGuardian(firstName, lastName, address, phone)
-                  .then(history.push("/home"));
+                  .then(
+                    setTimeout(() => {
+                      history.push("/home");
+                    }, 100)
+                  );
               }}
               color="secondary"
               variant="contained"

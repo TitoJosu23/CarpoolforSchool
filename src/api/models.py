@@ -161,20 +161,25 @@ class Black_list(db.Model):
             "blacklisting_guardian_id": self.blacklisting_guardian_id,
         }
 
-# class Ride_request(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     requesting_guardian_id = db.Column(db.Integer, db.ForeignKey("guardian.id"))
-#     accepting_guardian_id = db.Column(db.Integer, db.ForeignKey("guardian.id"))
-#     requested_day = db.Column(db.String(255), nullable=False)
-#     requested_seats = db.Column(db.Integer)
-#     requested_school = db
-#     requesting_guardian = db.relationship(Guardian, foreign_keys="Complaint.flag_creator_id",
-#         backref=db.backref('complaint'))
-#     flagged_guardian = db.relationship(Guardian, foreign_keys="Complaint.flagged_guardian_id")
+class Ride_request(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    requesting_guardian_id = db.Column(db.Integer, db.ForeignKey("guardian.id"), nullable=False)
+    accepting_guardian_id = db.Column(db.Integer, db.ForeignKey("guardian.id"))
+    requested_day = db.Column(db.String(255), nullable=False)
+    requested_seats = db.Column(db.Integer, nullable = False)
+    requested_time = db.Column(db.String(255), nullable = False)
+    requested_school = db.Column(db.Integer, db.ForeignKey("school.id"))
+    requesting_guardian = db.relationship(Guardian, foreign_keys="Ride_request.requesting_guardian_id",
+        backref=db.backref('ride_request'))
+    accepting_guardian = db.relationship(Guardian, foreign_keys="Ride_request.accepting_guardian_id")
     
-#     def serialize(self):
-#         return {
-#             "id": self.id,
-#             "blacklisted_guardian_id": self.blacklisted_guardian_id,
-#             "blacklisting_guardian_id": self.blacklisting_guardian_id,
-#         }
+    def serialize(self):
+        return {
+            "id": self.id,
+            "requesting_guardian_id": self.requesting_guardian_id,
+            "accepting_guardian_id": self.accepting_guardian_id,
+            "requested_day": self.requested_day,
+            "requested_seats": self.requested_seats,
+            "requested_school": self.requested_school,
+            "requested_time": self.requested_time,
+        }

@@ -70,7 +70,7 @@ def update_guardian():
     guardian.phone = request.json.get("phone")
     db.session.add(guardian)
     db.session.commit()
-    return ("Guardian information succesfully updated")
+    return jsonify(guardian.serialize()),200
 
 @api.route("/child", methods=["POST"])
 @jwt_required()
@@ -84,6 +84,7 @@ def create_child():
     first_name = request.json.get("first_name", None)
     last_name = request.json.get("last_name", None)
     class_grade = request.json.get("class_grade",None)
+    school_id = request.json.get("school_id",None)
     age = request.json.get("age",None)
     child = Child(first_name=first_name, last_name=last_name,class_grade=class_grade,age=age,school_id=school_id)
     db.session.add(child)
@@ -151,16 +152,14 @@ def create_school_access():
     current_user_id=get_jwt_identity()
     user = User.query.get(current_user_id)
     guardian = Guardian.query.filter_by(user_id=current_user_id).first()
-    if guardian is None:
-        raise APIException("Register as a guardian before applying to school!")
-    requested_school = request.json.get("schoolName", None)
-    school = School.query.filter_by(school_name=requested_school).first()
+    requested_school = request.json.get("school_id", None)
+    school = School.query.filter_by(id=requested_school).first()
     if school is None:
         raise APIException("School Does Not Exist!")
-    check_access_true = School_Access.query.filter_by(user_id=current_user_id,accepted=True).first()
+    check_access_true = School_Access.query.filter_by(user_id=current_user_id,school_id=requested_school,accepted=True).first()
     if check_access_true is not None:
         raise APIException("You already belong to that school")
-    check_access_false = School_Access.query.filter_by(user_id=current_user_id,accepted=False).first()
+    check_access_false = School_Access.query.filter_by(user_id=current_user_id,school_id=requested_school,accepted=False).first()
     if check_access_false is not None:
         raise APIException("You have a pending request, please be patient")
     school_access = School_Access(user_id=current_user_id,school_id=school.id,role="guardian")
@@ -241,14 +240,16 @@ def get_all_schools():
         school_id = item.id
         school_address = item.school_address
         school_phone = item.school_phone
-        school_name_id.append({"School_Name":school_name,"School_Id":school_id,"School_phone":school_phone})
+        school_logo_url = item.school_logo_url
+        school_name_id.append({"School_Name":school_name,"School_Id":school_id,"School_phone":school_phone,"School_logo_url":school_logo_url,"School_address":school_address})
     return jsonify(school_name_id)
 
-@api.route("/school/detail/<int:school_id>", methods=["GET"])
+@api.route("/school/detail", methods=["GET"])
 @jwt_required()
 def get_school(school_id):
     current_user_id=get_jwt_identity()
-    school = School.query.filter_by(id=school_id)
+    request = request.json.get("school_id")
+    school = School.query.filter_by("School")
     return jsonify(school)
 
 

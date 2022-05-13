@@ -14,12 +14,11 @@ import { useHistory } from "react-router-dom";
 export const NavReuse = (props) => {
   const { store, actions } = useContext(Context);
   const [name, setName] = useState("");
-  const history = useHistory();
 
   useEffect(() => {
     actions.getSelf().then((payload) => {
-      if (payload.msg) {
-        console.log("this is payload msg" + payload.msg);
+      if (payload.msg == "Token has expired") {
+        actions.clearSession();
       } else if (payload.first_name) {
         setName("Welcome: " + payload.first_name + " " + payload.last_name);
       } else if (payload.school_name) {

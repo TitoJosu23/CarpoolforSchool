@@ -1,10 +1,12 @@
 import { toast } from "react-toastify";
+import { useHistory } from "react-router-dom";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       children: [],
       guardians: [],
       schools: [],
+      userSchools: [],
     },
 
     actions: {
@@ -33,7 +35,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           return await response.json();
         } else if (response.status >= 400 && response.status < 500) {
           const error = await response.json();
-          toast(error.msg);
+          toast.error(error.message, { position: "top-center" });
           throw error;
         } else {
           alert("Unknown Error");
@@ -69,7 +71,12 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       getSelf: async () => {
         const actions = getActions();
-        return await actions._fetch(`/api/access`);
+        try {
+          return await actions._fetch(`/api/access`);
+        } catch (error) {
+          actions.clearSession();
+          return error;
+        }
       },
       clearSession: () => {
         localStorage.removeItem("session");
@@ -96,15 +103,33 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       getGuardians: async () => {
         const actions = getActions();
-        const payload = await actions._fetch(`/api/guardians`);
-        setStore({ guardians: payload });
-        return payload;
+        try {
+          const payload = await actions._fetch(`/api/guardians`);
+          setStore({ guardians: payload });
+          return payload;
+        } catch (error) {
+          return error;
+        }
       },
       getSchools: async () => {
         const actions = getActions();
-        const payload = await actions._fetch(`/api/schools`);
-        setStore({ schools: payload });
-        return payload;
+        try {
+          const payload = await actions._fetch(`/api/schools`);
+          setStore({ schools: payload });
+          return payload;
+        } catch (error) {
+          return error;
+        }
+      },
+      getUserSchools: async () => {
+        const actions = getActions();
+        try {
+          const payload = await actions._fetch(`/api/user/schools`);
+          setStore({ userSchools: payload });
+          return payload;
+        } catch (error) {
+          return error;
+        }
       },
       getSchool: async () => {
         const actions = getActions();
@@ -159,6 +184,19 @@ const getState = ({ getStore, getActions, setStore }) => {
           }),
         };
         const payload = await actions._fetch(`/api/child`, options);
+        return payload;
+      },
+      reqAccess: async (school_id) => {
+        const actions = getActions();
+        const options = {
+          method: "POST",
+          body: JSON.stringify({
+            school_id: school_id,
+          }),
+        };
+        const payload = await actions._fetch(`/api/school/access`, options);
+        if (payload.status == undefined)
+          toast.info("Request Sucessfully Sent!", { position: "top-center" });
         return payload;
       },
     },

@@ -26,10 +26,6 @@ export const ChildCard = (props) => {
                 <br></br>
                 Age: {props.age}
               </div>
-              <div className="col-12 text-nowrap fs-5 border-bottom text-dark mb-3 pb-3">
-                <br></br>
-                School: {props.school_id}
-              </div>
             </div>
             <div className="cardButtons row justify-content-center">
               <button className="btn requestButton col-8 mb-3 fs-4">

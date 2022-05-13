@@ -1,26 +1,42 @@
 import React, { useState, useEffect, useContext } from "react";
-import { FaSearch } from "react-icons/fa";
-import queryString from "query-string";
-import Chip from "@mui/material/Chip";
 import Autocomplete from "@mui/material/Autocomplete";
 import Checkbox from "@mui/material/Checkbox";
 import TextField from "@mui/material/TextField";
-import Stack from "@mui/material/Stack";
 import { FaSchool } from "react-icons/fa";
 import { BsCheckLg } from "react-icons/bs";
 import { Context } from "../store/appContext";
 import { Link, useParams } from "react-router-dom";
+import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
+
+const StyledAutocomplete = styled(Autocomplete)({
+  "& .MuiAutocomplete-inputRoot": {
+    color: "White",
+    // This matches the specificity of the default styles at https://github.com/mui-org/material-ui/blob/v4.11.3/packages/material-ui-lab/src/Autocomplete/Autocomplete.js#L90
+    '&[class*="MuiOutlinedInput-root"] .MuiAutocomplete-input:first-child': {
+      // Default left padding is 6px
+      paddingLeft: 6,
+    },
+    "& .MuiOutlinedInput-notchedOutline": {
+      borderColor: "White",
+    },
+    "&:hover .MuiOutlinedInput-notchedOutline": {
+      borderColor: "White",
+    },
+    "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+      borderColor: "White",
+    },
+  },
+});
 
 export const SchoolSearchBar = (props) => {
-  const { store, actions } = useContext(Context);
   return (
     <div className="searchBar">
-      <Autocomplete
-        multiple
+      <StyledAutocomplete
         id="checkboxes-tags-demo"
         freeSolo
         options={props.schools}
         disableCloseOnSelect
+        disableClearable
         getOptionLabel={(option) => option.School_Name}
         renderOption={(props, option, { selected }) => (
           <Link className="text-dark" to={"/school/" + option.School_Id}>
@@ -38,14 +54,12 @@ export const SchoolSearchBar = (props) => {
         renderInput={(params) => (
           <TextField
             {...params}
+            InputLabelProps={{
+              style: { color: "#a9a9a9" },
+            }}
             label="Search Schools"
             type="search"
             placeholder="Search for your school"
-            sx={{
-              "& .MuiOutlinedInput-root": {
-                color: "White",
-              },
-            }}
           />
         )}
       />

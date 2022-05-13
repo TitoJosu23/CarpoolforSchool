@@ -99,7 +99,7 @@ a {
 
 .navdropdown {
   position: absolute;
-  top: 70px;
+  top: 120px;
   width: 300px;
   transform: translate(-120px, 20px);
   background-color: var(--bg);
@@ -112,7 +112,7 @@ a {
 }
 .navdropdown2 {
   position: absolute;
-  top: 70px;
+  top: 120px;
   width: 300px;
   transform: translate(-40px, 20px);
   background-color: var(--bg);

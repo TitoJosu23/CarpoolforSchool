@@ -4,9 +4,6 @@ import { Context } from "../store/appContext";
 import { NavReuse } from "../component/NavReuse.jsx";
 import "../../styles/searchGuard.css";
 import { SchoolSearchBar } from "../component/SchoolSearchBar.jsx";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-// import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
-// import CheckBoxIcon from "@mui/icons-material/CheckBox";
 
 export const SchoolSearch = (props) => {
   //react declarations
@@ -16,7 +13,11 @@ export const SchoolSearch = (props) => {
   const logStatus = JSON.parse(localStorage.getItem("session"));
 
   const [state, setState] = useState("State");
-  const schools = store.schools;
+  const [schools, setSchools] = useState([]);
+
+  useEffect(() => {
+    actions.getSchools().then((payload) => setSchools(payload));
+  }, []);
 
   return (
     <div className="dashBody w-100">

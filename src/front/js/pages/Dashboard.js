@@ -19,5 +19,5 @@ export const Dashboard = (props) => {
       <NavReuse />
       <div className="dashBoardHome"></div>
     </div>
-  );;
+  );
 };
