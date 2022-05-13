@@ -9,7 +9,6 @@ export const ViewChildren = (props) => {
   const history = useHistory();
   const { store, actions } = useContext(Context);
   const params = useParams();
-  const logStatus = JSON.parse(localStorage.getItem("session"));
   //declare states here vvvv
   const [children, setChildren] = useState([]);
 
@@ -17,11 +16,6 @@ export const ViewChildren = (props) => {
     actions.getChildren().then((payload) => setChildren(payload));
   }, []);
 
-  if (logStatus === null) {
-    history.push("/");
-  }
-
-  console.log(children);
   return (
     <div className="dashBody w-100">
       <NavReuse />
@@ -33,6 +27,7 @@ export const ViewChildren = (props) => {
           return (
             <ChildCard
               first_name={child.first_name}
+              school={"schoolName"}
               last_name={child.last_name}
               class_grade={child.class_grade}
               age={child.age}

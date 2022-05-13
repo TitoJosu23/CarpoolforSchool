@@ -61,7 +61,7 @@ export const GuardianProfileDetails = () => {
       <ThemeProvider theme={theme}>
         <React.Fragment>
           <Dialog open fullWidth maxWidth="sm" color="primary">
-            <h1>Guardian Profile Details</h1>
+            <h1 className="p-2">Guardian Profile Details</h1>
             <TextField
               onChange={(e) => setFirstName(e.target.value)}
               value={firstName}
@@ -69,7 +69,7 @@ export const GuardianProfileDetails = () => {
               placeholder="Enter Your First Name"
               id="outlined-basic"
               label="First Name"
-              fullWidth
+              className="mx-2"
             />
             <br />
             <TextField
@@ -78,7 +78,7 @@ export const GuardianProfileDetails = () => {
               placeholder="Enter Your Last Name"
               id="outlined-basic"
               label="Last Name"
-              fullWidth
+              className="mx-2"
             />
             <br />
             <TextField
@@ -87,7 +87,7 @@ export const GuardianProfileDetails = () => {
               placeholder="Enter Your Address"
               id="outlined-basic"
               label="Address"
-              fullWidth
+              className="mx-2"
             />
             <br />
             <TextField
@@ -96,7 +96,7 @@ export const GuardianProfileDetails = () => {
               placeholder="Mobile"
               id="outlined-basic"
               label="Phone Number"
-              fullWidth
+              className="mx-2"
             />
             <br />
             <br />
@@ -104,10 +104,15 @@ export const GuardianProfileDetails = () => {
               onClick={() => {
                 actions
                   .updateGuardian(firstName, lastName, address, phone)
-                  .then(history.push("/home"));
+                  .then(
+                    setTimeout(() => {
+                      history.push("/home");
+                    }, 100)
+                  );
               }}
               color="secondary"
               variant="contained"
+              className="mx-2"
             >
               Update Information
             </Button>

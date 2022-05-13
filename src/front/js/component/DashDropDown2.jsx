@@ -64,9 +64,13 @@ export const DashDropDown2 = (props) => {
         >
           <div className="menu2">
             <div className="mt-2">
+<<<<<<< HEAD
               <Link to={"/ride"}>
                 <DropItem leftIcon={<FaCar />}>Request Ride</DropItem>
               </Link>
+=======
+              <DropItem leftIcon={<FaCar />}>Pending Rides</DropItem>
+>>>>>>> 87e3d0caa904ea5cda5e976dc44b505b0806f731
             </div>
 
             <div className="mt-4">
@@ -75,7 +79,9 @@ export const DashDropDown2 = (props) => {
               </Link>
             </div>
             <div className="mt-4">
-              <DropItem leftIcon={<FaSchool />}>Search Schools</DropItem>
+              <Link to={"/school/search"}>
+                <DropItem leftIcon={<FaSchool />}>Search Schools</DropItem>
+              </Link>
             </div>
           </div>
         </CSSTransition>

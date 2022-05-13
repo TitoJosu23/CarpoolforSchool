@@ -7,12 +7,6 @@ import "../../styles/profileDetails.css";
 import { GuardianProfileDetails } from "../component/GuardianProfileDetails.jsx";
 
 export const UserDetails = () => {
-  const logStatus = JSON.parse(localStorage.getItem("session"));
-
-  if (logStatus === null) {
-    history.push("/");
-  }
-
   return (
     <div className="dashBody w-100">
       <NavReuse />

@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Complaint, School, School_Access, Child, Guardian, Black_list
+from api.models import db, User, Complaint, School, School_Access, Child, Guardian, Black_list, Ride_request
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token,jwt_required,get_jwt_identity
 
@@ -70,7 +70,7 @@ def update_guardian():
     guardian.phone = request.json.get("phone")
     db.session.add(guardian)
     db.session.commit()
-    return ("Guardian information succesfully updated")
+    return jsonify(guardian.serialize()),200
 
 @api.route("/child", methods=["POST"])
 @jwt_required()
@@ -81,13 +81,14 @@ def create_child():
     if guardian is None:
         raise APIException ("Please register as a guardian first!")
     print(guardian.first_name,guardian.last_name)
-    first_name = request.json.get("firstName", None)
-    last_name = request.json.get("lastName", None)
-    class_grade = request.json.get("classGrade",None)
+    first_name = request.json.get("first_name", None)
+    last_name = request.json.get("last_name", None)
+    class_grade = request.json.get("class_grade",None)
+    school_id = request.json.get("school_id",None)
     age = request.json.get("age",None)
-    child = Child(first_name=first_name, last_name=last_name,class_grade=class_grade,age=age)
+    child = Child(first_name=first_name, last_name=last_name,class_grade=class_grade,age=age,school_id=school_id)
     db.session.add(child)
-    added_child = Child.query.filter_by(first_name=first_name, last_name=last_name,class_grade=class_grade,age=age).first()
+    added_child = Child.query.filter_by(first_name=first_name, last_name=last_name,class_grade=class_grade,age=age,school_id=school_id).first()
     if added_child is None:
         raise APIException ("Failed to add child!")
     print(added_child)
@@ -151,16 +152,14 @@ def create_school_access():
     current_user_id=get_jwt_identity()
     user = User.query.get(current_user_id)
     guardian = Guardian.query.filter_by(user_id=current_user_id).first()
-    if guardian is None:
-        raise APIException("Register as a guardian before applying to school!")
-    requested_school = request.json.get("schoolName", None)
-    school = School.query.filter_by(school_name=requested_school).first()
+    requested_school = request.json.get("school_id", None)
+    school = School.query.filter_by(id=requested_school).first()
     if school is None:
         raise APIException("School Does Not Exist!")
-    check_access_true = School_Access.query.filter_by(user_id=current_user_id,accepted=True).first()
+    check_access_true = School_Access.query.filter_by(user_id=current_user_id,school_id=requested_school,accepted=True).first()
     if check_access_true is not None:
         raise APIException("You already belong to that school")
-    check_access_false = School_Access.query.filter_by(user_id=current_user_id,accepted=False).first()
+    check_access_false = School_Access.query.filter_by(user_id=current_user_id,school_id=requested_school,accepted=False).first()
     if check_access_false is not None:
         raise APIException("You have a pending request, please be patient")
     school_access = School_Access(user_id=current_user_id,school_id=school.id,role="guardian")
@@ -168,7 +167,7 @@ def create_school_access():
     db.session.commit()
     return jsonify(school_access.serialize())
 
-@api.route("/school_access/pending", methods=["GET"])
+@api.route("/access/pending", methods=["GET"])
 @jwt_required()
 def get_pending_requests():
     current_user_id=get_jwt_identity()
@@ -230,25 +229,28 @@ def get_schools():
         school_name_id.append({"School_Name":name,"School_Id":school_id})
     return jsonify(school_name_id)
 
-# @api.route("/guardians", methods=["GET"])
-# @jwt_required()
-# def get_all_guardians():
-#     guardians= Guardian.query.all()
-#     guardian_list=[guardian.serialize() for guardian in guardians]
-#     print (guardian_list)
-#     return jsonify(guardian_list)
+@api.route("/schools", methods=["GET"])
+@jwt_required()
+def get_all_schools():
+    current_user_id=get_jwt_identity()
+    list_of_schools = School.query.all()
+    school_name_id = []
+    for item in list_of_schools:
+        school_name = item.school_name
+        school_id = item.id
+        school_address = item.school_address
+        school_phone = item.school_phone
+        school_logo_url = item.school_logo_url
+        school_name_id.append({"School_Name":school_name,"School_Id":school_id,"School_phone":school_phone,"School_logo_url":school_logo_url,"School_address":school_address})
+    return jsonify(school_name_id)
 
-# @api.route("/guardian/school/<int:school_id>", methods=["GET"])
-# @jwt_required()
-# def get_guardians_for_school(school_id):
-#     current_user_id=get_jwt_identity()
-#     search_school = 
-#     school = School.query.filter_by(school_name=search_school).first()
-#     if school is None:
-#         raise APIException("School Not Found!")
-#     return (school)
-#     # school_access_list = School_Access.query.filter_by(school_id=school.id)
-    
+@api.route("/school/detail", methods=["GET"])
+@jwt_required()
+def get_school(school_id):
+    current_user_id=get_jwt_identity()
+    request = request.json.get("school_id")
+    school = School.query.filter_by("School")
+    return jsonify(school)
 
 @api.route("/school/<int:school_id>/complaint/<int:flagged_guardian_id>", methods=["POST"])
 @jwt_required()
@@ -269,7 +271,6 @@ def create_complaint(flagged_guardian_id):
     db.session.add(complaint)
     db.session.commit()
     return ("Complaint Succesfully Filed!"),200
-
 
 @api.route("/complaint", methods=["GET"])
 @jwt_required()
@@ -305,3 +306,43 @@ def get_complaint():
     #     active_complaints.append({"complaining_guardian":complaining_guardian,"complaint_guardian":complaint_guardian,"Complaint":item.flag_comment})
     print(complaint_list)
     return ("")
+    
+@api.route("/ride/requests", methods=["GET"])
+@jwt_required()
+def get_requested_rides():
+    current_user_id=get_jwt_identity()
+    user = User.query.get(current_user_id)
+    check_access = School_Access.query.filter_by(user_id=current_user_id,accepted=True)
+    if check_access is None:
+        raise APIException("You Do Not Belong To Any Schools!")
+    requested_list = []
+    for item in check_access:
+        if item is not None:
+            get_school = item.school_id
+            requested_list.append(get_school)
+    pending_requests = []
+    for access in requested_list:
+        school_request = Ride_request.query.filter_by(requested_school_id=access).first()
+        school_request = school_request.serialize()
+        pending_requests.append(school_request)
+    return jsonify(pending_requests)
+@api.route("/access/guardians", methods=["GET"])
+@jwt_required()
+def get_related_guardians():
+    current_user_id=get_jwt_identity()
+    user = User.query.get(current_user_id)
+    check_access = School_Access.query.filter_by(user_id=current_user_id,accepted=True)
+    if check_access is None:
+        raise APIException("You Do Not Belong To Any Schools!")
+    requested_list = []
+    for item in check_access:
+        if item is not None:
+            get_school = item.school_id
+            requested_list.append(get_school)
+    related_access = []
+    for access in requested_list:
+        access_list = School_Access.query.filter_by(school_id=access,accepted=True)
+        print(access_list)
+        # for item in access_list:
+        #     related_guardians.append(item)
+    return jsonify(requested_list)

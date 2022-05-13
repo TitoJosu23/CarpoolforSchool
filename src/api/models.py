@@ -23,6 +23,8 @@ class School(db.Model):
     school_logo_url = db.Column(db.String(255), unique=False, nullable=True)
     active_complaints = db.Column(db.Integer, db.ForeignKey('complaint.id'))
     access_list = db.relationship("School_Access")
+    ride_list = db.relationship("Ride_request")
+
 
 
     def serialize(self):
@@ -89,6 +91,8 @@ class Child(db.Model):
     last_name = db.Column(db.String(255), unique=False, nullable=False)
     class_grade = db.Column(db.String(255), unique=False, nullable=False)
     age = db.Column(db.String(255), nullable=False)
+    school_id = db.Column(db.Integer, db.ForeignKey('school.id'))
+    school = db.relationship("School")
     guardians = db.relationship("Guardian",
                     secondary=Child_to_guardian)
 
@@ -98,7 +102,8 @@ class Child(db.Model):
             "first_name":self.first_name,
             "last_name":self.last_name,
             "class_grade":self.class_grade,
-            "age":self.age
+            "age":self.age,
+            "school_id":self.school_id
         }
 class Guardian(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -158,22 +163,26 @@ class Black_list(db.Model):
             "blacklisting_guardian_id": self.blacklisting_guardian_id,
         }
 
-# class Ride_request(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     requesting_guardian_id = db.Column(db.Integer, db.ForeignKey("guardian.id"))
-#     accepting_guardian_id = db.Column(db.Integer, db.ForeignKey("guardian.id"))
-#     requested_day = db.Column(db.String(255), nullable=False)
-#     requested_seats = db.Column(db.Integer)
-#     requested_school = 
-#     requesting_guardian = db.relationship(Guardian, foreign_keys="Complaint.flag_creator_id",
-#         backref=db.backref('complaint'))
-#     flagged_guardian = db.relationship(Guardian, foreign_keys="Complaint.flagged_guardian_id")
-
-#     def serialize(self):
-#         return {
-#             "id": self.id,
-#             "flagged_guardian_id": self.flagged_guardian_id,
-#             "flag_creator_id": self.flag_creator_id,
-#             "flag_comment": self.flag_comment,
-#                 # do not serialize the password, its a security breach
-#             }
+class Ride_request(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    requesting_guardian_id = db.Column(db.Integer, db.ForeignKey("guardian.id"), nullable=False)
+    accepting_guardian_id = db.Column(db.Integer, db.ForeignKey("guardian.id"))
+    requested_day = db.Column(db.String(255), nullable=False)
+    requested_seats = db.Column(db.Integer, nullable = False)
+    requested_time = db.Column(db.String(255), nullable = False)
+    requested_school_id = db.Column(db.Integer, db.ForeignKey("school.id"))
+    requesting_guardian = db.relationship(Guardian, foreign_keys="Ride_request.requesting_guardian_id",
+        backref=db.backref('ride_request'))
+    accepting_guardian = db.relationship(Guardian, foreign_keys="Ride_request.accepting_guardian_id")
+    school = db.relationship("School")
+    
+    def serialize(self):
+        return {
+            "id": self.id,
+            "requesting_guardian_id": self.requesting_guardian_id,
+            "accepting_guardian_id": self.accepting_guardian_id,
+            "requested_day": self.requested_day,
+            "requested_seats": self.requested_seats,
+            "requested_school_id": self.requested_school_id,
+            "requested_time": self.requested_time,
+        }

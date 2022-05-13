@@ -84,6 +84,7 @@ export const GuardianSchedule = () => {
 
       <Grommet theme={theme}>
         <Page kind="full">
+<<<<<<< HEAD
           <PageContent background="light-3">
             <Heading>School Schedule</Heading>
             <Paragraph>Set your Driving Schedule Here</Paragraph>
@@ -111,6 +112,48 @@ export const GuardianSchedule = () => {
                           </Form>
                         </Box>
                       </Box>
+=======
+          <PageContent background="">
+            <Heading color="White">School Schedule</Heading>
+            <Paragraph color="white">Set your Driving Schedule Here</Paragraph>
+            <Box pad="xsmall">
+              <Grid
+                gap="medium"
+                rows="small"
+                columns={{ count: "fit", size: "small" }}
+              >
+                {data.map((value) => (
+                  <Card
+                    background={"#d6ecef"}
+                    onClick={() => {
+                      {
+                        {
+                          background = "#90EE90";
+                        }
+                      }
+                    }}
+                    key={value.message}
+                  >
+                    <CardBody pad="small">
+                      <Identifier
+                        pad="small"
+                        title={value.title}
+                        subTitle={value.subTitle}
+                        size="small"
+                        align="start"
+                      >
+                        {value.icon}
+                      </Identifier>
+                    </CardBody>
+                    <CardFooter
+                      pad={{ horizontal: "medium", vertical: "small" }}
+                    >
+                      <Text size="xsmall">{value.message}</Text>
+                    </CardFooter>
+                  </Card>
+                ))}
+              </Grid>
+>>>>>>> 87e3d0caa904ea5cda5e976dc44b505b0806f731
 
                       <div style={{ marginTop: "200px" }}>
                         <DaysOfWeekCards />

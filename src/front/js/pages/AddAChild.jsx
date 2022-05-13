@@ -37,9 +37,14 @@ export const AddAChild = () => {
   const history = useHistory();
   const { store, actions } = useContext(Context);
   const [firstName, setFirstName] = useState("");
-  const [age, setAge] = useState("");
   const [lastName, setLastName] = useState("");
+  const [age, setAge] = useState("");
   const [grade, setGrade] = useState("");
+  const [school, setSchool] = useState("");
+
+  useEffect(() => {
+    actions.getUserSchools();
+  }, []);
 
   return (
     <div className="dashBody w-100">
@@ -76,7 +81,6 @@ export const AddAChild = () => {
                 fullWidth
               />
               <br />
-
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">
                   Child Grade
@@ -103,12 +107,28 @@ export const AddAChild = () => {
                   <MenuItem value={"Twelfth"}>Twelfth</MenuItem>
                 </Select>
               </FormControl>
+              <FormControl className="mt-4" fullWidth>
+                <InputLabel id="demo-simple-select-label">
+                  Child School
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={school}
+                  label="Child School"
+                  onChange={(e) => setSchool(e.target.value)}
+                >
+                  {store.userSchools.map((x, id) => (
+                    <MenuItem value={x.School_Id}>{x.School_Name}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
               <br />
               <Button
                 className="text-dark w-75 mx-auto fs-4"
                 onClick={(e) => {
                   actions
-                    .addChild(firstName, lastName, grade, age)
+                    .addChild(firstName, lastName, grade, age, school)
                     .then(history.push("/children"));
                 }}
                 color="secondary"
@@ -117,7 +137,6 @@ export const AddAChild = () => {
                 Add Child
               </Button>
               <Link to={"/children"}>
-                {" "}
                 <Button
                   className="text-dark w-75 mx-auto mt-3 fs-4"
                   color="secondary"
@@ -126,7 +145,6 @@ export const AddAChild = () => {
                   Cancel
                 </Button>
               </Link>
-
               <br />
             </Dialog>
           </div>

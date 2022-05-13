@@ -9,6 +9,7 @@ import { BsPerson } from "react-icons/bs";
 import { GrHomeRounded } from "react-icons/gr";
 import { Context } from "../store/appContext";
 import { Link, useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 export const NavReuse = (props) => {
   const { store, actions } = useContext(Context);
@@ -16,11 +17,13 @@ export const NavReuse = (props) => {
 
   useEffect(() => {
     actions.getSelf().then((payload) => {
-      if (payload.school_name) {
+      if (payload.msg == "Token has expired") {
+        actions.clearSession();
+      } else if (payload.first_name) {
+        setName("Welcome: " + payload.first_name + " " + payload.last_name);
+      } else if (payload.school_name) {
         setName("Welcome: " + payload.school_name);
         setGuardianTask("bg-danger");
-      } else {
-        setName("Welcome: " + payload.first_name + " " + payload.last_name);
       }
     });
   }, []);
