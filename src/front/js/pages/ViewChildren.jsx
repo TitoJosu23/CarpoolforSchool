@@ -9,7 +9,6 @@ export const ViewChildren = (props) => {
   const history = useHistory();
   const { store, actions } = useContext(Context);
   const params = useParams();
-  const logStatus = JSON.parse(localStorage.getItem("session"));
   //declare states here vvvv
   const [children, setChildren] = useState([]);
 

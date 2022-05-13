@@ -7,7 +7,6 @@ import "../styles/registration.css";
 import { Login } from "./pages/Login.js";
 import { Registration } from "./pages/Registration.jsx";
 import { Dashboard } from "./pages/Dashboard.js";
-import { ModalView } from "./pages/ModalView";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { GuardianSchedule } from "./pages/GuardianSchedule.jsx";
@@ -19,7 +18,8 @@ import { AddAChild } from "./pages/AddAChild.jsx";
 import { ViewChildren } from "./pages/ViewChildren.jsx";
 import { ViewSchool } from "./pages/ViewSchool.jsx";
 import { RequestRide } from "./pages/RequestRide.jsx";
-import { ModalGuardianInformation } from "./component/ModalGuardianInformation.js";
+import { ModalGuardianInformation } from "./pages/ModalGuardianInformation.js";
+import { PendingRides } from "./pages/PendingRides.jsx";
 
 //create your first component
 const Layout = () => {
@@ -68,6 +68,9 @@ const Layout = () => {
             </Route>
             <Route exact path="/school/:id">
               <ViewSchool />
+            </Route>
+            <Route exact path="/rides/pending">
+              <PendingRides />
             </Route>
             <Route>
               <h1>Not found!</h1>

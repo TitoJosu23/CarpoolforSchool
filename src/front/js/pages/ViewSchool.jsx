@@ -70,7 +70,7 @@ export const ViewSchool = (props) => {
                   <div className="card-text mt-3 fs-4 text-decoration-underline">
                     Rides
                   </div>
-                  <div>{"3 Pending"}</div>
+                  <div>{"1 Pending"}</div>
                 </div>
               </div>
             </div>

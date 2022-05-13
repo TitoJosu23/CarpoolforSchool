@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Complaint, School, School_Access, Child, Guardian, Black_list
+from api.models import db, User, Complaint, School, School_Access, Child, Guardian, Black_list, Ride_request
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token,jwt_required,get_jwt_identity
 
@@ -167,7 +167,7 @@ def create_school_access():
     db.session.commit()
     return jsonify(school_access.serialize())
 
-@api.route("/school_access/pending", methods=["GET"])
+@api.route("/access/pending", methods=["GET"])
 @jwt_required()
 def get_pending_requests():
     current_user_id=get_jwt_identity()
@@ -252,27 +252,6 @@ def get_school(school_id):
     school = School.query.filter_by("School")
     return jsonify(school)
 
-
-# @api.route("/guardians", methods=["GET"])
-# @jwt_required()
-# def get_all_guardians():
-#     guardians= Guardian.query.all()
-#     guardian_list=[guardian.serialize() for guardian in guardians]
-#     print (guardian_list)
-#     return jsonify(guardian_list)
-
-# @api.route("/guardian/school/<int:school_id>", methods=["GET"])
-# @jwt_required()
-# def get_guardians_for_school(school_id):
-#     current_user_id=get_jwt_identity()
-#     search_school = 
-#     school = School.query.filter_by(school_name=search_school).first()
-#     if school is None:
-#         raise APIException("School Not Found!")
-#     return (school)
-#     # school_access_list = School_Access.query.filter_by(school_id=school.id)
-    
-
 @api.route("/school/<int:school_id>/complaint/<int:flagged_guardian_id>", methods=["POST"])
 @jwt_required()
 def create_complaint(flagged_guardian_id):
@@ -292,7 +271,6 @@ def create_complaint(flagged_guardian_id):
     db.session.add(complaint)
     db.session.commit()
     return ("Complaint Succesfully Filed!"),200
-
 
 @api.route("/complaint", methods=["GET"])
 @jwt_required()
@@ -328,3 +306,43 @@ def get_complaint():
     #     active_complaints.append({"complaining_guardian":complaining_guardian,"complaint_guardian":complaint_guardian,"Complaint":item.flag_comment})
     print(complaint_list)
     return ("")
+    
+@api.route("/ride/requests", methods=["GET"])
+@jwt_required()
+def get_requested_rides():
+    current_user_id=get_jwt_identity()
+    user = User.query.get(current_user_id)
+    check_access = School_Access.query.filter_by(user_id=current_user_id,accepted=True)
+    if check_access is None:
+        raise APIException("You Do Not Belong To Any Schools!")
+    requested_list = []
+    for item in check_access:
+        if item is not None:
+            get_school = item.school_id
+            requested_list.append(get_school)
+    pending_requests = []
+    for access in requested_list:
+        school_request = Ride_request.query.filter_by(requested_school_id=access).first()
+        school_request = school_request.serialize()
+        pending_requests.append(school_request)
+    return jsonify(pending_requests)
+@api.route("/access/guardians", methods=["GET"])
+@jwt_required()
+def get_related_guardians():
+    current_user_id=get_jwt_identity()
+    user = User.query.get(current_user_id)
+    check_access = School_Access.query.filter_by(user_id=current_user_id,accepted=True)
+    if check_access is None:
+        raise APIException("You Do Not Belong To Any Schools!")
+    requested_list = []
+    for item in check_access:
+        if item is not None:
+            get_school = item.school_id
+            requested_list.append(get_school)
+    related_access = []
+    for access in requested_list:
+        access_list = School_Access.query.filter_by(school_id=access,accepted=True)
+        print(access_list)
+        # for item in access_list:
+        #     related_guardians.append(item)
+    return jsonify(requested_list)

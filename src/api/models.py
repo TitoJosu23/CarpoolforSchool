@@ -23,6 +23,8 @@ class School(db.Model):
     school_logo_url = db.Column(db.String(255), unique=False, nullable=True)
     active_complaints = db.Column(db.Integer, db.ForeignKey('complaint.id'))
     access_list = db.relationship("School_Access")
+    ride_list = db.relationship("Ride_request")
+
 
 
     def serialize(self):
@@ -168,10 +170,11 @@ class Ride_request(db.Model):
     requested_day = db.Column(db.String(255), nullable=False)
     requested_seats = db.Column(db.Integer, nullable = False)
     requested_time = db.Column(db.String(255), nullable = False)
-    requested_school = db.Column(db.Integer, db.ForeignKey("school.id"))
+    requested_school_id = db.Column(db.Integer, db.ForeignKey("school.id"))
     requesting_guardian = db.relationship(Guardian, foreign_keys="Ride_request.requesting_guardian_id",
         backref=db.backref('ride_request'))
     accepting_guardian = db.relationship(Guardian, foreign_keys="Ride_request.accepting_guardian_id")
+    school = db.relationship("School")
     
     def serialize(self):
         return {
@@ -180,6 +183,6 @@ class Ride_request(db.Model):
             "accepting_guardian_id": self.accepting_guardian_id,
             "requested_day": self.requested_day,
             "requested_seats": self.requested_seats,
-            "requested_school": self.requested_school,
+            "requested_school_id": self.requested_school_id,
             "requested_time": self.requested_time,
         }

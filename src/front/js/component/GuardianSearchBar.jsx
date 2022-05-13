@@ -1,82 +1,67 @@
 import React, { useState, useEffect, useContext } from "react";
-import { FaSearch } from "react-icons/fa";
-import queryString from "query-string";
-import Chip from "@mui/material/Chip";
 import Autocomplete from "@mui/material/Autocomplete";
 import Checkbox from "@mui/material/Checkbox";
 import TextField from "@mui/material/TextField";
-import Stack from "@mui/material/Stack";
 import { FaSchool } from "react-icons/fa";
 import { BsCheckLg } from "react-icons/bs";
 import { Context } from "../store/appContext";
+import { Link, useParams } from "react-router-dom";
+import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
+
+const StyledAutocomplete = styled(Autocomplete)({
+  "& .MuiAutocomplete-inputRoot": {
+    color: "White",
+    // This matches the specificity of the default styles at https://github.com/mui-org/material-ui/blob/v4.11.3/packages/material-ui-lab/src/Autocomplete/Autocomplete.js#L90
+    '&[class*="MuiOutlinedInput-root"] .MuiAutocomplete-input:first-child': {
+      // Default left padding is 6px
+      paddingLeft: 6,
+    },
+    "& .MuiOutlinedInput-notchedOutline": {
+      borderColor: "White",
+    },
+    "&:hover .MuiOutlinedInput-notchedOutline": {
+      borderColor: "White",
+    },
+    "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+      borderColor: "White",
+    },
+  },
+});
 
 export const GuardianSearchBar = (props) => {
-  const { store, actions } = useContext(Context);
-  const [schoolInfo, setSchoolInfo] = useState([]);
-
-  useEffect(() => {
-    const qs = queryString.parse(location.hash);
-    searchFunction(qs.keyword);
-  }, [store.guardians]);
-
-  const searchFunction = (keyword) => {
-    console.log("Search function keyword: ", keyword);
-    let filteredArray = store.guardians.filter((item) => {
-      if (keyword == "" || keyword == undefined) {
-        return item;
-      } else if (
-        item.first_name.toLowerCase().includes(keyword.toLowerCase())
-      ) {
-        return item;
-      }
-    });
-    // setGuardians(filteredArray);
-    props.func(filteredArray);
-  };
-
-  const searchHash = (event) => {
-    searchFunction(event);
-    if (event == "") {
-      // setGuardians(store.guardians);
-      props.func(store.guardians);
-    }
-    location.hash = `keyword=${event}`;
-  };
   return (
     <div className="searchBar">
-      <Autocomplete
-        multiple
+      <StyledAutocomplete
         id="checkboxes-tags-demo"
         freeSolo
-        options={schoolInfo}
+        options={props.guardians}
         disableCloseOnSelect
-        getOptionLabel={(option) => option.school_Name}
+        disableClearable
+        getOptionLabel={(option) =>
+          guardian.first_name + "" + guardian.last_name
+        }
         renderOption={(props, option, { selected }) => (
-          <li {...props}>
-            <Checkbox
-              icon={<FaSchool />}
-              checkedIcon={<BsCheckLg />}
-              style={{ marginRight: 8 }}
-              checked={selected}
-            />
-            {option.school_Name}
-          </li>
+          <Link className="text-dark" to={"/school/" + option.School_Id}>
+            <li {...props}>
+              <Checkbox
+                icon={<FaSchool />}
+                checkedIcon={<BsCheckLg />}
+                style={{ marginRight: 8 }}
+              />
+              {option.School_Name}
+            </li>
+          </Link>
         )}
         style={{ width: 500 }}
         renderInput={(params) => (
           <TextField
             {...params}
-            label="Guardian Search"
+            InputLabelProps={{
+              style: { color: "#a9a9a9" },
+            }}
+            label="Search Guardians"
             type="search"
-            onChange={(e) => {
-              searchHash(e.target.value);
-            }}
-            placeholder="Search Guardians in your School"
-            sx={{
-              "& .MuiOutlinedInput-root": {
-                color: "White",
-              },
-            }}
+            placeholder="Search for guardians in your schools"
           />
         )}
       />

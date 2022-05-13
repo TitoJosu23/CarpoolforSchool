@@ -165,9 +165,9 @@ const getState = ({ getStore, getActions, setStore }) => {
         const payload = await actions._fetch("/api/guardian", options);
         return payload;
       },
-      getGuardianSchools: async () => {
+      getSchoolGuardians: async () => {
         const actions = getActions();
-        const payload = await actions._fetch("/user/schools");
+        const payload = await actions._fetch("/school/guardians");
         setStore({ schools: payload });
         return payload;
       },
@@ -197,6 +197,11 @@ const getState = ({ getStore, getActions, setStore }) => {
         const payload = await actions._fetch(`/api/school/access`, options);
         if (payload.status == undefined)
           toast.info("Request Sucessfully Sent!", { position: "top-center" });
+        return payload;
+      },
+      getPendingRides: async () => {
+        const actions = getActions();
+        const payload = await actions._fetch("/api/ride/requests");
         return payload;
       },
     },
