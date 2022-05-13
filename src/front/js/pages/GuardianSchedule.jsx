@@ -2,7 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { NavReuse } from "../component/NavReuse.jsx";
-import { Calendar } from "grommet-icons";
+import { DaysOfWeekCards } from "../component/DaysOfWeekCards.jsx";
+import "../../styles/guardianSchedule.css";
+
 // import { Box, Text, Grid } from "grommet";
 
 import {
@@ -11,53 +13,15 @@ import {
   Heading,
   Paragraph,
   Box,
-  Card,
-  CardBody,
-  CardFooter,
-  Grid,
+  Button,
   Grommet,
   Text,
+  Accordion,
+  AccordionPanel,
+  Form,
+  FormField,
+  Select,
 } from "grommet";
-
-const data = [
-  {
-    color: "#d6ecef",
-    icon: <Calendar size="large" />,
-    title: "Monday",
-    subTitle: "Weekday",
-    message: "Schedule",
-  },
-  {
-    color: "#d6ecef",
-    icon: <Calendar size="large" />,
-    title: "Tuesday",
-    subTitle: "Weekday",
-    message: "Schedule",
-  },
-  {
-    color: "#d6ecef",
-    icon: <Calendar size="large" />,
-    title: "Wednesday",
-    subTitle: "Weekday",
-    message: "Schedule",
-  },
-  {
-    color: "#d6ecef",
-
-    icon: <Calendar size="large" />,
-    title: "Thursday",
-    subTitle: "WeekdaY",
-    message: "Schedule",
-  },
-  {
-    color: "#d6ecef",
-
-    icon: <Calendar size="large" />,
-    title: "Friday",
-    subTitle: "Weekday",
-    message: "Schedule",
-  },
-];
 
 const theme = {
   global: {
@@ -67,26 +31,7 @@ const theme = {
            "Segoe UI"`,
     },
   },
-  card: {
-    footer: {
-      pad: { horizontal: "medium", vertical: "small" },
-      background: "#FFFFFF27",
-    },
-    hover: {
-      container: {
-        elevation: "large",
-        background: "#90EE90",
-      },
-    },
-    container: {
-      elevation: "medium",
-      extend: `transition: all 0.2s ease-in-out;`,
-    },
-    footer: {
-      pad: { horizontal: "medium", vertical: "small" },
-      background: "#00000008",
-    },
-  },
+
   page: {
     full: {
       alignSelf: "center",
@@ -107,6 +52,9 @@ const theme = {
         margin: { vertical: "small", horizontal: "small" },
       },
     },
+  },
+  box: {
+    margin: { vertical: "medium" },
   },
 };
 
@@ -133,8 +81,38 @@ export const GuardianSchedule = () => {
   return (
     <div className="dashBody w-100">
       <NavReuse />
+
       <Grommet theme={theme}>
         <Page kind="full">
+<<<<<<< HEAD
+          <PageContent background="light-3">
+            <Heading>School Schedule</Heading>
+            <Paragraph>Set your Driving Schedule Here</Paragraph>
+            <Box>
+              <Accordion>
+                <AccordionPanel label="Village Green Elementary">
+                  <Box background="light-2" overflow="auto" height="auto">
+                    <Box height="large" flex={false}>
+                      <Box fill align="center" justify="center">
+                        <Box marginTop="50px" height="large" width="medium">
+                          <Form>
+                            <FormField label="Seats available" name="size">
+                              <Select
+                                name="Seats"
+                                options={["1", "2", "3", "4", "5"]}
+                              />
+                            </FormField>
+                            <FormField label="Time of Day" name="size">
+                              <Select
+                                name="M/A"
+                                multiple
+                                options={["Morning", "Afternoon"]}
+                              />
+                            </FormField>
+                          </Form>
+                        </Box>
+                      </Box>
+=======
           <PageContent background="">
             <Heading color="White">School Schedule</Heading>
             <Paragraph color="white">Set your Driving Schedule Here</Paragraph>
@@ -175,8 +153,100 @@ export const GuardianSchedule = () => {
                   </Card>
                 ))}
               </Grid>
+>>>>>>> 87e3d0caa904ea5cda5e976dc44b505b0806f731
 
-              <Paragraph></Paragraph>
+                      <div style={{ marginTop: "200px" }}>
+                        <DaysOfWeekCards />
+                      </div>
+                    </Box>
+                    <div
+                      className="scheduleButtonGroup"
+                      style={{ marginTop: "80px", marginBottom: "5px" }}
+                    >
+                      <Box direction="row" justify="evenly" overflow="auto">
+                        <Button type="reset" label="Edit" />
+                        <Button type="submit" label="Update" primary />
+                      </Box>
+                    </div>
+                  </Box>
+                </AccordionPanel>
+                <AccordionPanel label="Doolin Middle School">
+                  <Box background="light-2" overflow="auto" height="medium">
+                    <Box height="large" flex={false}>
+                      <Box fill align="center" justify="center">
+                        <Box width="medium">
+                          <Form className="">
+                            <FormField label="Seats available" name="size">
+                              <Select
+                                name="Seats"
+                                multiple
+                                options={["1", "2", "3", "4", "5"]}
+                              />
+                            </FormField>
+                            <FormField label="Time of Day" name="size">
+                              <Select
+                                name="M/A"
+                                multiple
+                                options={["Morning", "Afternoon"]}
+                              />
+                            </FormField>
+                          </Form>
+                        </Box>
+                      </Box>
+                      <div style={{ marginTop: "200px" }}>
+                        <DaysOfWeekCards />
+                      </div>
+                    </Box>
+                    <div
+                      className="scheduleButtonGroup"
+                      style={{ marginTop: "80px", marginBottom: "5px" }}
+                    >
+                      <Box direction="row" justify="evenly" overflow="auto">
+                        <Button type="reset" label="Edit" />
+                        <Button type="submit" label="Update" primary />
+                      </Box>
+                    </div>
+                  </Box>
+                </AccordionPanel>
+                <AccordionPanel label="Varela Sr High">
+                  <Box background="light-2" overflow="auto" height="medium">
+                    <Box height="large" flex={false}>
+                      <Box fill align="center" justify="center">
+                        <Box width="medium">
+                          <Form>
+                            <FormField label="Seats available" name="size">
+                              <Select
+                                name="Seats"
+                                multiple
+                                options={["1", "2", "3", "4", "5"]}
+                              />
+                            </FormField>
+                            <FormField label="Time of Day" name="size">
+                              <Select
+                                name="M/A"
+                                multiple
+                                options={["Morning", "Afternoon"]}
+                              />
+                            </FormField>
+                          </Form>
+                        </Box>
+                      </Box>
+                      <div style={{ marginTop: "200px" }}>
+                        <DaysOfWeekCards />
+                      </div>
+                    </Box>
+                    <div
+                      className="scheduleButtonGroup"
+                      style={{ marginTop: "80px", marginBottom: "5px" }}
+                    >
+                      <Box direction="row" justify="evenly" overflow="auto">
+                        <Button type="reset" label="Edit" />
+                        <Button type="submit" label="Update" primary />
+                      </Box>
+                    </div>
+                  </Box>
+                </AccordionPanel>
+              </Accordion>
             </Box>
           </PageContent>
         </Page>
