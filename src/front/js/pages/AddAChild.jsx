@@ -136,7 +136,7 @@ export const AddAChild = () => {
               >
                 Add Child
               </Button>
-              <Link to={"/children"}>
+              <Link to={"/ride"}>
                 <Button
                   className="text-dark w-75 mx-auto mt-3 fs-4"
                   color="secondary"

@@ -25,7 +25,10 @@ export const SchoolSearch = (props) => {
       <div className="dashBoardHome">
         <div className="searchGuard-content">
           <div className="searchArea mt-3 container-fluid">
-            <SchoolSearchBar schools={schools} />
+            <div className="text-light fs-3">Search For Schools to join!</div>
+            <div className="mt-5">
+              <SchoolSearchBar schools={schools} />
+            </div>
           </div>
         </div>
       </div>

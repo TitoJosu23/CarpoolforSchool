@@ -33,7 +33,9 @@ export const NavReuse = (props) => {
         <Link to={"/home"}>
           <DashNavItems icon={<GrHomeRounded className="svg" />} />
         </Link>
-        <DashNavItems icon={<BsFlag className="flag" />} />
+        <Link to={"/rides/pending"}>
+          <DashNavItems icon={<BsFlag className="flag" />} />
+        </Link>
         <DashNavItems icon={<BsSearch className="Search" />}>
           <DashDropDown2></DashDropDown2>
         </DashNavItems>

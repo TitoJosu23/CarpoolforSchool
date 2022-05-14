@@ -97,10 +97,10 @@ export const DashDropDown = (props) => {
             <Link to={"/guardian/schedule"}>
               <DropItem leftIcon={<AiOutlineSchedule />}>Schedule</DropItem>
             </Link>
-            <Link to={"/children"}>
-              <DropItem leftIcon={<FaChild />}>Children</DropItem>
+            <Link to={"/hidden"}>
+              <DropItem leftIcon={<ImEyeBlocked />}>Hidden</DropItem>
             </Link>
-            <DropItem leftIcon={<ImEyeBlocked />}>BlackList</DropItem>
+
             <DropItem
               onClick={() => {
                 actions.clearSession();

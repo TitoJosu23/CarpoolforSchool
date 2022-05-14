@@ -2,48 +2,39 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { NavReuse } from "../component/NavReuse.jsx";
-import CssBaseline from "@mui/material/CssBaseline";
-import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
-import { ChildrenToDrive } from "../component/ChildrenToDrive.jsx";
-import { RequestRideButton } from "../component/RequestRideButton.jsx";
-import { RideRequestDialog } from "../component/RideRequestDialog.jsx";
+import { ChildCard } from "../component/ChildCard.jsx";
+
 export const RequestRide = (props) => {
   //react declarations
   const history = useHistory();
   const { store, actions } = useContext(Context);
   const params = useParams();
-  const logStatus = JSON.parse(localStorage.getItem("session"));
-
   //declare states here vvvv
-  const [state, setState] = useState("State");
+  const [children, setChildren] = useState([]);
 
-  if (logStatus === null) {
-    history.push("/");
-  }
+  useEffect(() => {
+    actions.getChildren().then((payload) => setChildren(payload));
+  }, []);
 
   return (
     <div className="dashBody w-100">
       <NavReuse />
       <div className="dashBoardHome">
-        <RideRequestDialog />
+        <Link className="route" to="/children/add">
+          <button className="btn addButton p-3 my-3 fs-4">Add A Child</button>
+        </Link>
+        {children?.map((child, index) => {
+          return (
+            <ChildCard
+              first_name={child.first_name}
+              school="Miami High"
+              last_name={child.last_name}
+              class_grade={child.class_grade}
+              age={child.age}
+            />
+          );
+        })}
       </div>
     </div>
   );
 };
-{
-  /* <Box
-sx={{
-  width: 300,
-  height: 400,
-  backgroundColor: "#d6ecef",
-  margin: "auto",
-}}
->
-<ChildrenToDrive />
-<Divider sx={{ marginTop: "1em" }} light />
-<Box sx={{ mt: 3, ml: 1, mb: 1 }}>
-  <RequestRideButton />
-</Box>
-</Box> */
-}

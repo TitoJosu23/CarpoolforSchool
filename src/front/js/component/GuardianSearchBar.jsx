@@ -31,12 +31,6 @@ const StyledAutocomplete = styled(Autocomplete)({
 export const GuardianSearchBar = (props) => {
   return (
     <div className="searchBar">
-<<<<<<< HEAD
-      <Autocomplete
-        sx={{ bgcolor: "#FFFFFF" }}
-        freeSolo
-        options={schoolInfo}
-=======
       <StyledAutocomplete
         id="checkboxes-tags-demo"
         freeSolo
@@ -58,23 +52,12 @@ export const GuardianSearchBar = (props) => {
             </li>
           </Link>
         )}
->>>>>>> 87e3d0caa904ea5cda5e976dc44b505b0806f731
         style={{ width: 500 }}
         renderInput={(params) => (
           <TextField
             {...params}
-<<<<<<< HEAD
-            label="Guardian Search"
-            type="search"
-            InputLabelProps={{
-              style: { color: "#000000" },
-            }}
-            onChange={(e) => {
-              searchHash(e.target.value);
-=======
             InputLabelProps={{
               style: { color: "#a9a9a9" },
->>>>>>> 87e3d0caa904ea5cda5e976dc44b505b0806f731
             }}
             label="Search Guardians"
             type="search"

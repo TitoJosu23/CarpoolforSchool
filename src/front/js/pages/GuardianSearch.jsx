@@ -25,7 +25,12 @@ export const GuardianSearch = (props) => {
       <div className="dashBoardHome">
         <div className="searchGuard-content">
           <div className="searchArea mt-3 container-fluid">
-            <GuardianSearchBar guardians={guardians} />
+            <div className="text-light fs-3">
+              Search Guardians{<br></br>} in your Schools!
+            </div>
+            <div className="mt-5">
+              <GuardianSearchBar guardians={guardians} />
+            </div>
           </div>
         </div>
       </div>

@@ -20,6 +20,7 @@ import { ViewSchool } from "./pages/ViewSchool.jsx";
 import { RequestRide } from "./pages/RequestRide.jsx";
 import { ModalGuardianInformation } from "./pages/ModalGuardianInformation.js";
 import { PendingRides } from "./pages/PendingRides.jsx";
+import { Hidden } from "./pages/Hidden.jsx";
 
 //create your first component
 const Layout = () => {
@@ -71,6 +72,9 @@ const Layout = () => {
             </Route>
             <Route exact path="/rides/pending">
               <PendingRides />
+            </Route>
+            <Route exact path="/hidden">
+              <Hidden />
             </Route>
             <Route>
               <h1>Not found!</h1>

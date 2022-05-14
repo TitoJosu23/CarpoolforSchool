@@ -1,27 +1,27 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useHistory } from "react-router-dom";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { NavReuse } from "../component/NavReuse.jsx";
-import { RideFeed } from "../component/RideFeed.jsx";
 
-// Dashboard
-export const Dashboard = (props) => {
+export const Hidden = (props) => {
+  //react declarations
   const history = useHistory();
   const { store, actions } = useContext(Context);
   const params = useParams();
   const logStatus = JSON.parse(localStorage.getItem("session"));
+  //declare states here vvvv
+  const [state, setState] = useState("State");
 
   if (logStatus === null) {
     history.push("/");
   }
+
   return (
     <div className="dashBody w-100">
       <NavReuse />
-      <div className="dashBoardHome d-flex justify-content-center">
-        <div className="col-10 mt-3">
-          <div className="text-light fs-3 mb-3">Ride History</div>
-          <RideFeed />
+      <div className="dashBoardHome">
+        <div className="text-light fs-2 mt-5">
+          You have not blocked any guardians!
         </div>
       </div>
     </div>
