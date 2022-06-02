@@ -7,8 +7,8 @@ import logo from "../../img/logo.png";
 export const Login = (props) => {
   const history = useHistory();
   const { store, actions } = useContext(Context);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("testuser@test.com");
+  const [password, setPassword] = useState("login");
   const [error, setError] = useState(null);
   const [loginMsg, setLoginMsg] = useState("Log In To Your Account");
   const logStatus = JSON.parse(localStorage.getItem("session"));
@@ -63,6 +63,7 @@ export const Login = (props) => {
                           <div className="form-outline form-floating mb-4">
                             <input
                               onChange={(e) => setEmail(e.target.value)}
+                              value={email}
                               type="email"
                               id="floatingEmail"
                               placeholder="Email"
@@ -85,6 +86,7 @@ export const Login = (props) => {
                             <input
                               onChange={(e) => setPassword(e.target.value)}
                               type="password"
+                              value={password}
                               id="floatingPassword"
                               placeholder="Password"
                               className="form-control form-control-lg"
